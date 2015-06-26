@@ -1,0 +1,32 @@
+/* =========================================================================
+ *
+ * base.scss
+ *      Base HTML overrides and general reusable classes
+ * 
+ * ========================================================================= */
+html, body {
+    @include position(absolute, 0 0 0 0);
+    background: #f0f0f0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+// ====================================
+//
+// Base game styles
+//
+// ====================================
+#game__wrapper, #game__screen-wrapper {
+    @include position(absolute, 0 0 0 0);
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+// ====================================
+//
+// Reusable Classes
+//
+// ====================================
+.clear { clear: both; }

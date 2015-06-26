@@ -1,0 +1,35 @@
+/* =========================================================================
+ *
+ * main.scss
+ * 
+ * ========================================================================= */
+// ======================================
+//
+// Themes
+//
+// ======================================
+// Imports the based colors used in the app!
+
+// ======================================
+//
+// Import 3rd pary files or frameworks/libraries
+//
+// ======================================
+@import "vendors/bourbon/bourbon";
+@import "vendors/normalize";
+@import "vendors/flipbook";
+
+// ======================================
+//
+// Base / root HTML definitions
+//
+// ======================================
+@import "base/base";
+
+// ======================================
+//
+// Components
+//
+// ======================================
+@import "components/game-screen__onboarding";
+@import "components/game-screen__title";
