@@ -64621,11 +64621,11 @@
 	                'div',
 	                { className: 'onboarding-new__page-1__name-warpper' },
 	                'I was infamous; most people knew me as',
-	                _react2['default'].createElement('br', null),
 	                _react2['default'].createElement('input', { type: 'text',
+	                    key: 'page1nameInput',
 	                    className: 'interaction',
-	                    placeholder: 'Alias',
-	                    id: 'onboarding-new__page1__name-input' })
+	                    placeholder: 'Alias'
+	                })
 	            )
 	        );
 
@@ -64633,7 +64633,7 @@
 	        // ----------------------------
 	        // PREVIOUS
 	        var previousClasses = (0, _classnames2['default'])({
-	            'game-screen-onboarding__book-arrow--next': true,
+	            'game-screen-onboarding__book-arrow--previous': true,
 	            'opacity0': currentPage < 3 ? true : false
 	        });
 	        var arrowHtmlPrevious = _react2['default'].createElement(
@@ -64850,7 +64850,7 @@
 	  },
 
 	  // Number of pages in the DOM, minimum value: 6
-	  pagesInDOM = 6,
+	  pagesInDOM = 200,
 	      turnMethods = {
 
 	    // Singleton constructor
@@ -64919,7 +64919,9 @@
 	      }
 
 	      // Event listeners
-	      var bound = $(this).bind(mouseEvents.down, data.eventHandlers.touchStart).bind('end', turnMethods._eventEnd)
+	      var bound = $(this)
+	      // .bind(mouseEvents.down, data.eventHandlers.touchStart)
+	      .bind('end', turnMethods._eventEnd)
 	      //  .bind('released', turnMethods._eventReleased)
 	      .bind('flip', turnMethods._flip);
 

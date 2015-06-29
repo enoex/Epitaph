@@ -84,7 +84,7 @@ var has3d,
   },
 
   // Number of pages in the DOM, minimum value: 6
-  pagesInDOM = 6,
+  pagesInDOM = 200,
   
 
 turnMethods = {
@@ -158,7 +158,8 @@ turnMethods = {
     }
 
     // Event listeners
-    var bound = $(this).bind(mouseEvents.down, data.eventHandlers.touchStart)
+    var bound = $(this)
+    // .bind(mouseEvents.down, data.eventHandlers.touchStart)
       .bind('end', turnMethods._eventEnd)
   //  .bind('released', turnMethods._eventReleased)
       .bind('flip', turnMethods._flip);

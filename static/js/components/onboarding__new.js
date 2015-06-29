@@ -237,11 +237,11 @@ var ScreenCreate = React.createClass({
                 </div>
                 <div className='onboarding-new__page-1__name-warpper'>
                     I was infamous; most people knew me as
-                    <br />
                     <input type='text'
+                        key="page1nameInput"
                         className='interaction'
                         placeholder='Alias'
-                        id='onboarding-new__page1__name-input' />
+                        ></input>
                 </div>
             </div>
         );
@@ -250,7 +250,7 @@ var ScreenCreate = React.createClass({
         // ----------------------------
         // PREVIOUS
         var previousClasses = classNames({
-            'game-screen-onboarding__book-arrow--next': true,
+            'game-screen-onboarding__book-arrow--previous': true,
             'opacity0': currentPage < 3 ? true : false
         });
         let arrowHtmlPrevious = (
