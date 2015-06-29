@@ -446,6 +446,12 @@ html, body {
 .clear {
   clear: both; }
 
+.displayNone {
+  display: none; }
+
+.opacity0 {
+  opacity: 0; }
+
 /* =========================================================================
  *
  * game-screen__title.scss
@@ -465,7 +471,7 @@ html, body {
   overflow: hidden;
   padding: 0; }
 
-#game-screen-onboarding__book-wrapper {
+.game-screen-onboarding__book-item-wrapper {
   position: absolute;
   top: 30px;
   right: 0;
@@ -473,28 +479,39 @@ html, body {
   left: 50%;
   margin-left: -450px;
   width: 920px;
-  height: 600px; }
-  #game-screen-onboarding__book-wrapper #game-screen-onboarding__book.transition {
-    -webkit-transition: margin-left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    -moz-transition: margin-left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    transition: margin-left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-  #game-screen-onboarding__book-wrapper .page {
+  height: 640px; }
+  .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-item {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+    .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-item.transition {
+      -webkit-transition: margin-left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      -moz-transition: margin-left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: margin-left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .game-screen-onboarding__book-item-wrapper .game-screen-title__menu-item {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    background: transparent; }
+  .game-screen-onboarding__book-item-wrapper .page {
     background-color: white;
-    line-height: 300px;
     font-size: 20px; }
-  #game-screen-onboarding__book-wrapper .page-wrapper {
+  .game-screen-onboarding__book-item-wrapper .page-wrapper {
     -webkit-perspective: 2000px;
     -moz-perspective: 2000px;
     -ms-perspective: 2000px;
     -o-perspective: 2000px;
     perspective: 2000px; }
-  #game-screen-onboarding__book-wrapper .hard {
+  .game-screen-onboarding__book-item-wrapper .hard {
     background: #ccc !important;
     color: #333;
     box-shadow: inset 0 0 5px #666;
     font-weight: bold; }
-  #game-screen-onboarding__book-wrapper .odd {
+  .game-screen-onboarding__book-item-wrapper .odd {
     background: -webkit-gradient(linear, right top, left top, color-stop(0.95, #FFF), color-stop(1, #DADADA));
     background-image: -webkit-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
     background-image: -moz-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
@@ -506,7 +523,7 @@ html, body {
     -o-box-shadow: inset 0 0 5px #666;
     -ms-box-shadow: inset 0 0 5px #666;
     box-shadow: inset 0 0 5px #666; }
-  #game-screen-onboarding__book-wrapper .even {
+  .game-screen-onboarding__book-item-wrapper .even {
     background: -webkit-gradient(linear, left top, right top, color-stop(0.95, #fff), color-stop(1, #dadada));
     background-image: -webkit-linear-gradient(left, #fff 95%, #dadada 100%);
     background-image: -moz-linear-gradient(left, #fff 95%, #dadada 100%);
@@ -518,6 +535,20 @@ html, body {
     -o-box-shadow: inset 0 0 5px #666;
     -ms-box-shadow: inset 0 0 5px #666;
     box-shadow: inset 0 0 5px #666; }
+  .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--previous {
+    background: #f0f0f0;
+    cursor: pointer;
+    font-size: 3em;
+    position: absolute;
+    left: -30px;
+    top: 200px; }
+  .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--next {
+    background: #f0f0f0;
+    cursor: pointer;
+    font-size: 3em;
+    position: absolute;
+    right: -30px;
+    top: 200px; }
 
 /* =========================================================================
  *

@@ -1,36 +1,26 @@
 /* =========================================================================
  *
- * Game.js
- *  Main game store
+ * onboarding__new
+ *      Actions for the create character flow
  *
  * ========================================================================= */
 // External Dependencies
 // ------------------------------------
 import logger from 'bragi-browser';
-import _ from 'lodash';
 
 import React from 'react';
 import Reflux from 'reflux';
-import Immutable from 'immutable';
 
 // Internal Dependencies
 // ------------------------------------
-import GameControllerActions from '../actions/game__controller.js';
 
 // ========================================================================
 //
 // Functionality
 //
 // ========================================================================
-// keep track of state
-
-// Store
-var GameStore = Reflux.createStore({
-    listenables: [GameControllerActions],
-
-    init: function(){
-        logger.log('stores/game:store:init', 'called');
-    }
-});
-
-export default GameStore;
+var OnboardingNewActions = Reflux.createActions([
+    'pageTurnNext',
+    'pageTurnPrevious'
+]);
+export default OnboardingNewActions;

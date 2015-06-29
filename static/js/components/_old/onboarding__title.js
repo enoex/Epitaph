@@ -17,40 +17,37 @@ import $ from 'jquery';
 // Internal Dependencies
 // ------------------------------------
 import Timings from '../util/Timings.js';
-import GameStore from '../stores/Game.js';
-import GameActions from '../actions/game-actions.js';
+
+import OnboardingActions from '../actions/onboarding.js';
 
 // ========================================================================
 //
 // Functionality
 //
 // ========================================================================
-var ScreenTitle = React.createClass({
+var OnboardingTitle = React.createClass({
     // --------------------------------
     // Handle actions
     // --------------------------------
-    menuItemClickedNewGame: function(targetState) {
-        logger.log('ScreenTitle:component:menuItemClickedNewGame',
-        'called with ' + targetState);
+    menuItemClickedNewGame: function() {
+        logger.log('onboarding__title:component:menuItemClickedNewGame', 'called');
 
         // Change state
-        GameActions.gameNew({
-            targetOnboardingState: targetState
-        });
+        OnboardingActions.showNew();
     },
 
     menuItemClickedResume: function(e) {
-        logger.log('ScreenTitle:component:menuItemClickedResume', 'called');
+        logger.log('onboarding__title:component:menuItemClickedResume', 'called');
 
         // Change state
-        GameActions.gameResume();
+        OnboardingActions.showResume();
     },
 
     // --------------------------------
     // Render
     // --------------------------------
     render: function(){
-        logger.log('ScreenTitle:component:render', 'called');
+        logger.log('onboarding__title:component:render', 'called');
 
         return (
             <div id="game-screen-onboarding__book">
@@ -60,7 +57,7 @@ var ScreenTitle = React.createClass({
                         <div id='game-screen-title__menu-wrapper'>
 
                             <div className='game-screen-title__menu-item'
-                                onClick={this.menuItemClickedNewGame.bind(this, 'create')}>
+                                onClick={this.menuItemClickedNewGame}>
                                 New Game
                             </div>
 
@@ -81,4 +78,4 @@ var ScreenTitle = React.createClass({
     }
 });
 
-export default ScreenTitle;
+export default OnboardingTitle;

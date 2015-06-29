@@ -122,7 +122,7 @@
 	window.jQuery = _jquery2['default'];
 
 	// jquery plugins
-	__webpack_require__(248)(_jquery2['default']);
+	__webpack_require__(253)(_jquery2['default']);
 
 	// ====================================
 	//
@@ -134,7 +134,7 @@
 	// Initial Setup
 	// ------------------------------------
 	// Setup key handling
-	__webpack_require__(249)();
+	__webpack_require__(254)();
 
 	// Setup global document / game wide events
 	$(document).on({
@@ -53603,7 +53603,7 @@
 
 	var _componentsGame__mainJs2 = _interopRequireDefault(_componentsGame__mainJs);
 
-	var _componentsNotFoundJs = __webpack_require__(247);
+	var _componentsNotFoundJs = __webpack_require__(252);
 
 	var _componentsNotFoundJs2 = _interopRequireDefault(_componentsNotFoundJs);
 
@@ -53689,15 +53689,15 @@
 
 	    componentWillMount: function componentWillMount() {
 	        timings.push('componentWillMount');
-	        _bragiBrowser2['default'].log('Main:component:componentWillMount:start', '<start> called');
+	        _bragiBrowser2['default'].log('components/main:componentWillMount:start', '<start> called');
 	    },
 	    componentDidMount: function componentDidMount() {
 	        timings.push('componentDidMount');
-	        _bragiBrowser2['default'].log('Main:component:componentDidMount:finish', '<finished> called | took: ' + timings.printLast());
+	        _bragiBrowser2['default'].log('components/main:componentDidMount:finish', '<finished> called | took: ' + timings.printLast());
 	    },
 
 	    render: function render() {
-	        _bragiBrowser2['default'].log('Main:component:render', 'called : ', this.props);
+	        _bragiBrowser2['default'].log('components/main:render', 'called : %O', this.props);
 
 	        return _react2['default'].createElement(
 	            'div',
@@ -56916,15 +56916,15 @@
 
 	var _storesGameJs2 = _interopRequireDefault(_storesGameJs);
 
-	var _actionsGameActionsJs = __webpack_require__(243);
+	var _storesGame__controllerJs = __webpack_require__(244);
 
-	var _actionsGameActionsJs2 = _interopRequireDefault(_actionsGameActionsJs);
+	var _storesGame__controllerJs2 = _interopRequireDefault(_storesGame__controllerJs);
 
 	// Main screens
 
-	var _gameScreen__onboardingJs = __webpack_require__(244);
+	var _onboardingJs = __webpack_require__(245);
 
-	var _gameScreen__onboardingJs2 = _interopRequireDefault(_gameScreen__onboardingJs);
+	var _onboardingJs2 = _interopRequireDefault(_onboardingJs);
 
 	// ========================================================================
 	//
@@ -56936,30 +56936,32 @@
 	var GameMain = _react2['default'].createClass({
 	    displayName: 'GameMain',
 
-	    mixins: [_reflux2['default'].listenTo(_storesGameJs2['default'], 'storeChange')],
+	    mixins: [_reflux2['default'].listenTo(_storesGame__controllerJs2['default'], 'controllerStoreChange')],
 
 	    contextTypes: {
 	        router: _react2['default'].PropTypes.func.isRequired
 	    },
 
 	    getInitialState: function getInitialState() {
-	        _bragiBrowser2['default'].log('GameMain:component:getInitialState', 'called');
+	        _bragiBrowser2['default'].log('components/game__main:getInitialState', 'called');
 	        return {
-	            // The current screen:
-	            //      1) onboarding (title, new, options, achievements)
-	            //      2) game (map, battle, battle results, shop)
-	            screen: 'onboarding'
+	            state: _immutable2['default'].fromJS({
+	                // The current screen:
+	                //      1) onboarding (title, new, options, achievements)
+	                //      2) game (map, battle, battle results, shop)
+	                screen: 'onboarding'
+	            })
 	        };
 	    },
 
-	    storeChange: function storeChange(message) {
-	        _bragiBrowser2['default'].log('GameMain:component:storeChange', 'called | %O', message);
+	    controllerStoreChange: function controllerStoreChange(message) {
+	        _bragiBrowser2['default'].log('components/game__main:storeChange', 'called | %O', message);
 
 	        // change screen if necessary
-	        if (message.data.screen && message.data.screen !== this.state.screen) {
-	            _bragiBrowser2['default'].log('GameMain:component:storeChange:changeScreen', 'changing screen to %O', message.data.screen);
+	        if (message.data && message.data.get('screen') !== this.state.state.get('screen')) {
+	            _bragiBrowser2['default'].log('components/game__main:storeChange:changeScreen', 'changing screen to %O', message.data.get('screen'));
 
-	            this.setState({ screen: message.data.screen });
+	            this.setState({ screen: message.data.get('screen') });
 	        }
 
 	        return this;
@@ -56967,11 +56969,11 @@
 
 	    componentWillMount: function componentWillMount() {
 	        timings.push('componentWillMount');
-	        _bragiBrowser2['default'].log('GameMain:component:componentWillMount:start', '<start> called');
+	        _bragiBrowser2['default'].log('components/game__main:componentWillMount:start', '<start> called');
 	    },
 	    componentDidMount: function componentDidMount() {
 	        timings.push('componentDidMount');
-	        _bragiBrowser2['default'].log('GameMain:component:componentDidMount:finish', '<finished> called | took: ' + timings.printLast());
+	        _bragiBrowser2['default'].log('components/game__main:componentDidMount:finish', '<finished> called | took: ' + timings.printLast());
 
 	        // TODO
 	        // Now that it's mounted, see if we need to load initial data
@@ -56981,14 +56983,14 @@
 	        // Main game render function.
 	        // The shown part of the game (screen) depends on the state -
 	        // e.g., the create screen or map or battle
-	        _bragiBrowser2['default'].log('GameMain:component:render', 'called : ', this.props);
+	        _bragiBrowser2['default'].log('components/game__main:render', 'called : %O', this.props);
 
 	        // Get screen based on state
 	        var screenComponent;
 
 	        // TITLE Screen
-	        if (this.state.screen === 'onboarding') {
-	            screenComponent = _react2['default'].createElement(_gameScreen__onboardingJs2['default'], {
+	        if (this.state.state.get('screen') === 'onboarding') {
+	            screenComponent = _react2['default'].createElement(_onboardingJs2['default'], {
 	                params: this.props.params,
 	                gameState: this.state
 	            });
@@ -63450,8 +63452,8 @@
 
 	/* =========================================================================
 	 *
-	 * Categories.js
-	 *  Store for categories list / interactions
+	 * Game.js
+	 *  Main game store
 	 *
 	 * ========================================================================= */
 	// External Dependencies
@@ -63487,9 +63489,9 @@
 	// Internal Dependencies
 	// ------------------------------------
 
-	var _actionsGameActionsJs = __webpack_require__(243);
+	var _actionsGame__controllerJs = __webpack_require__(243);
 
-	var _actionsGameActionsJs2 = _interopRequireDefault(_actionsGameActionsJs);
+	var _actionsGame__controllerJs2 = _interopRequireDefault(_actionsGame__controllerJs);
 
 	// ========================================================================
 	//
@@ -63500,66 +63502,11 @@
 
 	// Store
 	var GameStore = _reflux2['default'].createStore({
-	    listenables: [_actionsGameActionsJs2['default']],
+	    listenables: [_actionsGame__controllerJs2['default']],
 
 	    init: function init() {
-	        var _this = this;
-
-	        _bragiBrowser2['default'].log('Game:store:init', 'called');
-	        // set initial data
-	        this.data = _immutable2['default'].fromJS({
-	            screen: 'onboarding',
-	            screenState: {}
-	        });
-
-	        // TODO: Don't embed this logic here, do it elsewhere
-	        // listen to own changes to store data
-	        this.listen(function (d) {
-	            // Update localforage when state changes
-	            window.localforage.setItem('store:game', JSON.stringify(_this.data.toJS()));
-	        });
-
-	        // get initial state from localForage
-	        // TODO: don't do this here?
-	        window.localforage.getItem('store:game', function (err, d) {
-	            requestAnimationFrame(function () {
-	                _bragiBrowser2['default'].log('Game:store:init:loadLocalData', 'called | %j', {
-	                    err: err,
-	                    data: d
-	                });
-	                _this.data = _immutable2['default'].fromJS(JSON.parse(d));
-	                _this.trigger({ data: _this.data });
-	            });
-	        });
-
-	        return this;
-	    },
-
-	    onGameNew: function onGameNew(d) {
-	        _bragiBrowser2['default'].log('Game:store:onGameNew', 'called | %o', d);
-
-	        this.data = _immutable2['default'].fromJS({
-	            screen: 'onboarding',
-	            screenState: {
-	                bookState: 'create',
-	                page: 2
-	            }
-	        });
-
-	        this.trigger({ data: this.data });
-	    },
-
-	    onGameResume: function onGameResume(d) {
-	        _bragiBrowser2['default'].log('Game:store:onGameResume', 'called');
-
-	        this.data = _immutable2['default'].fromJS({
-	            screen: 'game',
-	            screenState: {}
-	        });
-
-	        this.trigger({ data: this.data });
+	        _bragiBrowser2['default'].log('stores/game:store:init', 'called');
 	    }
-
 	});
 
 	exports['default'] = GameStore;
@@ -63571,7 +63518,9 @@
 
 	/* =========================================================================
 	 *
-	 * game-actions
+	 * screen
+	 *      Actions for which screen the player is on. One of:
+	 *          'onboarding', 'battle', 'map'
 	 *
 	 * ========================================================================= */
 	// External Dependencies
@@ -63596,20 +63545,122 @@
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
+	// ========================================================================
+	//
+	// Functionality
+	//
+	// ========================================================================
+	var ScreenActions = _reflux2['default'].createActions(['showOnboarding']);
+	exports['default'] = ScreenActions;
+	module.exports = exports['default'];
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* =========================================================================
+	 *
+	 * game__controller
+	 *  Controller for game - handles screen state, loading data, etc
+	 *
+	 * ========================================================================= */
+	// External Dependencies
+	// ------------------------------------
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _bragiBrowser = __webpack_require__(4);
+
+	var _bragiBrowser2 = _interopRequireDefault(_bragiBrowser);
+
+	var _lodash = __webpack_require__(16);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _react = __webpack_require__(19);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reflux = __webpack_require__(219);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _immutable = __webpack_require__(241);
+
+	var _immutable2 = _interopRequireDefault(_immutable);
+
 	// Internal Dependencies
 	// ------------------------------------
+
+	var _actionsGame__controllerJs = __webpack_require__(243);
+
+	var _actionsGame__controllerJs2 = _interopRequireDefault(_actionsGame__controllerJs);
 
 	// ========================================================================
 	//
 	// Functionality
 	//
 	// ========================================================================
-	var GameActions = _reflux2['default'].createActions(['gameNew', 'gameResume']);
-	exports['default'] = GameActions;
+	var GameControllerStore = _reflux2['default'].createStore({
+	    listenables: [_actionsGame__controllerJs2['default']],
+
+	    init: function init() {
+	        var _this = this;
+
+	        _bragiBrowser2['default'].log('stores/game__controller:init', 'called');
+
+	        // set initial data
+	        this.data = _immutable2['default'].fromJS({
+	            screen: 'onboarding'
+	        });
+
+	        // TODO: Don't embed this logic here, do it elsewhere
+	        // listen to own changes to store data
+	        this.listen(function (d) {
+	            // Update localforage when state changes
+	            window.localforage.setItem('store:game', JSON.stringify(_this.data.toJS()));
+	        });
+
+	        // get initial state from localForage
+	        // TODO: don't do this here?
+	        window.localforage.getItem('store:game', function (err, d) {
+	            requestAnimationFrame(function () {
+	                _bragiBrowser2['default'].log('stores/game__controller:init:loadLocalData', 'called | %O', {
+	                    err: err,
+	                    data: d
+	                });
+
+	                _this.data = _immutable2['default'].fromJS(JSON.parse(d));
+	                _this.trigger({ data: _this.data });
+	            });
+	        });
+
+	        return this;
+	    },
+
+	    getState: function getState() {
+	        // Returns the state of this controller
+	        return this.data;
+	    },
+
+	    // --------------------------------
+	    //
+	    // onboarding - NOTE should be own store
+	    //
+	    // --------------------------------
+	    onShowOnboarding: function onShowOnboarding(d) {}
+	});
+
+	exports['default'] = GameControllerStore;
 	module.exports = exports['default'];
 
 /***/ },
-/* 244 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* =========================================================================
@@ -63657,23 +63708,31 @@
 
 	var _utilTimingsJs2 = _interopRequireDefault(_utilTimingsJs);
 
-	var _storesGameJs = __webpack_require__(242);
+	var _actionsOnboardingJs = __webpack_require__(246);
 
-	var _storesGameJs2 = _interopRequireDefault(_storesGameJs);
+	var _actionsOnboardingJs2 = _interopRequireDefault(_actionsOnboardingJs);
 
-	var _actionsGameActionsJs = __webpack_require__(243);
+	var _storesGame__controllerJs = __webpack_require__(244);
 
-	var _actionsGameActionsJs2 = _interopRequireDefault(_actionsGameActionsJs);
+	var _storesGame__controllerJs2 = _interopRequireDefault(_storesGame__controllerJs);
+
+	var _storesOnboardingJs = __webpack_require__(247);
+
+	var _storesOnboardingJs2 = _interopRequireDefault(_storesOnboardingJs);
+
+	var _storesOnboarding__newJs = __webpack_require__(248);
+
+	var _storesOnboarding__newJs2 = _interopRequireDefault(_storesOnboarding__newJs);
 
 	// Book Pages
 
-	var _gameScreen__onboardingTitleJs = __webpack_require__(245);
+	var _onboarding__titleJs = __webpack_require__(250);
 
-	var _gameScreen__onboardingTitleJs2 = _interopRequireDefault(_gameScreen__onboardingTitleJs);
+	var _onboarding__titleJs2 = _interopRequireDefault(_onboarding__titleJs);
 
-	var _gameScreen__onboardingCreateJs = __webpack_require__(246);
+	var _onboarding__newJs = __webpack_require__(251);
 
-	var _gameScreen__onboardingCreateJs2 = _interopRequireDefault(_gameScreen__onboardingCreateJs);
+	var _onboarding__newJs2 = _interopRequireDefault(_onboarding__newJs);
 
 	// ========================================================================
 	//
@@ -63685,135 +63744,85 @@
 	var ScreenOnboarding = _react2['default'].createClass({
 	    displayName: 'ScreenOnboarding',
 
-	    mixins: [_reflux2['default'].listenTo(_storesGameJs2['default'], 'storeChange')],
+	    mixins: [_reflux2['default'].listenTo(_storesOnboardingJs2['default'], 'onboardingStoreChange')],
 
 	    getInitialState: function getInitialState() {
-	        this._previousPage = 1;
 	        this._previousBookState = 'title';
 
 	        return {
-	            state: _immutable2['default'].Map({
-	                bookState: 'title',
-	                page: this._previousPage
-	            })
+	            state: _storesOnboardingJs2['default'].getState()
 	        };
 	    },
 
-	    storeChange: function storeChange(message) {
+	    // STORE Changes
+	    // --------------------------------
+	    onboardingStoreChange: function onboardingStoreChange(message) {
 	        // Change state if necessary
 	        // NOTE: We can't use props because we do NOT want to trigger an entire
 	        // re-render
-	        _bragiBrowser2['default'].log('ScreenTitle:component:storeChange', 'called | %O', message);
+	        _bragiBrowser2['default'].log('components/onboarding:storeChange', 'called | %O', message);
 
-	        if (!_immutable2['default'].is(message.data.get('screenState'), this.state.state)) {
-	            this.setState({
-	                state: message.data.get('screenState')
-	            });
+	        if (!_immutable2['default'].is(message.data, this.state.state)) {
+	            // Book state is different, re-render everything
+	            _bragiBrowser2['default'].log('components/onboarding:storeChange:dataDiff', 'data not same, changing');
+
+	            this.setState({ state: message.data });
 	        }
-
 	        return this;
 	    },
 
 	    // Component Mounting
 	    // --------------------------------
 	    componentWillMount: function componentWillMount() {
+	        _bragiBrowser2['default'].log('components/onboarding:componentWillMount', 'called');
 	        timings.push('componentWillMount');
+	    },
+
+	    shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
+	        _bragiBrowser2['default'].log('components/onboarding:shouldComponentUpdate', 'checking | %O', arguments);
+
+	        // Only update (render) if the book state is different
+	        if (nextState.state.get('bookState') !== this.state.state.get('bookState')) {
+	            _bragiBrowser2['default'].log('components/onboarding:shouldComponentUpdate', 'true');
+	            return true;
+	        } else {
+	            _bragiBrowser2['default'].log('components/onboarding:shouldComponentUpdate', 'false');
+	            return false;
+	        }
 	    },
 
 	    componentDidMount: function componentDidMount() {
 	        // After render is called, setup the flipbook
 	        timings.push('componentDidMount');
-	        _bragiBrowser2['default'].log('ScreenTitle:component:componentDidMount', '<finished> called | took: ' + timings.printLast());
-
-	        this.setupPageTurn(false);
-	    },
-
-	    componentDidUpdate: function componentDidUpdate() {
-	        _bragiBrowser2['default'].log('ScreenTitle:component:componentDidUpdate', 'called %O', {
-	            state: this.state,
-	            previousPage: this._previousPage,
-	            previousBookState: this._previousBookState
-	        });
-
-	        // If page state is different, we do need to re-setup page turn
-	        if (this._previousBookState !== this.state.state.get('bookState')) {
-	            this.setupPageTurn(true);
-	        }
-
-	        // Update previous states
-	        this._previousPage = this.state.state.get('page');
-	        this._previousBookState = this.state.state.get('bookState');
-	    },
-
-	    // Setup page turn
-	    // --------------------------------
-	    setupPageTurn: function setupPageTurn(shouldDestroy) {
-	        var _this = this;
-
-	        // TODO: get pages based on state? Re-call flipbook and destroy?
-	        // TODO: Call flipbook create if it was destroyed?
-	        // Check previous state?
-	        _bragiBrowser2['default'].log('ScreenTitle:component:setupPageTurn', 'called');
-
-	        requestAnimationFrame(function () {
-	            // Setup page turner
-	            var duration = 600;
-
-	            (0, _jquery2['default'])('#game-screen-onboarding__book').turn({
-	                height: parseInt((0, _jquery2['default'])('#game-screen-onboarding__book-wrapper').height(), 10),
-	                page: 1,
-	                autoCenter: true,
-	                gradients: true,
-	                acceleration: true,
-	                duration: duration,
-	                elevation: 150,
-	                when: {
-	                    turning: function turning(event, page, pageObject) {
-	                        // TODO: XXXXXXXXXXXXXX
-	                        // Figure out how best to handle going back to page 1.
-	                        // Should the create flow just only exist for the book?
-	                        // If you click options or achievements, maybe a different
-	                        // UI element should come in
-	                        if (page === 1) {}
-	                    }
-	                }
-	            });
-
-	            // add the transition class AFTER we've setup the page turn, as if
-	            // it is added before the margin-left will transition and the book
-	            // will slide in - we want it started centered
-	            requestAnimationFrame(function () {
-	                (0, _jquery2['default'])('#game-screen-onboarding__book').addClass('transition');
-	                (0, _jquery2['default'])('#game-screen-onboarding__book').turn('page', _this.state.state.get('page'));
-	            });
-	        });
+	        _bragiBrowser2['default'].log('components/onboarding:componentDidMount', '<finished> called | took: ' + timings.printLast());
 	    },
 
 	    // Render
 	    // --------------------------------
 	    render: function render() {
-	        _bragiBrowser2['default'].log('ScreenOnboarding:component:render', 'called | previousState: ' + this._previousBookState + ' | current: ' + this.state.state.get('bookState'));
-
-	        window.z = this;
+	        _bragiBrowser2['default'].log('components/onboarding:render', 'called | previousState: ' + this._previousBookState + ' | current: ' + this.state.state.get('bookState'));
 
 	        // Setup pages based on bookState (title, create, resume, or options page)
 	        var bookHtml;
 	        if (this.state.state.get('bookState') === 'title') {
 	            // TITLE PAGE
-	            bookHtml = _react2['default'].createElement(_gameScreen__onboardingTitleJs2['default'], null);
-	        } else if (this.state.state.get('bookState') === 'create') {
+	            bookHtml = _react2['default'].createElement(_onboarding__titleJs2['default'], null);
+	        } else if (this.state.state.get('bookState') === 'new') {
 	            // CREATE NEW CHARACTER
-	            bookHtml = _react2['default'].createElement(_gameScreen__onboardingCreateJs2['default'], null);
+	            bookHtml = _react2['default'].createElement(_onboarding__newJs2['default'], null);
+	        } else {
+	            _bragiBrowser2['default'].log('error:components/onboarding:render', 'invalid book state', this.state.state.get('bookState'));
+	            bookHtml = _react2['default'].createElement(
+	                'div',
+	                null,
+	                ' INVALID STATE '
+	            );
 	        }
 
 	        return _react2['default'].createElement(
 	            'div',
 	            { id: 'game-screen__onboarding-wrapper' },
-	            _react2['default'].createElement(
-	                'div',
-	                { id: 'game-screen-onboarding__book-wrapper' },
-	                bookHtml
-	            )
+	            bookHtml
 	        );
 	    }
 	});
@@ -63822,13 +63831,13 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 245 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* =========================================================================
 	 *
-	 * game-screen__title.js
-	 *      Title screen
+	 * onboarding
+	 *      Onboarding screen actions
 	 *
 	 * ========================================================================= */
 	// External Dependencies
@@ -63836,127 +63845,306 @@
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
-	    value: true
+	  value: true
 	});
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _react = __webpack_require__(19);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(178);
 
 	var _bragiBrowser = __webpack_require__(4);
 
 	var _bragiBrowser2 = _interopRequireDefault(_bragiBrowser);
 
+	var _react = __webpack_require__(19);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reflux = __webpack_require__(219);
 
 	var _reflux2 = _interopRequireDefault(_reflux);
 
-	var _immutable = __webpack_require__(241);
-
-	var _immutable2 = _interopRequireDefault(_immutable);
-
-	var _jquery = __webpack_require__(2);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
 	// Internal Dependencies
 	// ------------------------------------
-
-	var _utilTimingsJs = __webpack_require__(217);
-
-	var _utilTimingsJs2 = _interopRequireDefault(_utilTimingsJs);
-
-	var _storesGameJs = __webpack_require__(242);
-
-	var _storesGameJs2 = _interopRequireDefault(_storesGameJs);
-
-	var _actionsGameActionsJs = __webpack_require__(243);
-
-	var _actionsGameActionsJs2 = _interopRequireDefault(_actionsGameActionsJs);
 
 	// ========================================================================
 	//
 	// Functionality
 	//
 	// ========================================================================
-	var ScreenTitle = _react2['default'].createClass({
-	    displayName: 'ScreenTitle',
-
-	    // --------------------------------
-	    // Handle actions
-	    // --------------------------------
-	    menuItemClickedNewGame: function menuItemClickedNewGame(targetState) {
-	        _bragiBrowser2['default'].log('ScreenTitle:component:menuItemClickedNewGame', 'called with ' + targetState);
-
-	        // Change state
-	        _actionsGameActionsJs2['default'].gameNew({
-	            targetOnboardingState: targetState
-	        });
-	    },
-
-	    menuItemClickedResume: function menuItemClickedResume(e) {
-	        _bragiBrowser2['default'].log('ScreenTitle:component:menuItemClickedResume', 'called');
-
-	        // Change state
-	        _actionsGameActionsJs2['default'].gameResume();
-	    },
-
-	    // --------------------------------
-	    // Render
-	    // --------------------------------
-	    render: function render() {
-	        _bragiBrowser2['default'].log('ScreenTitle:component:render', 'called');
-
-	        return _react2['default'].createElement(
-	            'div',
-	            { id: 'game-screen-onboarding__book' },
-	            _react2['default'].createElement(
-	                'div',
-	                { className: 'hard' },
-	                _react2['default'].createElement(
-	                    'div',
-	                    { id: 'game-screen-title__wrapper' },
-	                    'Title',
-	                    _react2['default'].createElement(
-	                        'div',
-	                        { id: 'game-screen-title__menu-wrapper' },
-	                        _react2['default'].createElement(
-	                            'div',
-	                            { className: 'game-screen-title__menu-item',
-	                                onClick: this.menuItemClickedNewGame.bind(this, 'create') },
-	                            'New Game'
-	                        ),
-	                        _react2['default'].createElement(
-	                            'div',
-	                            { className: 'game-screen-title__menu-item' },
-	                            'Resume'
-	                        ),
-	                        _react2['default'].createElement(
-	                            'div',
-	                            { className: 'game-screen-title__menu-item' },
-	                            'Options'
-	                        )
-	                    )
-	                )
-	            ),
-	            _react2['default'].createElement(
-	                'div',
-	                { className: 'hard' },
-	                ' '
-	            )
-	        );
-	    }
-	});
-
-	exports['default'] = ScreenTitle;
+	var OnboardingActions = _reflux2['default'].createActions(['showTitle', 'showNew', 'showResume', 'turnPage']);
+	exports['default'] = OnboardingActions;
 	module.exports = exports['default'];
 
 /***/ },
-/* 246 */
+/* 247 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* =========================================================================
+	 *
+	 * Game Onboarding.js
+	 *  Game onboarding store (e.g., new / history)
+	 *
+	 * ========================================================================= */
+	// External Dependencies
+	// ------------------------------------
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _bragiBrowser = __webpack_require__(4);
+
+	var _bragiBrowser2 = _interopRequireDefault(_bragiBrowser);
+
+	var _lodash = __webpack_require__(16);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _react = __webpack_require__(19);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reflux = __webpack_require__(219);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _immutable = __webpack_require__(241);
+
+	var _immutable2 = _interopRequireDefault(_immutable);
+
+	// Internal Dependencies
+	// ------------------------------------
+
+	var _actionsOnboardingJs = __webpack_require__(246);
+
+	var _actionsOnboardingJs2 = _interopRequireDefault(_actionsOnboardingJs);
+
+	// ========================================================================
+	//
+	// Functionality
+	//
+	// ========================================================================
+	var OnboardingStore = _reflux2['default'].createStore({
+	    listenables: [_actionsOnboardingJs2['default']],
+
+	    init: function init() {
+	        _bragiBrowser2['default'].log('stores/onboarding:init', 'called');
+	        // set initial data
+	        this.data = _immutable2['default'].fromJS({ bookState: 'title' });
+
+	        return this;
+	    },
+
+	    getState: function getState() {
+	        return this.data;
+	    },
+
+	    // TODO: save / load functionality
+
+	    // Page Turns
+	    // --------------------------------
+	    onTurnPage: function onTurnPage(options) {
+	        // Called when a page is turned
+	        _bragiBrowser2['default'].log('stores/onboarding:onTurnPage', 'called | %O', options);
+
+	        this.data = _immutable2['default'].fromJS({
+	            bookState: options.bookState || this.data.get('bookState'),
+	            page: +(options.targetPage || options.page || this.data.get('page'))
+	        });
+
+	        this.trigger({ data: this.data });
+	    },
+
+	    // Handle book switches
+	    // --------------------------------
+	    onShowTitle: function onShowTitle(d) {
+	        _bragiBrowser2['default'].log('stores/onboarding:onShowTitle', 'called');
+
+	        this.data = _immutable2['default'].fromJS({ bookState: 'title' });
+	        this.trigger({ data: this.data });
+	    },
+
+	    onShowNew: function onShowNew() {
+	        _bragiBrowser2['default'].log('stores/onboarding:onShowNew', 'called');
+
+	        this.data = _immutable2['default'].fromJS({ bookState: 'new' });
+	        this.trigger({ data: this.data });
+	    }
+	});
+
+	exports['default'] = OnboardingStore;
+	module.exports = exports['default'];
+
+/***/ },
+/* 248 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* =========================================================================
+	 *
+	 * Onboarding New
+	 *      Store for new user creation flow
+	 *
+	 * ========================================================================= */
+	// External Dependencies
+	// ------------------------------------
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _bragiBrowser = __webpack_require__(4);
+
+	var _bragiBrowser2 = _interopRequireDefault(_bragiBrowser);
+
+	var _lodash = __webpack_require__(16);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _react = __webpack_require__(19);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reflux = __webpack_require__(219);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _immutable = __webpack_require__(241);
+
+	var _immutable2 = _interopRequireDefault(_immutable);
+
+	// Internal Dependencies
+	// ------------------------------------
+
+	var _actionsOnboarding__newJs = __webpack_require__(249);
+
+	var _actionsOnboarding__newJs2 = _interopRequireDefault(_actionsOnboarding__newJs);
+
+	var _actionsOnboardingJs = __webpack_require__(246);
+
+	var _actionsOnboardingJs2 = _interopRequireDefault(_actionsOnboardingJs);
+
+	// ========================================================================
+	//
+	// Functionality
+	//
+	// ========================================================================
+	// Utility values
+	var MAX_NUM_PAGES = 8;
+
+	// STORE
+	var OnboardingNewStore = _reflux2['default'].createStore({
+	    listenables: [_actionsOnboardingJs2['default'], _actionsOnboarding__newJs2['default']],
+
+	    init: function init() {
+	        _bragiBrowser2['default'].log('onboarding__new:store:init', 'called');
+	        // set initial data
+	        this.data = _immutable2['default'].fromJS({ page: 2 });
+
+	        return this;
+	    },
+
+	    getData: function getData() {
+	        _bragiBrowser2['default'].log('stores/onboarding__new:getData', 'called');
+	        // utility to return data
+	        return this.data;
+	    },
+
+	    setData: function setData(data, triggerChange) {
+	        _bragiBrowser2['default'].log('stores/onboarding__new:setData', 'called');
+	        // utility function to manually set data. Useful when fetching data
+	        // from parent and propagating data downwards to this store
+	        this.data = data;
+	        if (triggerChange) {
+	            this.trigger({ data: this.data });
+	        }
+
+	        return this.data;
+	    },
+
+	    // --------------------------------
+	    //
+	    // Turn page
+	    //
+	    // --------------------------------
+	    onPageTurnNext: function onPageTurnNext() {
+	        _bragiBrowser2['default'].log('stores/onboarding__new:onPageTurnNext', 'called');
+
+	        if (this.data.get('page') + 2 > MAX_NUM_PAGES) {
+	            _bragiBrowser2['default'].log('warn:stores/onboarding__new:onPageTurnNext', 'max pages exceeded');
+	            return false;
+	        }
+
+	        this.data = this.data.mergeDeep({ page: this.data.get('page') + 2 });
+	        this.trigger({ data: this.data });
+	    },
+	    onPageTurnPrevious: function onPageTurnPrevious() {
+	        _bragiBrowser2['default'].log('stores/onboarding__new:onPageTurnPrevious', 'called');
+
+	        if (this.data.get('page') < 3) {
+	            _bragiBrowser2['default'].log('warn:stores/onboarding__new:onPageTurnPrevious', 'min pages exceeded');
+	            return false;
+	        }
+
+	        this.data = this.data.mergeDeep({ page: this.data.get('page') - 2 });
+	        this.trigger({ data: this.data });
+	    }
+
+	});
+
+	exports['default'] = OnboardingNewStore;
+	module.exports = exports['default'];
+
+/***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* =========================================================================
+	 *
+	 * onboarding__new
+	 *      Actions for the create character flow
+	 *
+	 * ========================================================================= */
+	// External Dependencies
+	// ------------------------------------
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _bragiBrowser = __webpack_require__(4);
+
+	var _bragiBrowser2 = _interopRequireDefault(_bragiBrowser);
+
+	var _react = __webpack_require__(19);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reflux = __webpack_require__(219);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	// Internal Dependencies
+	// ------------------------------------
+
+	// ========================================================================
+	//
+	// Functionality
+	//
+	// ========================================================================
+	var OnboardingNewActions = _reflux2['default'].createActions(['pageTurnNext', 'pageTurnPrevious']);
+	exports['default'] = OnboardingNewActions;
+	module.exports = exports['default'];
+
+/***/ },
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* =========================================================================
@@ -64004,17 +64192,221 @@
 
 	var _utilTimingsJs2 = _interopRequireDefault(_utilTimingsJs);
 
-	var _storesGameJs = __webpack_require__(242);
+	var _actionsOnboardingJs = __webpack_require__(246);
 
-	var _storesGameJs2 = _interopRequireDefault(_storesGameJs);
+	var _actionsOnboardingJs2 = _interopRequireDefault(_actionsOnboardingJs);
 
-	var _actionsGameActionsJs = __webpack_require__(243);
+	// ========================================================================
+	//
+	// Functionality
+	//
+	// ========================================================================
+	var OnboardingTitle = _react2['default'].createClass({
+	    displayName: 'OnboardingTitle',
 
-	var _actionsGameActionsJs2 = _interopRequireDefault(_actionsGameActionsJs);
+	    getInitialState: function getInitialState() {
+	        return _immutable2['default'].Map({});
+	    },
 
-	var _gameScreen__onboardingTitleJs = __webpack_require__(245);
+	    // --------------------------------
+	    // Handle actions
+	    // --------------------------------
+	    menuItemClickedNewGame: function menuItemClickedNewGame() {
+	        _bragiBrowser2['default'].log('onboarding__title:component:menuItemClickedNewGame', 'called');
 
-	var _gameScreen__onboardingTitleJs2 = _interopRequireDefault(_gameScreen__onboardingTitleJs);
+	        // Change state
+	        _actionsOnboardingJs2['default'].showNew();
+	    },
+
+	    menuItemClickedResume: function menuItemClickedResume(e) {
+	        _bragiBrowser2['default'].log('onboarding__title:component:menuItemClickedResume', 'called');
+
+	        // Change state
+	        _actionsOnboardingJs2['default'].showResume();
+	    },
+
+	    // --------------------------------
+	    // Component handling
+	    // --------------------------------
+	    componentDidMount: function componentDidMount() {
+	        _bragiBrowser2['default'].log('components/onboarding__new:componentDidMount', 'called');
+
+	        // Trigger animations / transitions based on state
+	        this.setupPageTurn();
+
+	        return this;
+	    },
+
+	    setupPageTurn: function setupPageTurn() {
+	        // TODO: get pages based on state? Re-call flipbook and destroy?
+	        // TODO: Call flipbook create if it was destroyed?
+	        // Check previous state?
+	        _bragiBrowser2['default'].log('components/onboarding__title:setupPageTurn', 'called');
+
+	        // Setup page turner
+	        var duration = 600;
+
+	        // Page turn needs to be setup here so we can call re-render on the
+	        // subcomponents (new / title / history) without having to re-setup
+	        // the page turn
+	        this.pageTurn = (0, _jquery2['default'])('#game-screen-onboarding__book--title').turn({
+	            height: parseInt((0, _jquery2['default'])('#game-screen-onboarding__book-wrapper--title').height(), 10),
+	            page: 1,
+	            disableClickToTurn: false,
+	            autoCenter: true,
+	            gradients: true,
+	            acceleration: true,
+	            duration: duration,
+	            elevation: 150,
+	            when: {
+	                turning: function turning(event, page, pageObject) {
+	                    _bragiBrowser2['default'].log('components/onboarding__title:pageTurn:turning', 'turning page: %O', {
+	                        event: event,
+	                        targetPage: page,
+	                        pageObject: pageObject
+	                    });
+	                }
+	            }
+	        });
+
+	        // add the transition class AFTER we've setup the page turn, as if
+	        // it is added before the margin-left will transition and the book
+	        // will slide in - we want it started centered
+	        requestAnimationFrame(function () {
+	            (0, _jquery2['default'])('#game-screen-onboarding__book--title').addClass('transition');
+	            (0, _jquery2['default'])('#game-screen-onboarding__book--title').turn('page', 1);
+	        });
+	    },
+
+	    // --------------------------------
+	    // Render
+	    // --------------------------------
+	    render: function render() {
+	        _bragiBrowser2['default'].log('onboarding__title:component:render', 'called');
+
+	        return _react2['default'].createElement(
+	            'div',
+	            { id: 'game-screen-onboarding__book-wrapper--title', className: 'game-screen-onboarding__book-item-wrapper' },
+	            _react2['default'].createElement(
+	                'div',
+	                { id: 'game-screen-onboarding__book--title', className: 'game-screen-onboarding__book-item' },
+	                _react2['default'].createElement(
+	                    'div',
+	                    { className: 'hard' },
+	                    _react2['default'].createElement(
+	                        'div',
+	                        { id: 'game-screen-title__wrapper' },
+	                        'Title',
+	                        _react2['default'].createElement(
+	                            'div',
+	                            { id: 'game-screen-title__menu-wrapper' },
+	                            _react2['default'].createElement(
+	                                'div',
+	                                { id: 'game-screen-title__menu-item--new',
+	                                    className: 'game-screen-title__menu-item',
+	                                    onClick: this.menuItemClickedNewGame },
+	                                'New Game'
+	                            ),
+	                            _react2['default'].createElement(
+	                                'div',
+	                                { className: 'game-screen-title__menu-item' },
+	                                'Resume'
+	                            ),
+	                            _react2['default'].createElement(
+	                                'div',
+	                                { className: 'game-screen-title__menu-item' },
+	                                'Options'
+	                            )
+	                        )
+	                    )
+	                ),
+	                _react2['default'].createElement(
+	                    'div',
+	                    { className: 'hard' },
+	                    'Credits::::'
+	                )
+	            )
+	        );
+	    }
+	});
+
+	exports['default'] = OnboardingTitle;
+	module.exports = exports['default'];
+
+/***/ },
+/* 251 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* =========================================================================
+	 *
+	 * game-screen__new.js
+	 *      New character create flow
+	 *
+	 * TODO: Disable FINAL back of page turns
+	 *
+	 * ========================================================================= */
+	// External Dependencies
+	// ------------------------------------
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(19);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(178);
+
+	var _bragiBrowser = __webpack_require__(4);
+
+	var _bragiBrowser2 = _interopRequireDefault(_bragiBrowser);
+
+	var _reflux = __webpack_require__(219);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _immutable = __webpack_require__(241);
+
+	var _immutable2 = _interopRequireDefault(_immutable);
+
+	var _classnames = __webpack_require__(274);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _jquery = __webpack_require__(2);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	// Internal Dependencies
+	// ------------------------------------
+
+	var _utilTimingsJs = __webpack_require__(217);
+
+	var _utilTimingsJs2 = _interopRequireDefault(_utilTimingsJs);
+
+	var _eventsJs = __webpack_require__(174);
+
+	var _eventsJs2 = _interopRequireDefault(_eventsJs);
+
+	var _storesOnboarding__newJs = __webpack_require__(248);
+
+	var _storesOnboarding__newJs2 = _interopRequireDefault(_storesOnboarding__newJs);
+
+	var _actionsOnboarding__newJs = __webpack_require__(249);
+
+	var _actionsOnboarding__newJs2 = _interopRequireDefault(_actionsOnboarding__newJs);
+
+	var _actionsOnboardingJs = __webpack_require__(246);
+
+	var _actionsOnboardingJs2 = _interopRequireDefault(_actionsOnboardingJs);
+
+	var _storesOnboardingJs = __webpack_require__(247);
+
+	var _storesOnboardingJs2 = _interopRequireDefault(_storesOnboardingJs);
 
 	// ========================================================================
 	//
@@ -64024,69 +64416,290 @@
 	var ScreenCreate = _react2['default'].createClass({
 	    displayName: 'ScreenCreate',
 
+	    mixins: [_reflux2['default'].listenTo(_storesOnboarding__newJs2['default'], 'onboardingNewStoreChange')],
+
+	    getInitialState: function getInitialState() {
+	        this._previousState = {
+	            state: _storesOnboarding__newJs2['default'].getData()
+	        };
+
+	        return {
+	            state: _storesOnboarding__newJs2['default'].getData()
+	        };
+	    },
+
+	    onboardingNewStoreChange: function onboardingNewStoreChange(d) {
+	        _bragiBrowser2['default'].log('components/onboarding__new:onboardingNewStoreChange', 'called %O', d);
+
+	        this.setState({ state: d.data });
+
+	        return this;
+	    },
+
+	    // --------------------------------
+	    // Utility functions
+	    // --------------------------------
+	    getIntroText: function getIntroText() {
+	        // TODO: get different text based on past game play
+	        return 'I am old and tired now, but I was not young when the destruction of Felithport began.\n        The years since then seem more dim and faded than the years of my youth. Now, I wait.\n        Like a gnarled tree, withered and weathered, with nothing to do but decay to the grave.';
+	    },
+
+	    // --------------------------------
+	    // Component handling
+	    // --------------------------------
+	    componentDidUpdate: function componentDidUpdate() {
+	        _bragiBrowser2['default'].log('components/onboarding__new:componentDidUpdate', 'called %O', { state: this.state });
+
+	        // If page state is different, we do need to re-setup page turn
+	        if (this._previousState.state.get('page') !== this.state.state.get('page')) {
+	            _bragiBrowser2['default'].log('components/onboarding__new:componentDidUpdate:differentPage', 'turning to new page');
+
+	            this.pageTurn.turn('page', this.state.state.get('page'));
+	        }
+
+	        // Update previous states
+	        this._previousState = this.state;
+	    },
+
+	    componentDidMount: function componentDidMount() {
+	        _bragiBrowser2['default'].log('components/onboarding__new:componentDidMount', 'called');
+
+	        // Trigger animations / transitions based on state
+	        this.setupPageTurn();
+
+	        // handle keyboard events
+	        _eventsJs2['default'].addListener('keyPress', this.handleKeyPress);
+
+	        return this;
+	    },
+
+	    componentWillUnmount: function componentWillUnmount() {
+	        _bragiBrowser2['default'].log('components/onboarding__new:componentWillUnmount', 'called');
+
+	        _eventsJs2['default'].removeListener('keyPress', this.handleKeyPress);
+	    },
+
+	    // Setup page turn
+	    // --------------------------------
+	    setupPageTurn: function setupPageTurn() {
+	        var _this = this;
+
+	        // TODO: get pages based on state? Re-call flipbook and destroy?
+	        // TODO: Call flipbook create if it was destroyed?
+	        // Check previous state?
+	        _bragiBrowser2['default'].log('components/onboarding__new:setupPageTurn', 'called');
+
+	        // Setup page turner
+	        var duration = 600;
+
+	        // Page turn needs to be setup here so we can call re-render on the
+	        // subcomponents (new / title / history) without having to re-setup
+	        // the page turn
+	        this.pageTurn = (0, _jquery2['default'])('#game-screen-onboarding__book--new').turn({
+	            height: parseInt((0, _jquery2['default'])('#game-screen-onboarding__book-wrapper--new').height(), 10),
+	            page: 1,
+	            disableClickToTurn: this.state.state.get('bookState') === 'title' ? false : true,
+	            autoCenter: true,
+	            gradients: true,
+	            acceleration: true,
+	            duration: duration,
+	            elevation: 150,
+	            when: {
+	                turning: function turning(event, page, pageObject) {
+	                    _bragiBrowser2['default'].log('components/onboarding__new:pageTurn:turning', 'turning page: %O', {
+	                        event: event,
+	                        targetPage: page,
+	                        bookState: _this.state.state.get('bookState'),
+	                        pageObject: pageObject
+	                    });
+
+	                    // TODO: Trigger actions that other components listen to
+
+	                    // When going BACK to page 1 (from any book state),
+	                    // trigger the gameTitle action to update the state so the
+	                    // book and component will rerender
+	                    if (page === 1) {
+	                        var retriggerStateDuration = 190;
+	                        setTimeout(function () {
+	                            requestAnimationFrame(function () {
+	                                // Change state
+	                                _actionsOnboardingJs2['default'].showTitle();
+	                            });
+	                        }, retriggerStateDuration);
+	                    }
+	                }
+	            }
+	        });
+
+	        // Disable page turn animation
+	        this.pageTurn.bind('start', function (event, pageObject, corner) {
+	            if (corner === 'tl' || corner === 'tr' || corner === 'bl' || corner === 'br') {
+	                return event.preventDefault();
+	            }
+	        });
+
+	        // add the transition class AFTER we've setup the page turn, as if
+	        // it is added before the margin-left will transition and the book
+	        // will slide in - we want it started centered
+	        requestAnimationFrame(function () {
+	            (0, _jquery2['default'])('#game-screen-onboarding__book--new').addClass('transition');
+	            (0, _jquery2['default'])('#game-screen-onboarding__book--new').turn('page', _this.state.state.get('page'));
+	        });
+	    },
+
+	    // --------------------------------
+	    //
+	    // Page actions
+	    //
+	    // --------------------------------
+
+	    // Handle Keyboard Input
+	    // --------------------------------
+	    handleKeyPress: function handleKeyPress(data) {
+	        _bragiBrowser2['default'].log('components/onboarding__new:handleKeyPress', 'called with | ', data);
+	        // handle page turning
+	        if (data.key === 'right') {
+	            return this.pageNext();
+	        } else if (data.key === 'left') {
+	            return this.pagePrevious();
+	        }
+
+	        return true;
+	    },
+
+	    pagePrevious: function pageNext() {
+	        _bragiBrowser2['default'].log('components/onboarding__new:pagePrevious', 'called');
+
+	        // TODO: Check if we CAN go to next state
+	        _actionsOnboarding__newJs2['default'].pageTurnPrevious();
+	    },
+	    pageNext: function pageNext() {
+	        _bragiBrowser2['default'].log('components/onboarding__new:pageNext', 'called');
+
+	        // TODO: Check if we CAN go to next state
+	        _actionsOnboarding__newJs2['default'].pageTurnNext();
+	    },
+
 	    // --------------------------------
 	    // Handle actions
 	    // --------------------------------
+	    // NOTE: we can call OnboardingActions.turnPage({ page: X }) to turn the page
+	    arrowClickedPrevious: function arrowClickedPrevious() {
+	        _bragiBrowser2['default'].log('components/onboarding__new:arrowClickedPrevious', 'called');
+
+	        this.pagePrevious();
+	    },
+	    arrowClickedNext: function arrowClickedNext() {
+	        _bragiBrowser2['default'].log('components/onboarding__new:arrowClickedNext', 'called');
+
+	        this.pageNext();
+	    },
 
 	    // --------------------------------
 	    // Render
 	    // --------------------------------
 	    render: function render() {
-	        _bragiBrowser2['default'].log('ScreenCreate:component:render', 'called');
+	        var currentPage = this.state.state.get('page');
+	        _bragiBrowser2['default'].log('components/onboarding__new:render', 'called | page: ' + currentPage);
 
+	        // ----------------------------
+	        // Get HTML for pages
+	        // ----------------------------
+
+	        // PAGE 1
+	        // ---------------------------
+	        var page1Html = undefined;
+	        page1Html = _react2['default'].createElement(
+	            'div',
+	            null,
+	            _react2['default'].createElement(
+	                'div',
+	                { className: 'onboarding-new__page-1__intro-text' },
+	                this.getIntroText()
+	            ),
+	            _react2['default'].createElement(
+	                'div',
+	                { className: 'onboarding-new__page-1__name-warpper' },
+	                'I was infamous; most people knew me as',
+	                _react2['default'].createElement('br', null),
+	                _react2['default'].createElement('input', { type: 'text',
+	                    className: 'interaction',
+	                    placeholder: 'Alias',
+	                    id: 'onboarding-new__page1__name-input' })
+	            )
+	        );
+
+	        // Arrow HTML
+	        // ----------------------------
+	        // PREVIOUS
+	        var previousClasses = (0, _classnames2['default'])({
+	            'game-screen-onboarding__book-arrow--next': true,
+	            'opacity0': currentPage < 3 ? true : false
+	        });
+	        var arrowHtmlPrevious = _react2['default'].createElement(
+	            'div',
+	            { className: previousClasses,
+	                onClick: this.arrowClickedPrevious },
+	            '<'
+	        );
+
+	        // NEXT
+	        var nextClasses = (0, _classnames2['default'])({
+	            'game-screen-onboarding__book-arrow--next': true,
+	            'opacity0': currentPage > 7 ? true : false
+	        });
+	        var arrowHtmlNext = _react2['default'].createElement(
+	            'div',
+	            { className: nextClasses,
+	                onClick: this.arrowClickedNext },
+	            '>'
+	        );
+
+	        // Render it
+	        // ----------------------------
 	        return _react2['default'].createElement(
 	            'div',
-	            { id: 'game-screen-onboarding__book' },
+	            { id: 'game-screen-onboarding__book-wrapper--new', className: 'game-screen-onboarding__book-item-wrapper' },
 	            _react2['default'].createElement(
 	                'div',
-	                { className: 'hard' },
-	                ' '
+	                { id: 'game-screen-onboarding__book--new', className: 'game-screen-onboarding__book-item' },
+	                _react2['default'].createElement('div', { key: 'page1', className: 'hard' }),
+	                _react2['default'].createElement('div', { key: 'page2', className: 'hard' }),
+	                _react2['default'].createElement(
+	                    'div',
+	                    { key: 'page3' },
+	                    page1Html
+	                ),
+	                _react2['default'].createElement(
+	                    'div',
+	                    { key: 'page4' },
+	                    ' Page 2 '
+	                ),
+	                _react2['default'].createElement(
+	                    'div',
+	                    { key: 'page5' },
+	                    ' Page 3 '
+	                ),
+	                _react2['default'].createElement(
+	                    'div',
+	                    { key: 'page6' },
+	                    ' Page 4 '
+	                ),
+	                _react2['default'].createElement(
+	                    'div',
+	                    { key: 'page7' },
+	                    ' Page 5 '
+	                ),
+	                _react2['default'].createElement(
+	                    'div',
+	                    { key: 'page8' },
+	                    ' Page 6 '
+	                ),
+	                _react2['default'].createElement('div', { key: 'page9', className: 'hard' }),
+	                _react2['default'].createElement('div', { key: 'page10', className: 'hard' })
 	            ),
-	            _react2['default'].createElement(
-	                'div',
-	                { className: 'hard' },
-	                ' '
-	            ),
-	            _react2['default'].createElement(
-	                'div',
-	                null,
-	                ' Page 1 '
-	            ),
-	            _react2['default'].createElement(
-	                'div',
-	                null,
-	                ' Page 2 '
-	            ),
-	            _react2['default'].createElement(
-	                'div',
-	                null,
-	                ' Page 3 '
-	            ),
-	            _react2['default'].createElement(
-	                'div',
-	                null,
-	                ' Page 4 '
-	            ),
-	            _react2['default'].createElement(
-	                'div',
-	                null,
-	                ' Page 5 '
-	            ),
-	            _react2['default'].createElement(
-	                'div',
-	                null,
-	                ' Page 6 '
-	            ),
-	            _react2['default'].createElement(
-	                'div',
-	                { className: 'hard' },
-	                ' '
-	            ),
-	            _react2['default'].createElement(
-	                'div',
-	                { className: 'hard' },
-	                ' '
-	            )
+	            arrowHtmlPrevious,
+	            arrowHtmlNext
 	        );
 	    }
 	});
@@ -64095,7 +64708,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 247 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* =========================================================================
@@ -64150,7 +64763,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 248 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64201,55 +64814,42 @@
 	  },
 
 	  // Display values
-
 	  displays = ['single', 'double'],
 
 	  // Direction values
-
 	  directions = ['ltr', 'rtl'],
 
 	  // Default options
-
 	  turnOptions = {
 
 	    // Enables hardware acceleration
-
 	    acceleration: true,
 
 	    // Display
-
 	    display: 'double',
 
 	    // Duration of transition in milliseconds
-
 	    duration: 600,
 
 	    // First page
-
 	    page: 1,
 
 	    // Enables gradients
-
 	    gradients: true,
 
 	    // Corners used when turning the page
-
 	    turnCorners: 'bl,br',
 
 	    // Events
-
 	    when: null
 	  },
 	      flipOptions = {
-
 	    // Size of the active zone of each corner
-
 	    cornerSize: 100
 
 	  },
 
 	  // Number of pages in the DOM, minimum value: 6
-
 	  pagesInDOM = 6,
 	      turnMethods = {
 
@@ -64259,7 +64859,6 @@
 	    init: function init(options) {
 
 	      // Define constants
-
 	      has3d = 'WebKitCSSMatrix' in window || 'MozPerspective' in document.body.style;
 	      hasRot = rotationAvailable();
 	      vendor = getPrefix();
@@ -64295,19 +64894,15 @@
 	      };
 
 	      // Add event listeners
-
 	      if (options.when) for (i in options.when) if (has(i, options.when)) this.bind(i, options.when[i]);
 
 	      // Set the css
-
 	      this.css({ position: 'relative', width: options.width, height: options.height });
 
 	      // Set the initial display
-
 	      this.turn('display', options.display);
 
 	      // Set the direction
-
 	      if (options.direction !== '') this.turn('direction', options.direction);
 
 	      // Prevent blue screen problems of switching to hardware acceleration mode
@@ -64324,19 +64919,21 @@
 	      }
 
 	      // Event listeners
+	      var bound = $(this).bind(mouseEvents.down, data.eventHandlers.touchStart).bind('end', turnMethods._eventEnd)
+	      //  .bind('released', turnMethods._eventReleased)
+	      .bind('flip', turnMethods._flip);
 
-	      $(this).bind(mouseEvents.down, data.eventHandlers.touchStart).bind('end', turnMethods._eventEnd).bind('pressed', turnMethods._eventPressed).bind('released', turnMethods._eventReleased).bind('flip', turnMethods._flip);
+	      if (!options.disableClickToTurn) {}
 
 	      $(this).parent().bind('start', data.eventHandlers.start);
 
-	      $(document).bind(mouseEvents.move, data.eventHandlers.touchMove).bind(mouseEvents.up, data.eventHandlers.touchEnd);
+	      //$(document).bind(mouseEvents.move, data.eventHandlers.touchMove).
+	      //  bind(mouseEvents.up, data.eventHandlers.touchEnd);
 
 	      // Set the initial page
-
 	      this.turn('page', options.page);
 
 	      // This flipbook is ready
-
 	      data.done = true;
 
 	      return this;
@@ -65445,6 +66042,13 @@
 	        outArea = point.x < 0 || point.x > page.width();
 	      }
 
+	      // Only allow book to flip to the title page
+	      // NOTE: Manual hack
+	      if (data.opts.next > 2) {
+	        e.preventDefault();
+	        return false;
+	      }
+
 	      if (new Date().getTime() - data.time < 200 || outArea) {
 
 	        e.preventDefault();
@@ -66060,6 +66664,7 @@
 	          o = flipMethods._c.call(this, point.corner),
 	          width = this.width(),
 	          height = this.height();
+	      o = o || {};
 
 	      switch (data.effect) {
 
@@ -66394,6 +66999,7 @@
 	          dd = this.data(),
 	          data = dd.f,
 	          visible = data.visible;
+	      c = c || {};
 
 	      if (folding) {
 
@@ -66410,11 +67016,12 @@
 
 	          var that = this,
 	              point = data.point && data.point.corner == c.corner ? data.point : flipMethods._c.call(this, c.corner, 1);
+	          point = point || {};
 
 	          this.animatef({
 	            from: [point.x, point.y],
 	            to: [c.x, c.y],
-	            duration: 500,
+	            duration: 200,
 	            frame: function frame(v) {
 	              c.x = Math.round(v[0]);
 	              c.y = Math.round(v[1]);
@@ -66531,7 +67138,7 @@
 	            flipMethods._fold.call(that, p1);
 	          },
 	          complete: hide,
-	          duration: 800,
+	          duration: 160,
 	          hiding: true
 	        });
 	      } else {
@@ -66616,7 +67223,6 @@
 	        e = isTouch ? e.originalEvent.touches : [e];
 
 	        if (data.corner) {
-
 	          var pos = data.parent.offset();
 	          data.corner.x = e[0].pageX - pos.left;
 	          data.corner.y = e[0].pageY - pos.top;
@@ -67000,8 +67606,12 @@
 	  $.findPos = findPos;
 	};
 
+	//bound.bind('pressed', turnMethods._eventPressed);
+	//bound.bind('pressed', turnMethods._eventReleased);
+	//bound.bind('released', turnMethods._eventReleased);
+
 /***/ },
-/* 249 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* =========================================================================
@@ -67026,7 +67636,7 @@
 
 	var _eventsJs2 = _interopRequireDefault(_eventsJs);
 
-	var jwerty = __webpack_require__(250).jwerty;
+	var jwerty = __webpack_require__(255).jwerty;
 
 	var keys = ['up', 'down', 'left', 'right', 'space', 'escape', 'enter', 'q', 'w', 'e', 'r', 'shift+q', 'shift+w', 'shift+e', 'shift+r', 'h', 'j', 'k', 'l', '`', 'shift+`', '~', 'shift+~', '1', '2', '3', '4', '5', '6', 'shift+1', 'shift+2', 'shift+3', 'shift+4', 'shift+5', 'shift+6', 'backspace', 'tab', 'shift+tab', 'shift+up', 'shift+down', 'shift+i'];
 
@@ -67045,7 +67655,7 @@
 	                }
 
 	                _bragiBrowser2['default'].log('handleKeys:received', 'got : ' + key);
-	                _eventsJs2['default'].emit('keyPress:' + key, { key: key, e: e });
+	                _eventsJs2['default'].emit('keyPress', { key: key, e: e });
 	            }
 
 	            //return the event
@@ -67060,7 +67670,7 @@
 	module.exports = handleKeys;
 
 /***/ },
-/* 250 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*
@@ -67594,6 +68204,79 @@
 	    };
 	})(typeof global !== 'undefined' && global.window || undefined, typeof module !== 'undefined' && module.exports ? module.exports : undefined);
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2015 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+
+	(function () {
+		'use strict';
+
+		function classNames () {
+
+			var classes = '';
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg;
+
+				if ('string' === argType || 'number' === argType) {
+					classes += ' ' + arg;
+
+				} else if (Array.isArray(arg)) {
+					classes += ' ' + classNames.apply(null, arg);
+
+				} else if ('object' === argType) {
+					for (var key in arg) {
+						if (arg.hasOwnProperty(key) && arg[key]) {
+							classes += ' ' + key;
+						}
+					}
+				}
+			}
+
+			return classes.substr(1);
+		}
+
+		if (true) {
+			// AMD. Register as an anonymous module.
+			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else {
+			window.classNames = classNames;
+		}
+
+	}());
+
 
 /***/ }
 /******/ ]);

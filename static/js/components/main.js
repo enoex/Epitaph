@@ -28,16 +28,16 @@ var Main = React.createClass({
 
     componentWillMount: function(){
         timings.push('componentWillMount');
-        logger.log('Main:component:componentWillMount:start', '<start> called');
+        logger.log('components/main:componentWillMount:start', '<start> called');
     },
     componentDidMount: function(){
         timings.push('componentDidMount');
-        logger.log('Main:component:componentDidMount:finish',
+        logger.log('components/main:componentDidMount:finish',
         '<finished> called | took: ' + timings.printLast());
     },
 
     render: function render(){
-        logger.log('Main:component:render', 'called : ', this.props);
+        logger.log('components/main:render', 'called : %O', this.props);
 
         return (
             <div id='game__wrapper'>

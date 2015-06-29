@@ -15,11 +15,12 @@ import Immutable from 'immutable';
 // Internal Dependencies
 // ------------------------------------
 import Timings from '../util/Timings.js';
-import GameStore from '../stores/Game.js';
-import GameActions from '../actions/game-actions.js';
+
+import GameStore from '../stores/game.js';
+import GameControllerStore from '../stores/game__controller.js';
 
 // Main screens
-import GameScreenOnboarding from './game-screen__onboarding.js';
+import ScreenOnboarding from './onboarding.js';
 
 // ========================================================================
 //
@@ -29,31 +30,33 @@ import GameScreenOnboarding from './game-screen__onboarding.js';
 var timings = new Timings('GameMain');
 
 var GameMain = React.createClass({
-    mixins: [Reflux.listenTo(GameStore, 'storeChange')],
+    mixins: [Reflux.listenTo(GameControllerStore, 'controllerStoreChange')],
 
     contextTypes: {
         router: React.PropTypes.func.isRequired
     },
 
     getInitialState: function(){
-        logger.log('GameMain:component:getInitialState', 'called');
+        logger.log('components/game__main:getInitialState', 'called');
         return {
-            // The current screen:
-            //      1) onboarding (title, new, options, achievements)
-            //      2) game (map, battle, battle results, shop)
-            screen: 'onboarding'
+            state: Immutable.fromJS({
+                // The current screen:
+                //      1) onboarding (title, new, options, achievements)
+                //      2) game (map, battle, battle results, shop)
+                screen: 'onboarding'
+            })
         };
     },
 
-    storeChange: function(message){
-        logger.log('GameMain:component:storeChange', 'called | %O', message);
+    controllerStoreChange: function(message){
+        logger.log('components/game__main:storeChange', 'called | %O', message);
 
         // change screen if necessary
-        if(message.data.screen && message.data.screen !== this.state.screen){
-            logger.log('GameMain:component:storeChange:changeScreen',
-            'changing screen to %O', message.data.screen);
+        if(message.data && message.data.get('screen') !== this.state.state.get('screen')){
+            logger.log('components/game__main:storeChange:changeScreen',
+            'changing screen to %O', message.data.get('screen'));
 
-            this.setState({ screen: message.data.screen });
+            this.setState({ screen: message.data.get('screen') });
         }
 
         return this;
@@ -61,11 +64,11 @@ var GameMain = React.createClass({
 
     componentWillMount: function(){
         timings.push('componentWillMount');
-        logger.log('GameMain:component:componentWillMount:start', '<start> called');
+        logger.log('components/game__main:componentWillMount:start', '<start> called');
     },
     componentDidMount: function(){
         timings.push('componentDidMount');
-        logger.log('GameMain:component:componentDidMount:finish',
+        logger.log('components/game__main:componentDidMount:finish',
         '<finished> called | took: ' + timings.printLast());
 
         // TODO
@@ -76,15 +79,15 @@ var GameMain = React.createClass({
         // Main game render function.
         // The shown part of the game (screen) depends on the state -
         // e.g., the create screen or map or battle
-        logger.log('GameMain:component:render', 'called : ', this.props);
+        logger.log('components/game__main:render', 'called : %O', this.props);
 
         // Get screen based on state
         var screenComponent;
 
         // TITLE Screen
-        if(this.state.screen === 'onboarding'){
+        if(this.state.state.get('screen') === 'onboarding'){
             screenComponent = (
-                <GameScreenOnboarding
+                <ScreenOnboarding
                     params={this.props.params}
                     gameState={this.state}
                 />

@@ -37,7 +37,7 @@ var handleKeys = function handleKeys(){
                 if(key === 'backspace'){ e.preventDefault(); }
 
                 logger.log('handleKeys:received', 'got : ' + key);
-                events.emit('keyPress:' + key, { key: key, e: e });
+                events.emit('keyPress', { key: key, e: e });
             }
 
             //return the event

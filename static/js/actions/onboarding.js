@@ -1,6 +1,7 @@
 /* =========================================================================
  *
- * game-actions
+ * onboarding
+ *      Onboarding screen actions
  *
  * ========================================================================= */
 // External Dependencies
@@ -18,8 +19,11 @@ import Reflux from 'reflux';
 // Functionality
 //
 // ========================================================================
-var GameActions = Reflux.createActions([
-    "gameNew",
-    "gameResume"
+var OnboardingActions = Reflux.createActions([
+    "showTitle",
+    "showNew",
+    "showResume",
+
+    "turnPage"
 ]);
-export default GameActions;
+export default OnboardingActions;
