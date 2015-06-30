@@ -28,6 +28,9 @@ import OnboardingNewActions from '../actions/onboarding__new.js';
 import OnboardingActions from '../actions/onboarding.js';
 import OnboardingStore from '../stores/onboarding.js';
 
+// Pages
+import Page3 from './onboarding__new--page3.js';
+
 // ========================================================================
 //
 // Functionality
@@ -55,16 +58,6 @@ var ScreenCreate = React.createClass({
         this.setState({ state: d.data });
 
         return this;
-    },
-
-    // --------------------------------
-    // Utility functions
-    // --------------------------------
-    getIntroText: function(){
-        // TODO: get different text based on past game play
-        return `I am old and tired now, but I was not young when the destruction of Felithport began.
-        The years since then seem more dim and faded than the years of my youth. Now, I wait.
-        Like a gnarled tree, withered and weathered, with nothing to do but decay to the grave.`;
     },
 
     // --------------------------------
@@ -184,10 +177,21 @@ var ScreenCreate = React.createClass({
         // handle page turning
         if(data.key === 'right'){ return this.pageNext(); }
         else if(data.key === 'left'){ return this.pagePrevious(); }
-
         return true;
     },
 
+    arrowClickedPrevious: function(){
+        logger.log('components/onboarding__new:arrowClickedPrevious', 'called');
+        this.pagePrevious();
+    },
+    arrowClickedNext: function(){
+        logger.log('components/onboarding__new:arrowClickedNext', 'called');
+        this.pageNext();
+    },
+
+    // --------------------------------
+    // Handle page switching
+    // --------------------------------
     pagePrevious: function pageNext(){
         logger.log('components/onboarding__new:pagePrevious', 'called');
 
@@ -197,23 +201,16 @@ var ScreenCreate = React.createClass({
     pageNext: function pageNext(){
         logger.log('components/onboarding__new:pageNext', 'called');
 
+        if(this.state.state.get('furthestPageEnabled') <= this.state.state.get('page')){
+            logger.log('components/onboarding__new:pageNext:unableToContinue',
+           'cannot continue. current page: ' + this.state.state.get('page') +
+            ' | furthest enabled: ' + this.state.state.get('furthestPageEnabled'));
+
+            return false;
+        }
+
         // TODO: Check if we CAN go to next state
         OnboardingNewActions.pageTurnNext();
-    },
-
-    // --------------------------------
-    // Handle actions
-    // --------------------------------
-    // NOTE: we can call OnboardingActions.turnPage({ page: X }) to turn the page
-    arrowClickedPrevious: function(){
-        logger.log('components/onboarding__new:arrowClickedPrevious', 'called');
-
-        this.pagePrevious();
-    },
-    arrowClickedNext: function(){
-        logger.log('components/onboarding__new:arrowClickedNext', 'called');
-
-        this.pageNext();
     },
 
     // --------------------------------
@@ -223,35 +220,12 @@ var ScreenCreate = React.createClass({
         let currentPage = this.state.state.get('page');
         logger.log('components/onboarding__new:render', 'called | page: ' + currentPage);
 
-        // ----------------------------
-        // Get HTML for pages
-        // ----------------------------
-
-        // PAGE 1
-        // ---------------------------
-        let page1Html;
-        page1Html = (
-            <div>
-                <div className='onboarding-new__page-1__intro-text'>
-                    {this.getIntroText()}
-                </div>
-                <div className='onboarding-new__page-1__name-warpper'>
-                    I was infamous; most people knew me as
-                    <input type='text'
-                        key="page1nameInput"
-                        className='interaction'
-                        placeholder='Alias'
-                        ></input>
-                </div>
-            </div>
-        );
-
         // Arrow HTML
         // ----------------------------
         // PREVIOUS
         var previousClasses = classNames({
             'game-screen-onboarding__book-arrow--previous': true,
-            'opacity0': currentPage < 3 ? true : false
+            'opacity0': currentPage < 4 ? true : false
         });
         let arrowHtmlPrevious = (
             <div className={previousClasses}
@@ -263,7 +237,8 @@ var ScreenCreate = React.createClass({
         // NEXT
         var nextClasses = classNames({
             'game-screen-onboarding__book-arrow--next': true,
-            'opacity0': currentPage > 7 ? true : false
+            'opacity0': currentPage > 7 ? true : false,
+            'disabled': this.state.state.get('furthestPageEnabled') <= currentPage
         });
         let arrowHtmlNext = (
             <div className={nextClasses}
@@ -280,7 +255,11 @@ var ScreenCreate = React.createClass({
                     <div key='page1' className="hard"></div>
                     <div key='page2' className="hard"></div>
 
-                    <div key='page3'>{page1Html}</div>
+                    <div key='page3'>
+                        <Page3 name={this.state.state.get('entity__name')}
+                            fadeInIntroText={this.state.state.get('page3__fadeInIntroText')}
+                        />
+                    </div>
 
                     <div key='page4'> Page 2 </div>
                     <div key='page5'> Page 3 </div>

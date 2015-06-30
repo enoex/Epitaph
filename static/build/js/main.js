@@ -63997,6 +63997,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+	function _defineProperty(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); }
+
 	var _bragiBrowser = __webpack_require__(4);
 
 	var _bragiBrowser2 = _interopRequireDefault(_bragiBrowser);
@@ -64036,6 +64038,12 @@
 	// Utility values
 	var MAX_NUM_PAGES = 8;
 
+	// errors by furthest page
+	var FURTHEST_ERRORS = {
+	    '3': 'What should we call you?',
+	    '4': 'What should we call you?'
+	};
+
 	// STORE
 	var OnboardingNewStore = _reflux2['default'].createStore({
 	    listenables: [_actionsOnboardingJs2['default'], _actionsOnboarding__newJs2['default']],
@@ -64043,7 +64051,21 @@
 	    init: function init() {
 	        _bragiBrowser2['default'].log('onboarding__new:store:init', 'called');
 	        // set initial data
-	        this.data = _immutable2['default'].fromJS({ page: 2 });
+	        this.data = _immutable2['default'].fromJS({
+	            // page info
+	            // default is page 3 (which is the first step of the new character
+	            // flow)
+	            page: 3,
+	            furthestPageEnabled: 3,
+	            // error if user tries to go to next page
+	            furthestError: FURTHEST_ERRORS['3'],
+
+	            // entity info
+	            entity__name: '',
+
+	            // page states
+	            page3__fadeInIntroText: true
+	        });
 
 	        return this;
 	    },
@@ -64064,6 +64086,44 @@
 	        }
 
 	        return this.data;
+	    },
+
+	    // --------------------------------
+	    // Util to get character data from create state
+	    // --------------------------------
+	    getEntityFromBookState: function getEntityFromBookState() {
+	        return {};
+	    },
+
+	    // --------------------------------
+	    // Update data
+	    // --------------------------------
+	    onUpdateData: function onUpdateData(key, value) {
+	        var _data$mergeDeep;
+
+	        // Takes in a key and value then updates and returns the new data
+	        _bragiBrowser2['default'].log('stores/onboarding__new:updateData', 'called with ' + key + ', ' + value);
+
+	        var furthest = this.data.get('furthestPageEnabled');
+	        var furthestError = this.data.get('furthestError');
+
+	        // TODO: clean way to do this...
+	        if (key === 'entity__name') {
+	            // no value? We can't go on
+	            if (('' + value).length < 1) {
+	                furthest = 3;
+	                furthestError = FURTHEST_ERRORS['3'];
+	            } else if (furthest === 3) {
+	                furthest = 4;
+	                furthestError = FURTHEST_ERRORS['4'];
+	            }
+	        }
+
+	        // update data
+	        this.data = this.data.mergeDeep((_data$mergeDeep = {}, _defineProperty(_data$mergeDeep, key, value), _defineProperty(_data$mergeDeep, 'furthestPageEnabled', furthest), _defineProperty(_data$mergeDeep, 'furthestError', furthestError), _data$mergeDeep));
+
+	        this.trigger({ data: this.data });
+	        return this;
 	    },
 
 	    // --------------------------------
@@ -64139,7 +64199,7 @@
 	// Functionality
 	//
 	// ========================================================================
-	var OnboardingNewActions = _reflux2['default'].createActions(['pageTurnNext', 'pageTurnPrevious']);
+	var OnboardingNewActions = _reflux2['default'].createActions(['pageTurnNext', 'pageTurnPrevious', 'updateData']);
 	exports['default'] = OnboardingNewActions;
 	module.exports = exports['default'];
 
@@ -64408,6 +64468,12 @@
 
 	var _storesOnboardingJs2 = _interopRequireDefault(_storesOnboardingJs);
 
+	// Pages
+
+	var _onboarding__newPage3Js = __webpack_require__(275);
+
+	var _onboarding__newPage3Js2 = _interopRequireDefault(_onboarding__newPage3Js);
+
 	// ========================================================================
 	//
 	// Functionality
@@ -64434,14 +64500,6 @@
 	        this.setState({ state: d.data });
 
 	        return this;
-	    },
-
-	    // --------------------------------
-	    // Utility functions
-	    // --------------------------------
-	    getIntroText: function getIntroText() {
-	        // TODO: get different text based on past game play
-	        return 'I am old and tired now, but I was not young when the destruction of Felithport began.\n        The years since then seem more dim and faded than the years of my youth. Now, I wait.\n        Like a gnarled tree, withered and weathered, with nothing to do but decay to the grave.';
 	    },
 
 	    // --------------------------------
@@ -64563,10 +64621,21 @@
 	        } else if (data.key === 'left') {
 	            return this.pagePrevious();
 	        }
-
 	        return true;
 	    },
 
+	    arrowClickedPrevious: function arrowClickedPrevious() {
+	        _bragiBrowser2['default'].log('components/onboarding__new:arrowClickedPrevious', 'called');
+	        this.pagePrevious();
+	    },
+	    arrowClickedNext: function arrowClickedNext() {
+	        _bragiBrowser2['default'].log('components/onboarding__new:arrowClickedNext', 'called');
+	        this.pageNext();
+	    },
+
+	    // --------------------------------
+	    // Handle page switching
+	    // --------------------------------
 	    pagePrevious: function pageNext() {
 	        _bragiBrowser2['default'].log('components/onboarding__new:pagePrevious', 'called');
 
@@ -64576,23 +64645,14 @@
 	    pageNext: function pageNext() {
 	        _bragiBrowser2['default'].log('components/onboarding__new:pageNext', 'called');
 
+	        if (this.state.state.get('furthestPageEnabled') <= this.state.state.get('page')) {
+	            _bragiBrowser2['default'].log('components/onboarding__new:pageNext:unableToContinue', 'cannot continue. current page: ' + this.state.state.get('page') + ' | furthest enabled: ' + this.state.state.get('furthestPageEnabled'));
+
+	            return false;
+	        }
+
 	        // TODO: Check if we CAN go to next state
 	        _actionsOnboarding__newJs2['default'].pageTurnNext();
-	    },
-
-	    // --------------------------------
-	    // Handle actions
-	    // --------------------------------
-	    // NOTE: we can call OnboardingActions.turnPage({ page: X }) to turn the page
-	    arrowClickedPrevious: function arrowClickedPrevious() {
-	        _bragiBrowser2['default'].log('components/onboarding__new:arrowClickedPrevious', 'called');
-
-	        this.pagePrevious();
-	    },
-	    arrowClickedNext: function arrowClickedNext() {
-	        _bragiBrowser2['default'].log('components/onboarding__new:arrowClickedNext', 'called');
-
-	        this.pageNext();
 	    },
 
 	    // --------------------------------
@@ -64602,39 +64662,12 @@
 	        var currentPage = this.state.state.get('page');
 	        _bragiBrowser2['default'].log('components/onboarding__new:render', 'called | page: ' + currentPage);
 
-	        // ----------------------------
-	        // Get HTML for pages
-	        // ----------------------------
-
-	        // PAGE 1
-	        // ---------------------------
-	        var page1Html = undefined;
-	        page1Html = _react2['default'].createElement(
-	            'div',
-	            null,
-	            _react2['default'].createElement(
-	                'div',
-	                { className: 'onboarding-new__page-1__intro-text' },
-	                this.getIntroText()
-	            ),
-	            _react2['default'].createElement(
-	                'div',
-	                { className: 'onboarding-new__page-1__name-warpper' },
-	                'I was infamous; most people knew me as',
-	                _react2['default'].createElement('input', { type: 'text',
-	                    key: 'page1nameInput',
-	                    className: 'interaction',
-	                    placeholder: 'Alias'
-	                })
-	            )
-	        );
-
 	        // Arrow HTML
 	        // ----------------------------
 	        // PREVIOUS
 	        var previousClasses = (0, _classnames2['default'])({
 	            'game-screen-onboarding__book-arrow--previous': true,
-	            'opacity0': currentPage < 3 ? true : false
+	            'opacity0': currentPage < 4 ? true : false
 	        });
 	        var arrowHtmlPrevious = _react2['default'].createElement(
 	            'div',
@@ -64646,7 +64679,8 @@
 	        // NEXT
 	        var nextClasses = (0, _classnames2['default'])({
 	            'game-screen-onboarding__book-arrow--next': true,
-	            'opacity0': currentPage > 7 ? true : false
+	            'opacity0': currentPage > 7 ? true : false,
+	            'disabled': this.state.state.get('furthestPageEnabled') <= currentPage
 	        });
 	        var arrowHtmlNext = _react2['default'].createElement(
 	            'div',
@@ -64668,7 +64702,9 @@
 	                _react2['default'].createElement(
 	                    'div',
 	                    { key: 'page3' },
-	                    page1Html
+	                    _react2['default'].createElement(_onboarding__newPage3Js2['default'], { name: this.state.state.get('entity__name'),
+	                        fadeInIntroText: this.state.state.get('page3__fadeInIntroText')
+	                    })
 	                ),
 	                _react2['default'].createElement(
 	                    'div',
@@ -68279,6 +68315,135 @@
 
 	}());
 
+
+/***/ },
+/* 275 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* =========================================================================
+	 *
+	 * game-screen__new--page2.js
+	 *
+	 * ========================================================================= */
+	// External Dependencies
+	// ------------------------------------
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(19);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(178);
+
+	var _bragiBrowser = __webpack_require__(4);
+
+	var _bragiBrowser2 = _interopRequireDefault(_bragiBrowser);
+
+	var _reflux = __webpack_require__(219);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _immutable = __webpack_require__(241);
+
+	var _immutable2 = _interopRequireDefault(_immutable);
+
+	var _classnames = __webpack_require__(274);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _jquery = __webpack_require__(2);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	// Internal Dependencies
+	// ------------------------------------
+
+	var _utilTimingsJs = __webpack_require__(217);
+
+	var _utilTimingsJs2 = _interopRequireDefault(_utilTimingsJs);
+
+	var _eventsJs = __webpack_require__(174);
+
+	var _eventsJs2 = _interopRequireDefault(_eventsJs);
+
+	var _storesOnboarding__newJs = __webpack_require__(248);
+
+	var _storesOnboarding__newJs2 = _interopRequireDefault(_storesOnboarding__newJs);
+
+	var _actionsOnboarding__newJs = __webpack_require__(249);
+
+	var _actionsOnboarding__newJs2 = _interopRequireDefault(_actionsOnboarding__newJs);
+
+	var _actionsOnboardingJs = __webpack_require__(246);
+
+	var _actionsOnboardingJs2 = _interopRequireDefault(_actionsOnboardingJs);
+
+	var _storesOnboardingJs = __webpack_require__(247);
+
+	var _storesOnboardingJs2 = _interopRequireDefault(_storesOnboardingJs);
+
+	// ========================================================================
+	//
+	// Functionality
+	//
+	// ========================================================================
+	var Page3 = _react2['default'].createClass({
+	    displayName: 'Page3',
+
+	    // NOTE: NO state, only use props
+
+	    // --------------------------------
+	    // Utility functions
+	    // --------------------------------
+	    getIntroText: function getIntroText() {
+	        // TODO: get different text based on past game play
+	        return 'I am old and tired now, but I was not young when the destruction of Felithport began.\n        The years since then seem more dim and faded than the years of my youth. Now, I wait.\n        Like a gnarled tree, withered and weathered, with nothing to do but decay to the grave.';
+	    },
+
+	    changeName: function changeName(e) {
+	        var name = e.target.value;
+	        _bragiBrowser2['default'].log('components/onboarding__new--page3:changeName', 'called | name: ' + name);
+
+	        _actionsOnboarding__newJs2['default'].updateData('entity__name', name);
+	        return this;
+	    },
+
+	    render: function render() {
+	        _bragiBrowser2['default'].log('components/onboarding__new--page3:render', 'called %O', this.props);
+
+	        return _react2['default'].createElement(
+	            'div',
+	            null,
+	            _react2['default'].createElement(
+	                'div',
+	                { className: 'onboarding-new__page-1__intro-text' },
+	                this.getIntroText()
+	            ),
+	            _react2['default'].createElement(
+	                'div',
+	                { className: 'onboarding-new__page-1__name-warpper' },
+	                'I was infamous; most people knew me as',
+	                _react2['default'].createElement('input', { type: 'text',
+	                    name: 'page1-name-input',
+	                    key: 'page1nameInput',
+	                    className: 'interaction',
+	                    onChange: this.changeName,
+	                    value: this.props.name || '',
+	                    placeholder: this.props.name || 'Your Name'
+	                })
+	            )
+	        );
+	    }
+	});
+
+	exports['default'] = Page3;
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

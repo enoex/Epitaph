@@ -26,6 +26,12 @@ import OnboardingActions from '../actions/onboarding.js';
 // Utility values
 var MAX_NUM_PAGES = 8;
 
+// errors by furthest page
+var FURTHEST_ERRORS = {
+    '3': 'What should we call you?',
+    '4': 'What should we call you?'
+};
+
 // STORE
 var OnboardingNewStore = Reflux.createStore({
     listenables: [OnboardingActions, OnboardingNewActions],
@@ -33,7 +39,21 @@ var OnboardingNewStore = Reflux.createStore({
     init: function(){
         logger.log('onboarding__new:store:init', 'called');
         // set initial data
-        this.data = Immutable.fromJS({ page: 2 });
+        this.data = Immutable.fromJS({
+            // page info
+            // default is page 3 (which is the first step of the new character
+            // flow)
+            page: 3,
+            furthestPageEnabled: 3,
+            // error if user tries to go to next page
+            furthestError: FURTHEST_ERRORS['3'],
+
+            // entity info
+            entity__name: '',
+
+            // page states
+            page3__fadeInIntroText: true
+        });
 
         return this;
     },
@@ -52,6 +72,47 @@ var OnboardingNewStore = Reflux.createStore({
         if(triggerChange){ this.trigger({ data: this.data }); }
 
         return this.data;
+    },
+
+    // --------------------------------
+    // Util to get character data from create state
+    // --------------------------------
+    getEntityFromBookState: function (){
+        return {};
+    },
+
+    // --------------------------------
+    // Update data
+    // --------------------------------
+    onUpdateData: function( key, value ){
+        // Takes in a key and value then updates and returns the new data
+        logger.log('stores/onboarding__new:updateData', 'called with ' + key + ', ' + value);
+
+        var furthest = this.data.get('furthestPageEnabled');
+        var furthestError = this.data.get('furthestError');
+
+        // TODO: clean way to do this...
+        if(key === 'entity__name'){
+            // no value? We can't go on
+            if(('' + value).length < 1){
+                furthest = 3;
+                furthestError = FURTHEST_ERRORS['3'];
+
+            } else if (furthest === 3){
+                furthest = 4;
+                furthestError = FURTHEST_ERRORS['4'];
+            }
+        }
+
+        // update data
+        this.data = this.data.mergeDeep({
+            [key]: value,
+            furthestPageEnabled: furthest,
+            furthestError: furthestError
+        });
+
+        this.trigger({ data: this.data });
+        return this;
     },
 
     // --------------------------------

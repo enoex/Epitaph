@@ -21,6 +21,7 @@ import Reflux from 'reflux';
 // ========================================================================
 var OnboardingNewActions = Reflux.createActions([
     'pageTurnNext',
-    'pageTurnPrevious'
+    'pageTurnPrevious',
+    'updateData'
 ]);
 export default OnboardingNewActions;

@@ -549,6 +549,9 @@ html, body {
     position: absolute;
     right: -30px;
     top: 200px; }
+  .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--next.disabled,
+  .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--previous.disabled {
+    opacity: 0.3; }
 
 /* =========================================================================
  *
