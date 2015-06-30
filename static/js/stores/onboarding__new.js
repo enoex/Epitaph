@@ -3,6 +3,8 @@
  * Onboarding New
  *      Store for new user creation flow
  *
+ *      TODO: Rename this.data to this.state ?
+ *
  * ========================================================================= */
 // External Dependencies
 // ------------------------------------
@@ -29,7 +31,8 @@ var MAX_NUM_PAGES = 8;
 // errors by furthest page
 var FURTHEST_ERRORS = {
     '3': 'What should we call you?',
-    '4': 'What should we call you?'
+    '4': 'What were you raised as?',
+    '5': 'What were you proficient in?'
 };
 
 // STORE
@@ -123,6 +126,19 @@ var OnboardingNewStore = Reflux.createStore({
     onPageTurnNext: function(){
         logger.log('stores/onboarding__new:onPageTurnNext', 'called');
 
+        // check that we can't go furthest than the current furthest progress page
+        if(this.data.get('furthestPageEnabled') <= this.data.get('page')){
+            logger.log('warn:stores/onboarding__new:onPageTurnNext',
+           'cannot continue. current page: ' + this.data.get('page') +
+            ' | furthest enabled: ' + this.data.get('furthestPageEnabled'));
+
+            // TODO: Throw error; have view listen for and catch it
+            // TODO: onboarding error store
+            alert(this.data.get('furthestError'));
+            return false;
+        }
+
+        // check that we can't go past the very end
         if(this.data.get('page') + 2 > MAX_NUM_PAGES){
             logger.log('warn:stores/onboarding__new:onPageTurnNext', 'max pages exceeded');
             return false;
@@ -131,10 +147,11 @@ var OnboardingNewStore = Reflux.createStore({
         this.data = this.data.mergeDeep({page: this.data.get('page') + 2});
         this.trigger({ data: this.data });
     },
+
     onPageTurnPrevious: function(){
         logger.log('stores/onboarding__new:onPageTurnPrevious', 'called');
 
-        if(this.data.get('page') < 3){
+        if(this.data.get('page') < 4){
             logger.log('warn:stores/onboarding__new:onPageTurnPrevious', 'min pages exceeded');
             return false;
         }

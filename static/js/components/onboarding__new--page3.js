@@ -52,6 +52,13 @@ var Page3 = React.createClass({
         return this;
     },
 
+    keyDown: function(e){
+        // if enter was pressed, go to next page
+        if(e.keyCode === 13){
+            OnboardingNewActions.pageTurnNext();
+        }
+    },
+
     render: function(){
         logger.log('components/onboarding__new--page3:render', 'called %O', this.props);
 
@@ -67,6 +74,7 @@ var Page3 = React.createClass({
                         key="page1nameInput"
                         className='interaction'
                         onChange={this.changeName}
+                        onKeyDown={this.keyDown}
                         value={this.props.name || ''}
                         placeholder={this.props.name || 'Your Name'}
                         ></input>

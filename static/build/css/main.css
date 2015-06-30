@@ -507,34 +507,16 @@ html, body {
     -o-perspective: 2000px;
     perspective: 2000px; }
   .game-screen-onboarding__book-item-wrapper .hard {
-    background: #ccc !important;
-    color: #333;
+    background: url("/static/img/wood-bg.jpg") !important;
     box-shadow: inset 0 0 5px #666;
+    color: #ffffff;
     font-weight: bold; }
+  .game-screen-onboarding__book-item-wrapper .odd, .game-screen-onboarding__book-item-wrapper .even {
+    color: #343434; }
   .game-screen-onboarding__book-item-wrapper .odd {
-    background: -webkit-gradient(linear, right top, left top, color-stop(0.95, #FFF), color-stop(1, #DADADA));
-    background-image: -webkit-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
-    background-image: -moz-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
-    background-image: -ms-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
-    background-image: -o-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
-    background-image: linear-gradient(right, #FFF 95%, #C4C4C4 100%);
-    -webkit-box-shadow: inset 0 0 5px #666;
-    -moz-box-shadow: inset 0 0 5px #666;
-    -o-box-shadow: inset 0 0 5px #666;
-    -ms-box-shadow: inset 0 0 5px #666;
-    box-shadow: inset 0 0 5px #666; }
+    background: url("/static/img/onboarding__new--individual-page--right.png"); }
   .game-screen-onboarding__book-item-wrapper .even {
-    background: -webkit-gradient(linear, left top, right top, color-stop(0.95, #fff), color-stop(1, #dadada));
-    background-image: -webkit-linear-gradient(left, #fff 95%, #dadada 100%);
-    background-image: -moz-linear-gradient(left, #fff 95%, #dadada 100%);
-    background-image: -ms-linear-gradient(left, #fff 95%, #dadada 100%);
-    background-image: -o-linear-gradient(left, #fff 95%, #dadada 100%);
-    background-image: linear-gradient(left, #fff 95%, #dadada 100%);
-    -webkit-box-shadow: inset 0 0 5px #666;
-    -moz-box-shadow: inset 0 0 5px #666;
-    -o-box-shadow: inset 0 0 5px #666;
-    -ms-box-shadow: inset 0 0 5px #666;
-    box-shadow: inset 0 0 5px #666; }
+    background: url("/static/img/onboarding__new--individual-page--left.png"); }
   .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--previous {
     background: #f0f0f0;
     cursor: pointer;

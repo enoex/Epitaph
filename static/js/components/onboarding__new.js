@@ -192,24 +192,13 @@ var ScreenCreate = React.createClass({
     // --------------------------------
     // Handle page switching
     // --------------------------------
+    // NOTE: progress checked in store
     pagePrevious: function pageNext(){
         logger.log('components/onboarding__new:pagePrevious', 'called');
-
-        // TODO: Check if we CAN go to next state
         OnboardingNewActions.pageTurnPrevious();
     },
     pageNext: function pageNext(){
         logger.log('components/onboarding__new:pageNext', 'called');
-
-        if(this.state.state.get('furthestPageEnabled') <= this.state.state.get('page')){
-            logger.log('components/onboarding__new:pageNext:unableToContinue',
-           'cannot continue. current page: ' + this.state.state.get('page') +
-            ' | furthest enabled: ' + this.state.state.get('furthestPageEnabled'));
-
-            return false;
-        }
-
-        // TODO: Check if we CAN go to next state
         OnboardingNewActions.pageTurnNext();
     },
 
