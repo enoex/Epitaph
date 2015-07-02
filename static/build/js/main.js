@@ -63636,7 +63636,10 @@
 	        this.trigger({ state: this.state });
 
 	        // load initial state
-	        this.loadInitialState();
+	        // XXXXXXXXXXXXXXXXXXXXXXXXX
+	        // TODO: UNCOMMENT
+	        //this.loadInitialState();
+	        // XXXXXXXXXXXXXXXXXXXXXXXXX
 
 	        return this;
 	    },
@@ -64061,6 +64064,11 @@
 	        this.trigger({ state: this.state });
 	    }
 	});
+
+	// TODO: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	// REMOVE THIS
+	window.ONBOARDING_STORE = OnboardingStore;
+	// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 	exports['default'] = OnboardingStore;
 	module.exports = exports['default'];
@@ -64490,7 +64498,8 @@
 
 	        return _react2['default'].createElement(
 	            'div',
-	            { id: 'game-screen-onboarding__book-wrapper--title', className: 'game-screen-onboarding__book-item-wrapper' },
+	            { id: 'game-screen-onboarding__book-wrapper--title',
+	                className: 'game-screen-onboarding__book-item-wrapper game-screen__onboarding-wrapper--title' },
 	            _react2['default'].createElement(
 	                'div',
 	                { id: 'game-screen-onboarding__book--title', className: 'game-screen-onboarding__book-item' },

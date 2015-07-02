@@ -108,7 +108,9 @@ var OnboardingTitle = React.createClass({
         logger.log('onboarding__title:component:render', 'called');
 
         return (
-            <div id='game-screen-onboarding__book-wrapper--title' className='game-screen-onboarding__book-item-wrapper'>
+            <div id='game-screen-onboarding__book-wrapper--title'
+                className='game-screen-onboarding__book-item-wrapper game-screen__onboarding-wrapper--title'>
+
                 <div id="game-screen-onboarding__book--title" className="game-screen-onboarding__book-item">
                     <div className="hard">
                         <div id='game-screen-title__wrapper'>

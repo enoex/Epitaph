@@ -115,7 +115,7 @@ var ScreenOnboarding = React.createClass({
         }
 
         return (
-            <div id='game-screen__onboarding-wrapper'>
+            <div id='game-screen__onboarding-wrapper'> 
                 {bookHtml}
             </div>
         );

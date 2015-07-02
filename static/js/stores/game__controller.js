@@ -47,7 +47,10 @@ var GameControllerStore = Reflux.createStore({
         this.trigger({ state: this.state });
 
         // load initial state
-        this.loadInitialState();
+        // XXXXXXXXXXXXXXXXXXXXXXXXX
+        // TODO: UNCOMMENT
+        //this.loadInitialState();
+        // XXXXXXXXXXXXXXXXXXXXXXXXX
 
         return this;
     },

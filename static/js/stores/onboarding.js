@@ -110,4 +110,9 @@ var OnboardingStore = Reflux.createStore({
     }
 });
 
+// TODO: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+// REMOVE THIS
+window.ONBOARDING_STORE = OnboardingStore;
+// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
 export default OnboardingStore;
