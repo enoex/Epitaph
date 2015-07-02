@@ -56,11 +56,11 @@ var ScreenOnboarding = React.createClass({
         // re-render
         logger.log('components/onboarding:storeChange', 'called | %O', message);
 
-        if(!Immutable.is(message.data, this.state.state)){
+        if(!Immutable.is(message.state, this.state.state)){
             // Book state is different, re-render everything
             logger.log('components/onboarding:storeChange:dataDiff', 'data not same, changing');
 
-            this.setState({ state: message.data });
+            this.setState({ state: message.state });
         }
         return this;
     },

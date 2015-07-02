@@ -36,6 +36,10 @@ import Page3 from './onboarding__new--page3.js';
 // Functionality
 //
 // ========================================================================
+// Utility vars
+var PAGE_FLIP_DURATION = 600;
+
+// Component
 var ScreenCreate = React.createClass({
     mixins: [
         Reflux.listenTo(OnboardingNewStore, 'onboardingNewStoreChange')
@@ -43,19 +47,19 @@ var ScreenCreate = React.createClass({
 
     getInitialState: function(){
         this._previousState = {
-            state: OnboardingNewStore.getData()
+            state: OnboardingNewStore.getState()
         };
 
         return {
-            state: OnboardingNewStore.getData()
+            state: OnboardingNewStore.getState()
         };
     },
 
-    onboardingNewStoreChange: function(d){
+    onboardingNewStoreChange: function(message){
         logger.log('components/onboarding__new:onboardingNewStoreChange',
-        'called %O', d);
+        'called %O', message);
 
-        this.setState({ state: d.data });
+        this.setState({ state: message.state });
 
         return this;
     },
@@ -104,9 +108,6 @@ var ScreenCreate = React.createClass({
         // Check previous state?
         logger.log('components/onboarding__new:setupPageTurn', 'called');
 
-        // Setup page turner
-        let duration = 600;
-
         // Page turn needs to be setup here so we can call re-render on the
         // subcomponents (new / title / history) without having to re-setup
         // the page turn
@@ -117,7 +118,7 @@ var ScreenCreate = React.createClass({
             autoCenter: true,
             gradients: true,
             acceleration: true,
-            duration: duration,
+            duration: PAGE_FLIP_DURATION,
             elevation: 150,
             when: {
                 turning: (event, page, pageObject)=> {
@@ -195,10 +196,28 @@ var ScreenCreate = React.createClass({
     // NOTE: progress checked in store
     pagePrevious: function pageNext(){
         logger.log('components/onboarding__new:pagePrevious', 'called');
+
+        // Don't show flip if timer not met
+        this._lastPageTurnTime = this._lastPageTurnTime || 0;
+        if(Date.now() - this._lastPageTurnTime < (PAGE_FLIP_DURATION / 1.5)){
+            return false;
+        }
+        this._lastPageTurnTime = Date.now();
+
+        // Now check if we can turn the page
         OnboardingNewActions.pageTurnPrevious();
     },
     pageNext: function pageNext(){
         logger.log('components/onboarding__new:pageNext', 'called');
+
+        // Don't show flip if timer not met
+        this._lastPageTurnTime = this._lastPageTurnTime || 0;
+        if(Date.now() - this._lastPageTurnTime < (PAGE_FLIP_DURATION / 1.5)){
+            return false;
+        }
+        this._lastPageTurnTime = Date.now();
+
+        // Now check if we can turn the page
         OnboardingNewActions.pageTurnNext();
     },
 

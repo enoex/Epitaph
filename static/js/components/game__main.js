@@ -52,11 +52,11 @@ var GameMain = React.createClass({
         logger.log('components/game__main:storeChange', 'called | %O', message);
 
         // change screen if necessary
-        if(message.data && message.data.get('screen') !== this.state.state.get('screen')){
+        if(message.state && message.state.get('screen') !== this.state.state.get('screen')){
             logger.log('components/game__main:storeChange:changeScreen',
-            'changing screen to %O', message.data.get('screen'));
+            'changing screen to %O', message.state.get('screen'));
 
-            this.setState({ screen: message.data.get('screen') });
+            this.setState({ screen: message.state.get('screen') });
         }
 
         return this;

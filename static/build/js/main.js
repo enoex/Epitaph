@@ -122,7 +122,7 @@
 	window.jQuery = _jquery2['default'];
 
 	// jquery plugins
-	__webpack_require__(253)(_jquery2['default']);
+	__webpack_require__(255)(_jquery2['default']);
 
 	// ====================================
 	//
@@ -134,7 +134,7 @@
 	// Initial Setup
 	// ------------------------------------
 	// Setup key handling
-	__webpack_require__(254)();
+	__webpack_require__(256)();
 
 	// Setup global document / game wide events
 	$(document).on({
@@ -53603,7 +53603,7 @@
 
 	var _componentsGame__mainJs2 = _interopRequireDefault(_componentsGame__mainJs);
 
-	var _componentsNotFoundJs = __webpack_require__(252);
+	var _componentsNotFoundJs = __webpack_require__(254);
 
 	var _componentsNotFoundJs2 = _interopRequireDefault(_componentsNotFoundJs);
 
@@ -56958,10 +56958,10 @@
 	        _bragiBrowser2['default'].log('components/game__main:storeChange', 'called | %O', message);
 
 	        // change screen if necessary
-	        if (message.data && message.data.get('screen') !== this.state.state.get('screen')) {
-	            _bragiBrowser2['default'].log('components/game__main:storeChange:changeScreen', 'changing screen to %O', message.data.get('screen'));
+	        if (message.state && message.state.get('screen') !== this.state.state.get('screen')) {
+	            _bragiBrowser2['default'].log('components/game__main:storeChange:changeScreen', 'changing screen to %O', message.state.get('screen'));
 
-	            this.setState({ screen: message.data.get('screen') });
+	            this.setState({ screen: message.state.get('screen') });
 	        }
 
 	        return this;
@@ -63601,51 +63601,94 @@
 
 	var _actionsGame__controllerJs2 = _interopRequireDefault(_actionsGame__controllerJs);
 
+	// Screen stores
+
+	var _onboardingJs = __webpack_require__(247);
+
+	var _onboardingJs2 = _interopRequireDefault(_onboardingJs);
+
+	var _utilSaveDataOnChangeForKeyJs = __webpack_require__(258);
+
+	var _utilSaveDataOnChangeForKeyJs2 = _interopRequireDefault(_utilSaveDataOnChangeForKeyJs);
+
 	// ========================================================================
 	//
 	// Functionality
 	//
 	// ========================================================================
+	var STORE_KEY = 'store:game';
+
 	var GameControllerStore = _reflux2['default'].createStore({
 	    listenables: [_actionsGame__controllerJs2['default']],
 
 	    init: function init() {
-	        var _this = this;
-
 	        _bragiBrowser2['default'].log('stores/game__controller:init', 'called');
 
 	        // set initial data
-	        this.data = _immutable2['default'].fromJS({
+	        this.state = _immutable2['default'].fromJS({
 	            screen: 'onboarding'
 	        });
 
-	        // TODO: Don't embed this logic here, do it elsewhere
-	        // listen to own changes to store data
-	        this.listen(function (d) {
-	            // Update localforage when state changes
-	            window.localforage.setItem('store:game', JSON.stringify(_this.data.toJS()));
-	        });
+	        // update store when data changes
+	        (0, _utilSaveDataOnChangeForKeyJs2['default'])(this, STORE_KEY);
 
-	        // get initial state from localForage
-	        // TODO: don't do this here?
-	        window.localforage.getItem('store:game', function (err, d) {
-	            requestAnimationFrame(function () {
-	                _bragiBrowser2['default'].log('stores/game__controller:init:loadLocalData', 'called | %O', {
-	                    err: err,
-	                    data: d
-	                });
+	        // trigger initial change to save data
+	        this.trigger({ state: this.state });
 
-	                _this.data = _immutable2['default'].fromJS(JSON.parse(d));
-	                _this.trigger({ data: _this.data });
-	            });
-	        });
+	        // load initial state
+	        this.loadInitialState();
 
 	        return this;
 	    },
 
+	    loadInitialState: function loadInitialState() {
+	        var _this = this;
+
+	        // Called when user clicks "Resume"
+	        // Loads initial game state and propagates down to load all 'screen'
+	        // state stores
+	        //
+	        _bragiBrowser2['default'].log('stores/game__controller:loadInitialState', 'called');
+
+	        // get initial state from localForage
+	        // TODO: don't do this here?
+	        window.localforage.getItem(STORE_KEY, function (err, d) {
+
+	            requestAnimationFrame(function () {
+	                if (!d || !JSON.parse(d)) {
+	                    _bragiBrowser2['default'].log('warn:stores/game__controller:loadInitialState', 'no data ' + d);
+	                    return false;
+	                }
+
+	                // setup initial data
+	                var dataParsed;
+	                dataParsed = JSON.parse(d);
+
+	                if (!dataParsed.screen) {
+	                    _bragiBrowser2['default'].log('warn:stores/game__controller:loadInitialState', 'no screen state %j', { data: dataParsed });
+	                    return false;
+	                }
+
+	                _bragiBrowser2['default'].log('stores/game__controller:loadInitialState', 'called | %O', {
+	                    err: err,
+	                    data: dataParsed
+	                });
+
+	                _this.state = _immutable2['default'].fromJS(dataParsed);
+	                _this.trigger({ state: _this.state });
+
+	                // Now, call corresponding state loads based on current screen
+	                // --------------------
+	                if (dataParsed.screen === 'onboarding') {
+	                    _onboardingJs2['default'].loadInitialState();
+	                }
+	            });
+	        });
+	    },
+
 	    getState: function getState() {
 	        // Returns the state of this controller
-	        return this.data;
+	        return this.state;
 	    },
 
 	    // --------------------------------
@@ -63762,11 +63805,11 @@
 	        // re-render
 	        _bragiBrowser2['default'].log('components/onboarding:storeChange', 'called | %O', message);
 
-	        if (!_immutable2['default'].is(message.data, this.state.state)) {
+	        if (!_immutable2['default'].is(message.state, this.state.state)) {
 	            // Book state is different, re-render everything
 	            _bragiBrowser2['default'].log('components/onboarding:storeChange:dataDiff', 'data not same, changing');
 
-	            this.setState({ state: message.data });
+	            this.setState({ state: message.state });
 	        }
 	        return this;
 	    },
@@ -63921,27 +63964,72 @@
 
 	var _actionsOnboardingJs2 = _interopRequireDefault(_actionsOnboardingJs);
 
+	var _onboarding__newJs = __webpack_require__(248);
+
+	var _onboarding__newJs2 = _interopRequireDefault(_onboarding__newJs);
+
+	var _utilSaveDataOnChangeForKeyJs = __webpack_require__(258);
+
+	var _utilSaveDataOnChangeForKeyJs2 = _interopRequireDefault(_utilSaveDataOnChangeForKeyJs);
+
 	// ========================================================================
 	//
 	// Functionality
 	//
 	// ========================================================================
+	var STORE_KEY = 'store:onboarding';
+
 	var OnboardingStore = _reflux2['default'].createStore({
 	    listenables: [_actionsOnboardingJs2['default']],
 
 	    init: function init() {
 	        _bragiBrowser2['default'].log('stores/onboarding:init', 'called');
-	        // set initial data
-	        this.data = _immutable2['default'].fromJS({ bookState: 'title' });
+
+	        // listen for changes and update
+	        (0, _utilSaveDataOnChangeForKeyJs2['default'])(this, STORE_KEY);
+
+	        // set initial state
+	        this.state = _immutable2['default'].fromJS({ bookState: 'title' });
 
 	        return this;
 	    },
 
-	    getState: function getState() {
-	        return this.data;
+	    loadInitialState: function loadInitialState() {
+	        var _this = this;
+
+	        // called from game__controller. Loads the initial state (if it exists)
+	        // and updates the model. Loads any children sub stores (e.g., `new`)
+	        //
+	        window.localforage.getItem(STORE_KEY, function (err, d) {
+	            requestAnimationFrame(function () {
+	                if (!d || !JSON.parse(d) || !JSON.parse(d).bookState) {
+	                    _bragiBrowser2['default'].log('warn:stores/onboarding:loadInitialState', 'no data ' + d);
+	                    return false;
+	                }
+
+	                // setup initial data
+	                var dataParsed;
+	                dataParsed = JSON.parse(d);
+
+	                _bragiBrowser2['default'].log('stores/onboarding:loadInitialState', 'called | %O', {
+	                    err: err, data: dataParsed
+	                });
+
+	                _this.state = _immutable2['default'].fromJS(dataParsed);
+	                _this.trigger({ state: _this.state });
+
+	                // Now, call corresponding state loads based on current screen
+	                // --------------------
+	                if (dataParsed.bookState === 'new') {
+	                    _onboarding__newJs2['default'].loadInitialState();
+	                }
+	            });
+	        });
 	    },
 
-	    // TODO: save / load functionality
+	    getState: function getState() {
+	        return this.state;
+	    },
 
 	    // Page Turns
 	    // --------------------------------
@@ -63949,12 +64037,12 @@
 	        // Called when a page is turned
 	        _bragiBrowser2['default'].log('stores/onboarding:onTurnPage', 'called | %O', options);
 
-	        this.data = _immutable2['default'].fromJS({
-	            bookState: options.bookState || this.data.get('bookState'),
-	            page: +(options.targetPage || options.page || this.data.get('page'))
+	        this.state = _immutable2['default'].fromJS({
+	            bookState: options.bookState || this.state.get('bookState'),
+	            page: +(options.targetPage || options.page || this.state.get('page'))
 	        });
 
-	        this.trigger({ data: this.data });
+	        this.trigger({ state: this.state });
 	    },
 
 	    // Handle book switches
@@ -63962,15 +64050,15 @@
 	    onShowTitle: function onShowTitle(d) {
 	        _bragiBrowser2['default'].log('stores/onboarding:onShowTitle', 'called');
 
-	        this.data = _immutable2['default'].fromJS({ bookState: 'title' });
-	        this.trigger({ data: this.data });
+	        this.state = _immutable2['default'].fromJS({ bookState: 'title' });
+	        this.trigger({ state: this.state });
 	    },
 
 	    onShowNew: function onShowNew() {
 	        _bragiBrowser2['default'].log('stores/onboarding:onShowNew', 'called');
 
-	        this.data = _immutable2['default'].fromJS({ bookState: 'new' });
-	        this.trigger({ data: this.data });
+	        this.state = _immutable2['default'].fromJS({ bookState: 'new' });
+	        this.trigger({ state: this.state });
 	    }
 	});
 
@@ -63986,7 +64074,7 @@
 	 * Onboarding New
 	 *      Store for new user creation flow
 	 *
-	 *      TODO: Rename this.data to this.state ?
+	 *      TODO: Rename this.state to this.state ?
 	 *
 	 * ========================================================================= */
 	// External Dependencies
@@ -64032,6 +64120,10 @@
 
 	var _actionsOnboardingJs2 = _interopRequireDefault(_actionsOnboardingJs);
 
+	var _utilSaveDataOnChangeForKeyJs = __webpack_require__(258);
+
+	var _utilSaveDataOnChangeForKeyJs2 = _interopRequireDefault(_utilSaveDataOnChangeForKeyJs);
+
 	// ========================================================================
 	//
 	// Functionality
@@ -64047,14 +64139,20 @@
 	    '5': 'What were you proficient in?'
 	};
 
+	var STORE_KEY = 'store:onboarding__new';
+
 	// STORE
 	var OnboardingNewStore = _reflux2['default'].createStore({
 	    listenables: [_actionsOnboardingJs2['default'], _actionsOnboarding__newJs2['default']],
 
 	    init: function init() {
 	        _bragiBrowser2['default'].log('onboarding__new:store:init', 'called');
+
+	        // listen for changes and update
+	        (0, _utilSaveDataOnChangeForKeyJs2['default'])(this, STORE_KEY);
+
 	        // set initial data
-	        this.data = _immutable2['default'].fromJS({
+	        this.state = _immutable2['default'].fromJS({
 	            // page info
 	            // default is page 3 (which is the first step of the new character
 	            // flow)
@@ -64073,22 +64171,53 @@
 	        return this;
 	    },
 
-	    getData: function getData() {
-	        _bragiBrowser2['default'].log('stores/onboarding__new:getData', 'called');
-	        // utility to return data
-	        return this.data;
+	    // load initial data
+	    // --------------------------------
+	    loadInitialState: function loadInitialState() {
+	        var _this = this;
+
+	        // loads initial state when called (from onboarding store)
+
+	        window.localforage.getItem(STORE_KEY, function (err, d) {
+	            requestAnimationFrame(function () {
+	                if (!d || !JSON.parse(d)) {
+	                    _bragiBrowser2['default'].log('warn:stores/onboarding__new:loadInitialState', 'no data ' + d);
+	                    return false;
+	                }
+
+	                // setup initial data
+	                var dataParsed;
+	                dataParsed = JSON.parse(d);
+
+	                _bragiBrowser2['default'].log('stores/onboarding__new:loadInitialState', 'called | %O', {
+	                    err: err, data: dataParsed
+	                });
+
+	                _this.state = _immutable2['default'].fromJS(dataParsed);
+	                _this.trigger({ state: _this.state });
+	            });
+	        });
 	    },
 
-	    setData: function setData(data, triggerChange) {
-	        _bragiBrowser2['default'].log('stores/onboarding__new:setData', 'called');
-	        // utility function to manually set data. Useful when fetching data
-	        // from parent and propagating data downwards to this store
-	        this.data = data;
+	    // --------------------------------
+	    // State manipulation
+	    // --------------------------------
+	    getState: function getState() {
+	        _bragiBrowser2['default'].log('stores/onboarding__new:getState', 'called');
+	        // utility to return state
+	        return this.state;
+	    },
+
+	    setState: function setState(state, triggerChange) {
+	        _bragiBrowser2['default'].log('stores/onboarding__new:setState', 'called');
+	        // utility function to manually set state. Useful when fetching state
+	        // from parent and propagating state downwards to this store
+	        this.state = state;
 	        if (triggerChange) {
-	            this.trigger({ data: this.data });
+	            this.trigger({ state: this.state });
 	        }
 
-	        return this.data;
+	        return this.state;
 	    },
 
 	    // --------------------------------
@@ -64099,16 +64228,16 @@
 	    },
 
 	    // --------------------------------
-	    // Update data
+	    // Update state
 	    // --------------------------------
 	    onUpdateData: function onUpdateData(key, value) {
-	        var _data$mergeDeep;
+	        var _state$mergeDeep;
 
-	        // Takes in a key and value then updates and returns the new data
+	        // Takes in a key and value then updates and returns the new state
 	        _bragiBrowser2['default'].log('stores/onboarding__new:updateData', 'called with ' + key + ', ' + value);
 
-	        var furthest = this.data.get('furthestPageEnabled');
-	        var furthestError = this.data.get('furthestError');
+	        var furthest = this.state.get('furthestPageEnabled');
+	        var furthestError = this.state.get('furthestError');
 
 	        // TODO: clean way to do this...
 	        if (key === 'entity__name') {
@@ -64123,9 +64252,9 @@
 	        }
 
 	        // update data
-	        this.data = this.data.mergeDeep((_data$mergeDeep = {}, _defineProperty(_data$mergeDeep, key, value), _defineProperty(_data$mergeDeep, 'furthestPageEnabled', furthest), _defineProperty(_data$mergeDeep, 'furthestError', furthestError), _data$mergeDeep));
+	        this.state = this.state.mergeDeep((_state$mergeDeep = {}, _defineProperty(_state$mergeDeep, key, value), _defineProperty(_state$mergeDeep, 'furthestPageEnabled', furthest), _defineProperty(_state$mergeDeep, 'furthestError', furthestError), _state$mergeDeep));
 
-	        this.trigger({ data: this.data });
+	        this.trigger({ state: this.state });
 	        return this;
 	    },
 
@@ -64138,35 +64267,35 @@
 	        _bragiBrowser2['default'].log('stores/onboarding__new:onPageTurnNext', 'called');
 
 	        // check that we can't go furthest than the current furthest progress page
-	        if (this.data.get('furthestPageEnabled') <= this.data.get('page')) {
-	            _bragiBrowser2['default'].log('warn:stores/onboarding__new:onPageTurnNext', 'cannot continue. current page: ' + this.data.get('page') + ' | furthest enabled: ' + this.data.get('furthestPageEnabled'));
+	        if (this.state.get('furthestPageEnabled') <= this.state.get('page')) {
+	            _bragiBrowser2['default'].log('warn:stores/onboarding__new:onPageTurnNext', 'cannot continue. current page: ' + this.state.get('page') + ' | furthest enabled: ' + this.state.get('furthestPageEnabled'));
 
 	            // TODO: Throw error; have view listen for and catch it
 	            // TODO: onboarding error store
-	            alert(this.data.get('furthestError'));
+	            alert(this.state.get('furthestError'));
 	            return false;
 	        }
 
 	        // check that we can't go past the very end
-	        if (this.data.get('page') + 2 > MAX_NUM_PAGES) {
+	        if (this.state.get('page') + 2 > MAX_NUM_PAGES) {
 	            _bragiBrowser2['default'].log('warn:stores/onboarding__new:onPageTurnNext', 'max pages exceeded');
 	            return false;
 	        }
 
-	        this.data = this.data.mergeDeep({ page: this.data.get('page') + 2 });
-	        this.trigger({ data: this.data });
+	        this.state = this.state.mergeDeep({ page: this.state.get('page') + 2 });
+	        this.trigger({ state: this.state });
 	    },
 
 	    onPageTurnPrevious: function onPageTurnPrevious() {
 	        _bragiBrowser2['default'].log('stores/onboarding__new:onPageTurnPrevious', 'called');
 
-	        if (this.data.get('page') < 4) {
+	        if (this.state.get('page') < 4) {
 	            _bragiBrowser2['default'].log('warn:stores/onboarding__new:onPageTurnPrevious', 'min pages exceeded');
 	            return false;
 	        }
 
-	        this.data = this.data.mergeDeep({ page: this.data.get('page') - 2 });
-	        this.trigger({ data: this.data });
+	        this.state = this.state.mergeDeep({ page: this.state.get('page') - 2 });
+	        this.trigger({ state: this.state });
 	    }
 
 	});
@@ -64448,7 +64577,7 @@
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
-	var _classnames = __webpack_require__(274);
+	var _classnames = __webpack_require__(252);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -64485,7 +64614,7 @@
 
 	// Pages
 
-	var _onboarding__newPage3Js = __webpack_require__(275);
+	var _onboarding__newPage3Js = __webpack_require__(253);
 
 	var _onboarding__newPage3Js2 = _interopRequireDefault(_onboarding__newPage3Js);
 
@@ -64494,6 +64623,10 @@
 	// Functionality
 	//
 	// ========================================================================
+	// Utility vars
+	var PAGE_FLIP_DURATION = 600;
+
+	// Component
 	var ScreenCreate = _react2['default'].createClass({
 	    displayName: 'ScreenCreate',
 
@@ -64501,18 +64634,18 @@
 
 	    getInitialState: function getInitialState() {
 	        this._previousState = {
-	            state: _storesOnboarding__newJs2['default'].getData()
+	            state: _storesOnboarding__newJs2['default'].getState()
 	        };
 
 	        return {
-	            state: _storesOnboarding__newJs2['default'].getData()
+	            state: _storesOnboarding__newJs2['default'].getState()
 	        };
 	    },
 
-	    onboardingNewStoreChange: function onboardingNewStoreChange(d) {
-	        _bragiBrowser2['default'].log('components/onboarding__new:onboardingNewStoreChange', 'called %O', d);
+	    onboardingNewStoreChange: function onboardingNewStoreChange(message) {
+	        _bragiBrowser2['default'].log('components/onboarding__new:onboardingNewStoreChange', 'called %O', message);
 
-	        this.setState({ state: d.data });
+	        this.setState({ state: message.state });
 
 	        return this;
 	    },
@@ -64562,9 +64695,6 @@
 	        // Check previous state?
 	        _bragiBrowser2['default'].log('components/onboarding__new:setupPageTurn', 'called');
 
-	        // Setup page turner
-	        var duration = 600;
-
 	        // Page turn needs to be setup here so we can call re-render on the
 	        // subcomponents (new / title / history) without having to re-setup
 	        // the page turn
@@ -64575,7 +64705,7 @@
 	            autoCenter: true,
 	            gradients: true,
 	            acceleration: true,
-	            duration: duration,
+	            duration: PAGE_FLIP_DURATION,
 	            elevation: 150,
 	            when: {
 	                turning: function turning(event, page, pageObject) {
@@ -64654,10 +64784,28 @@
 	    // NOTE: progress checked in store
 	    pagePrevious: function pageNext() {
 	        _bragiBrowser2['default'].log('components/onboarding__new:pagePrevious', 'called');
+
+	        // Don't show flip if timer not met
+	        this._lastPageTurnTime = this._lastPageTurnTime || 0;
+	        if (Date.now() - this._lastPageTurnTime < PAGE_FLIP_DURATION / 1.5) {
+	            return false;
+	        }
+	        this._lastPageTurnTime = Date.now();
+
+	        // Now check if we can turn the page
 	        _actionsOnboarding__newJs2['default'].pageTurnPrevious();
 	    },
 	    pageNext: function pageNext() {
 	        _bragiBrowser2['default'].log('components/onboarding__new:pageNext', 'called');
+
+	        // Don't show flip if timer not met
+	        this._lastPageTurnTime = this._lastPageTurnTime || 0;
+	        if (Date.now() - this._lastPageTurnTime < PAGE_FLIP_DURATION / 1.5) {
+	            return false;
+	        }
+	        this._lastPageTurnTime = Date.now();
+
+	        // Now check if we can turn the page
 	        _actionsOnboarding__newJs2['default'].pageTurnNext();
 	    },
 
@@ -64753,6 +64901,198 @@
 /* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2015 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+
+	(function () {
+		'use strict';
+
+		function classNames () {
+
+			var classes = '';
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg;
+
+				if ('string' === argType || 'number' === argType) {
+					classes += ' ' + arg;
+
+				} else if (Array.isArray(arg)) {
+					classes += ' ' + classNames.apply(null, arg);
+
+				} else if ('object' === argType) {
+					for (var key in arg) {
+						if (arg.hasOwnProperty(key) && arg[key]) {
+							classes += ' ' + key;
+						}
+					}
+				}
+			}
+
+			return classes.substr(1);
+		}
+
+		if (true) {
+			// AMD. Register as an anonymous module.
+			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else {
+			window.classNames = classNames;
+		}
+
+	}());
+
+
+/***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* =========================================================================
+	 *
+	 * game-screen__new--page2.js
+	 *
+	 * ========================================================================= */
+	// External Dependencies
+	// ------------------------------------
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(19);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(178);
+
+	var _bragiBrowser = __webpack_require__(4);
+
+	var _bragiBrowser2 = _interopRequireDefault(_bragiBrowser);
+
+	var _reflux = __webpack_require__(219);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _immutable = __webpack_require__(241);
+
+	var _immutable2 = _interopRequireDefault(_immutable);
+
+	var _classnames = __webpack_require__(252);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _jquery = __webpack_require__(2);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	// Internal Dependencies
+	// ------------------------------------
+
+	var _utilTimingsJs = __webpack_require__(217);
+
+	var _utilTimingsJs2 = _interopRequireDefault(_utilTimingsJs);
+
+	var _eventsJs = __webpack_require__(174);
+
+	var _eventsJs2 = _interopRequireDefault(_eventsJs);
+
+	var _storesOnboarding__newJs = __webpack_require__(248);
+
+	var _storesOnboarding__newJs2 = _interopRequireDefault(_storesOnboarding__newJs);
+
+	var _actionsOnboarding__newJs = __webpack_require__(249);
+
+	var _actionsOnboarding__newJs2 = _interopRequireDefault(_actionsOnboarding__newJs);
+
+	var _actionsOnboardingJs = __webpack_require__(246);
+
+	var _actionsOnboardingJs2 = _interopRequireDefault(_actionsOnboardingJs);
+
+	var _storesOnboardingJs = __webpack_require__(247);
+
+	var _storesOnboardingJs2 = _interopRequireDefault(_storesOnboardingJs);
+
+	// ========================================================================
+	//
+	// Functionality
+	//
+	// ========================================================================
+	var Page3 = _react2['default'].createClass({
+	    displayName: 'Page3',
+
+	    // NOTE: NO state, only use props
+
+	    // --------------------------------
+	    // Utility functions
+	    // --------------------------------
+	    getIntroText: function getIntroText() {
+	        // TODO: get different text based on past game play
+	        return 'I am old and tired now, but I was not young when the destruction of Felithport began.\n        The years since then seem more dim and faded than the years of my youth. Now, I wait.\n        Like a gnarled tree, withered and weathered, with nothing to do but decay to the grave.';
+	    },
+
+	    changeName: function changeName(e) {
+	        var name = e.target.value;
+	        _bragiBrowser2['default'].log('components/onboarding__new--page3:changeName', 'called | name: ' + name);
+
+	        _actionsOnboarding__newJs2['default'].updateData('entity__name', name);
+	        return this;
+	    },
+
+	    keyDown: function keyDown(e) {
+	        // if enter was pressed, go to next page
+	        if (e.keyCode === 13) {
+	            _actionsOnboarding__newJs2['default'].pageTurnNext();
+	        }
+	    },
+
+	    render: function render() {
+	        _bragiBrowser2['default'].log('components/onboarding__new--page3:render', 'called %O', this.props);
+
+	        return _react2['default'].createElement(
+	            'div',
+	            null,
+	            _react2['default'].createElement(
+	                'div',
+	                { className: 'onboarding-new__page-1__intro-text' },
+	                this.getIntroText()
+	            ),
+	            _react2['default'].createElement(
+	                'div',
+	                { className: 'onboarding-new__page-1__name-warpper' },
+	                'I was infamous; most people knew me as',
+	                _react2['default'].createElement('input', { type: 'text',
+	                    name: 'page1-name-input',
+	                    key: 'page1nameInput',
+	                    className: 'interaction',
+	                    onChange: this.changeName,
+	                    onKeyDown: this.keyDown,
+	                    value: this.props.name || '',
+	                    placeholder: this.props.name || 'Your Name'
+	                })
+	            )
+	        );
+	    }
+	});
+
+	exports['default'] = Page3;
+	module.exports = exports['default'];
+
+/***/ },
+/* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* =========================================================================
 	 *
 	 * NotFound.js
@@ -64805,7 +65145,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 253 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -67655,7 +67995,7 @@
 	//bound.bind('released', turnMethods._eventReleased);
 
 /***/ },
-/* 254 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* =========================================================================
@@ -67680,7 +68020,7 @@
 
 	var _eventsJs2 = _interopRequireDefault(_eventsJs);
 
-	var jwerty = __webpack_require__(255).jwerty;
+	var jwerty = __webpack_require__(257).jwerty;
 
 	var keys = ['up', 'down', 'left', 'right', 'space', 'escape', 'enter', 'q', 'w', 'e', 'r', 'shift+q', 'shift+w', 'shift+e', 'shift+r', 'h', 'j', 'k', 'l', '`', 'shift+`', '~', 'shift+~', '1', '2', '3', '4', '5', '6', 'shift+1', 'shift+2', 'shift+3', 'shift+4', 'shift+5', 'shift+6', 'backspace', 'tab', 'shift+tab', 'shift+up', 'shift+down', 'shift+i'];
 
@@ -67714,7 +68054,7 @@
 	module.exports = handleKeys;
 
 /***/ },
-/* 255 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*
@@ -68250,89 +68590,15 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */,
-/* 272 */,
-/* 273 */,
-/* 274 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2015 Jed Watson.
-	  Licensed under the MIT License (MIT), see
-	  http://jedwatson.github.io/classnames
-	*/
-
-	(function () {
-		'use strict';
-
-		function classNames () {
-
-			var classes = '';
-
-			for (var i = 0; i < arguments.length; i++) {
-				var arg = arguments[i];
-				if (!arg) continue;
-
-				var argType = typeof arg;
-
-				if ('string' === argType || 'number' === argType) {
-					classes += ' ' + arg;
-
-				} else if (Array.isArray(arg)) {
-					classes += ' ' + classNames.apply(null, arg);
-
-				} else if ('object' === argType) {
-					for (var key in arg) {
-						if (arg.hasOwnProperty(key) && arg[key]) {
-							classes += ' ' + key;
-						}
-					}
-				}
-			}
-
-			return classes.substr(1);
-		}
-
-		if (true) {
-			// AMD. Register as an anonymous module.
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
-				return classNames;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-		} else if (typeof module !== 'undefined' && module.exports) {
-			module.exports = classNames;
-		} else {
-			window.classNames = classNames;
-		}
-
-	}());
-
-
-/***/ },
-/* 275 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* =========================================================================
 	 *
-	 * game-screen__new--page2.js
+	 * save-date-on-change-for-key.js
+	 *  Handles persisting store state when store changes
 	 *
 	 * ========================================================================= */
-	// External Dependencies
-	// ------------------------------------
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
@@ -68341,122 +68607,20 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _react = __webpack_require__(19);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(178);
-
 	var _bragiBrowser = __webpack_require__(4);
 
 	var _bragiBrowser2 = _interopRequireDefault(_bragiBrowser);
 
-	var _reflux = __webpack_require__(219);
+	function saveDataOnChangeForKey(store, key) {
+	    store.listen(function (d) {
+	        _bragiBrowser2['default'].log('saveDataOnChangeForKey', 'called with | ' + key);
 
-	var _reflux2 = _interopRequireDefault(_reflux);
+	        // Update localforage when state changes
+	        window.localforage.setItem(key, JSON.stringify(store.state.toJS()));
+	    });
+	}
 
-	var _immutable = __webpack_require__(241);
-
-	var _immutable2 = _interopRequireDefault(_immutable);
-
-	var _classnames = __webpack_require__(274);
-
-	var _classnames2 = _interopRequireDefault(_classnames);
-
-	var _jquery = __webpack_require__(2);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	// Internal Dependencies
-	// ------------------------------------
-
-	var _utilTimingsJs = __webpack_require__(217);
-
-	var _utilTimingsJs2 = _interopRequireDefault(_utilTimingsJs);
-
-	var _eventsJs = __webpack_require__(174);
-
-	var _eventsJs2 = _interopRequireDefault(_eventsJs);
-
-	var _storesOnboarding__newJs = __webpack_require__(248);
-
-	var _storesOnboarding__newJs2 = _interopRequireDefault(_storesOnboarding__newJs);
-
-	var _actionsOnboarding__newJs = __webpack_require__(249);
-
-	var _actionsOnboarding__newJs2 = _interopRequireDefault(_actionsOnboarding__newJs);
-
-	var _actionsOnboardingJs = __webpack_require__(246);
-
-	var _actionsOnboardingJs2 = _interopRequireDefault(_actionsOnboardingJs);
-
-	var _storesOnboardingJs = __webpack_require__(247);
-
-	var _storesOnboardingJs2 = _interopRequireDefault(_storesOnboardingJs);
-
-	// ========================================================================
-	//
-	// Functionality
-	//
-	// ========================================================================
-	var Page3 = _react2['default'].createClass({
-	    displayName: 'Page3',
-
-	    // NOTE: NO state, only use props
-
-	    // --------------------------------
-	    // Utility functions
-	    // --------------------------------
-	    getIntroText: function getIntroText() {
-	        // TODO: get different text based on past game play
-	        return 'I am old and tired now, but I was not young when the destruction of Felithport began.\n        The years since then seem more dim and faded than the years of my youth. Now, I wait.\n        Like a gnarled tree, withered and weathered, with nothing to do but decay to the grave.';
-	    },
-
-	    changeName: function changeName(e) {
-	        var name = e.target.value;
-	        _bragiBrowser2['default'].log('components/onboarding__new--page3:changeName', 'called | name: ' + name);
-
-	        _actionsOnboarding__newJs2['default'].updateData('entity__name', name);
-	        return this;
-	    },
-
-	    keyDown: function keyDown(e) {
-	        // if enter was pressed, go to next page
-	        if (e.keyCode === 13) {
-	            _actionsOnboarding__newJs2['default'].pageTurnNext();
-	        }
-	    },
-
-	    render: function render() {
-	        _bragiBrowser2['default'].log('components/onboarding__new--page3:render', 'called %O', this.props);
-
-	        return _react2['default'].createElement(
-	            'div',
-	            null,
-	            _react2['default'].createElement(
-	                'div',
-	                { className: 'onboarding-new__page-1__intro-text' },
-	                this.getIntroText()
-	            ),
-	            _react2['default'].createElement(
-	                'div',
-	                { className: 'onboarding-new__page-1__name-warpper' },
-	                'I was infamous; most people knew me as',
-	                _react2['default'].createElement('input', { type: 'text',
-	                    name: 'page1-name-input',
-	                    key: 'page1nameInput',
-	                    className: 'interaction',
-	                    onChange: this.changeName,
-	                    onKeyDown: this.keyDown,
-	                    value: this.props.name || '',
-	                    placeholder: this.props.name || 'Your Name'
-	                })
-	            )
-	        );
-	    }
-	});
-
-	exports['default'] = Page3;
+	exports['default'] = saveDataOnChangeForKey;
 	module.exports = exports['default'];
 
 /***/ }

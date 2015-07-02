@@ -17,11 +17,18 @@ import Immutable from 'immutable';
 // ------------------------------------
 import GameControllerActions from '../actions/game__controller.js';
 
+// Screen stores
+import OnboardingStore from './onboarding.js';
+
+import saveDataOnChangeForKey from './util/save-data-on-change-for-key.js';
+
 // ========================================================================
 //
 // Functionality
 //
 // ========================================================================
+var STORE_KEY = 'store:game';
+
 var GameControllerStore = Reflux.createStore({
     listenables: [GameControllerActions],
 
@@ -29,40 +36,70 @@ var GameControllerStore = Reflux.createStore({
         logger.log('stores/game__controller:init', 'called');
 
         // set initial data
-        this.data = Immutable.fromJS({
+        this.state = Immutable.fromJS({
             screen: 'onboarding'
         });
 
-        // TODO: Don't embed this logic here, do it elsewhere
-        // listen to own changes to store data
-        this.listen((d)=>{
-            // Update localforage when state changes
-            window.localforage.setItem(
-                'store:game',
-                JSON.stringify(this.data.toJS())
-            );
-        });
+        // update store when data changes
+        saveDataOnChangeForKey(this, STORE_KEY);
 
-        // get initial state from localForage
-        // TODO: don't do this here?
-        window.localforage.getItem('store:game', (err, d)=>{
-            requestAnimationFrame(()=>{
-                logger.log('stores/game__controller:init:loadLocalData', 'called | %O', {
-                    err: err,
-                    data: d
-                });
+        // trigger initial change to save data
+        this.trigger({ state: this.state });
 
-                this.data = Immutable.fromJS(JSON.parse(d));
-                this.trigger({ data: this.data });
-            });
-        });
+        // load initial state
+        this.loadInitialState();
 
         return this;
     },
 
+    loadInitialState: function(){
+        // Called when user clicks "Resume"
+        // Loads initial game state and propagates down to load all 'screen'
+        // state stores
+        //
+        logger.log('stores/game__controller:loadInitialState', 'called');
+
+        // get initial state from localForage
+        // TODO: don't do this here?
+        window.localforage.getItem(STORE_KEY, (err, d)=>{
+
+            requestAnimationFrame(()=>{
+                if(!d || !JSON.parse(d)){
+                    logger.log('warn:stores/game__controller:loadInitialState',
+                    'no data ' + d);
+                    return false;
+                }
+
+                // setup initial data
+                var dataParsed;
+                dataParsed = JSON.parse(d);
+
+                if(!dataParsed.screen){
+                    logger.log('warn:stores/game__controller:loadInitialState',
+                    'no screen state %j', {data: dataParsed});
+                    return false;
+                }
+
+                logger.log('stores/game__controller:loadInitialState', 'called | %O', {
+                    err: err,
+                    data: dataParsed
+                });
+
+                this.state = Immutable.fromJS(dataParsed);
+                this.trigger({ state: this.state });
+
+                // Now, call corresponding state loads based on current screen
+                // --------------------
+                if(dataParsed.screen === 'onboarding'){
+                    OnboardingStore.loadInitialState();
+                }
+            });
+        });
+    },
+
     getState: function(){
         // Returns the state of this controller
-        return this.data;
+        return this.state;
     },
 
     // --------------------------------

@@ -16,28 +16,68 @@ import Immutable from 'immutable';
 // Internal Dependencies
 // ------------------------------------
 import OnboardingActions from '../actions/onboarding.js';
+import OnboardingNewStore from './onboarding__new.js';
+
+import saveDataOnChangeForKey from './util/save-data-on-change-for-key.js';
 
 // ========================================================================
 //
 // Functionality
 //
 // ========================================================================
+var STORE_KEY = 'store:onboarding';
+
 var OnboardingStore = Reflux.createStore({
     listenables: [OnboardingActions],
 
     init: function(){
         logger.log('stores/onboarding:init', 'called');
-        // set initial data
-        this.data = Immutable.fromJS({ bookState: 'title' });
+
+        // listen for changes and update
+        saveDataOnChangeForKey(this, STORE_KEY);
+
+        // set initial state
+        this.state = Immutable.fromJS({ bookState: 'title' });
 
         return this;
     },
 
-    getState: function getState(){
-        return this.data;
+    loadInitialState: function(){
+        // called from game__controller. Loads the initial state (if it exists)
+        // and updates the model. Loads any children sub stores (e.g., `new`)
+        //
+        window.localforage.getItem(STORE_KEY, (err, d)=>{
+            requestAnimationFrame(()=>{
+                if(!d || !JSON.parse(d) || !JSON.parse(d).bookState){
+                    logger.log('warn:stores/onboarding:loadInitialState',
+                    'no data ' + d);
+                    return false;
+                }
+
+                // setup initial data
+                var dataParsed;
+                dataParsed = JSON.parse(d);
+
+                logger.log('stores/onboarding:loadInitialState', 'called | %O', {
+                    err: err, data: dataParsed
+                });
+
+                this.state = Immutable.fromJS(dataParsed);
+                this.trigger({ state: this.state });
+
+                // Now, call corresponding state loads based on current screen
+                // --------------------
+                if(dataParsed.bookState === 'new'){
+                    OnboardingNewStore.loadInitialState();
+                }
+            });
+        });
+
     },
 
-    // TODO: save / load functionality
+    getState: function getState(){
+        return this.state;
+    },
 
     // Page Turns
     // --------------------------------
@@ -45,12 +85,12 @@ var OnboardingStore = Reflux.createStore({
         // Called when a page is turned
         logger.log('stores/onboarding:onTurnPage', 'called | %O', options);
 
-        this.data = Immutable.fromJS({
-            bookState: options.bookState || this.data.get('bookState'),
-            page: +(options.targetPage || options.page || this.data.get('page'))
+        this.state = Immutable.fromJS({
+            bookState: options.bookState || this.state.get('bookState'),
+            page: +(options.targetPage || options.page || this.state.get('page'))
         });
 
-        this.trigger({ data: this.data });
+        this.trigger({ state: this.state });
     },
 
     // Handle book switches
@@ -58,15 +98,15 @@ var OnboardingStore = Reflux.createStore({
     onShowTitle: function( d ){
         logger.log('stores/onboarding:onShowTitle', 'called');
 
-        this.data = Immutable.fromJS({ bookState: 'title' });
-        this.trigger({ data: this.data });
+        this.state = Immutable.fromJS({ bookState: 'title' });
+        this.trigger({ state: this.state });
     },
 
     onShowNew: function() {
         logger.log('stores/onboarding:onShowNew', 'called');
 
-        this.data = Immutable.fromJS({ bookState: 'new' });
-        this.trigger({ data: this.data });
+        this.state = Immutable.fromJS({ bookState: 'new' });
+        this.trigger({ state: this.state });
     }
 });
 
