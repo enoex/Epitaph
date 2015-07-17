@@ -101,7 +101,7 @@ var OnboardingNewStore = Reflux.createStore({
     // --------------------------------
     getState: function(){
         logger.log('stores/onboarding__new:getState', 'called');
-        // utility to return state 
+        // utility to return state
         return this.state;
     },
 

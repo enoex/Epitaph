@@ -9,6 +9,7 @@
 //
 // ======================================
 // Imports the based colors used in the app!
+@import "themes/_colors.scss";
 
 // ======================================
 //
@@ -28,8 +29,14 @@
 
 // ======================================
 //
+// Themes
+//
+// ======================================
+@import "themes/_interactions.scss";
+
+// ======================================
+//
 // Components
 //
 // ======================================
 @import "components/game-screen__onboarding";
-@import "components/game-screen__title";

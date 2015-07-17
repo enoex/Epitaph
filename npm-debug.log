@@ -1,0 +1,958 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '--save-dev',
+1 verbose cli   'extract-text-webpack-plugin' ]
+2 info using npm@2.11.2
+3 info using node@v0.12.5
+4 verbose install initial load of /Users/erikhazzard/Code/GameDev/Epitaph-New/package.json
+5 warn package.json Epitaph@0.0.1 No repository field.
+6 warn package.json Epitaph@0.0.1 No README data
+7 warn package.json Epitaph@0.0.1 No license field.
+8 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/babel-core/package.json
+9 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/babel-loader/package.json
+10 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/bragi-browser/package.json
+11 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/classnames/package.json
+12 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/css-loader/package.json
+13 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/d3/package.json
+14 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/package.json
+15 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/file-loader/package.json
+16 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/immutable/package.json
+17 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/jquery/package.json
+18 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/jsx-loader/package.json
+19 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/localforage/package.json
+20 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/lodash/package.json
+21 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/mocha/package.json
+22 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/node-libs-browser/package.json
+23 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/node-sass/package.json
+24 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/promise/package.json
+25 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/react/package.json
+26 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/react-router/package.json
+27 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/react-tools/package.json
+28 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/reflux/package.json
+29 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/sass/package.json
+30 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/sass-loader/package.json
+31 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/style-loader/package.json
+32 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/url-loader/package.json
+33 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/uuid/package.json
+34 verbose installManyTop reading scoped package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/webpack/package.json
+35 info package.json d3@3.5.5 No license field.
+36 info package.json jquery@2.1.4 No license field.
+37 info package.json jsx-loader@0.13.2 license should be a valid SPDX license expression
+38 info package.json localforage@1.2.3 No license field.
+39 info package.json sass@0.5.0 No repository field.
+40 info package.json sass@0.5.0 No license field.
+41 info package.json uuid@2.0.1 No license field.
+42 verbose readDependencies loading dependencies from /Users/erikhazzard/Code/GameDev/Epitaph-New/package.json
+43 verbose install extract-text-webpack-plugin is installed as 0.8.1
+44 silly cache add args [ 'extract-text-webpack-plugin@^0.8.1', null ]
+45 verbose cache add spec extract-text-webpack-plugin@^0.8.1
+46 silly cache add parsed spec { raw: 'extract-text-webpack-plugin@^0.8.1',
+46 silly cache add   scope: null,
+46 silly cache add   name: 'extract-text-webpack-plugin',
+46 silly cache add   rawSpec: '^0.8.1',
+46 silly cache add   spec: '>=0.8.1 <0.9.0',
+46 silly cache add   type: 'range' }
+47 silly addNamed extract-text-webpack-plugin@>=0.8.1 <0.9.0
+48 verbose addNamed ">=0.8.1 <0.9.0" is a valid semver range for extract-text-webpack-plugin
+49 silly addNameRange { name: 'extract-text-webpack-plugin',
+49 silly addNameRange   range: '>=0.8.1 <0.9.0',
+49 silly addNameRange   hasData: false }
+50 silly mapToRegistry name extract-text-webpack-plugin
+51 silly mapToRegistry using default registry
+52 silly mapToRegistry registry https://registry.npmjs.org/
+53 silly mapToRegistry uri https://registry.npmjs.org/extract-text-webpack-plugin
+54 verbose addNameRange registry:https://registry.npmjs.org/extract-text-webpack-plugin not in flight; fetching
+55 verbose request uri https://registry.npmjs.org/extract-text-webpack-plugin
+56 verbose request no auth needed
+57 info attempt registry request try #1 at 3:07:17 PM
+58 verbose request id 897e3e9b76d3fd06
+59 verbose etag "7CYCMU1KZNXCRNFHUZCTLON85"
+60 http request GET https://registry.npmjs.org/extract-text-webpack-plugin
+61 http 304 https://registry.npmjs.org/extract-text-webpack-plugin
+62 silly get cb [ 304,
+62 silly get   { date: 'Thu, 16 Jul 2015 22:07:17 GMT',
+62 silly get     via: '1.1 varnish',
+62 silly get     'cache-control': 'max-age=60',
+62 silly get     etag: '"7CYCMU1KZNXCRNFHUZCTLON85"',
+62 silly get     age: '37',
+62 silly get     connection: 'keep-alive',
+62 silly get     'x-served-by': 'cache-lax1428-LAX',
+62 silly get     'x-cache': 'HIT',
+62 silly get     'x-cache-hits': '3',
+62 silly get     'x-timer': 'S1437084437.872545,VS0,VE0',
+62 silly get     vary: 'Accept' } ]
+63 verbose etag https://registry.npmjs.org/extract-text-webpack-plugin from cache
+64 verbose get saving extract-text-webpack-plugin to /Users/erikhazzard/.npm/registry.npmjs.org/extract-text-webpack-plugin/.cache.json
+65 silly addNameRange number 2 { name: 'extract-text-webpack-plugin',
+65 silly addNameRange   range: '>=0.8.1 <0.9.0',
+65 silly addNameRange   hasData: true }
+66 silly addNameRange versions [ 'extract-text-webpack-plugin',
+66 silly addNameRange   [ '0.1.0',
+66 silly addNameRange     '0.1.1',
+66 silly addNameRange     '0.1.2',
+66 silly addNameRange     '0.2.0',
+66 silly addNameRange     '0.2.1',
+66 silly addNameRange     '0.2.2',
+66 silly addNameRange     '0.2.3',
+66 silly addNameRange     '0.2.4',
+66 silly addNameRange     '0.2.5',
+66 silly addNameRange     '0.3.0',
+66 silly addNameRange     '0.3.1',
+66 silly addNameRange     '0.3.2',
+66 silly addNameRange     '0.3.3',
+66 silly addNameRange     '0.3.4',
+66 silly addNameRange     '0.3.5',
+66 silly addNameRange     '0.3.6',
+66 silly addNameRange     '0.3.7',
+66 silly addNameRange     '0.3.8',
+66 silly addNameRange     '0.4.0',
+66 silly addNameRange     '0.5.0',
+66 silly addNameRange     '0.6.0',
+66 silly addNameRange     '0.7.0',
+66 silly addNameRange     '0.7.1',
+66 silly addNameRange     '0.8.0',
+66 silly addNameRange     '0.8.1',
+66 silly addNameRange     '0.8.2' ] ]
+67 silly addNamed extract-text-webpack-plugin@0.8.2
+68 verbose addNamed "0.8.2" is a plain semver version for extract-text-webpack-plugin
+69 silly cache afterAdd extract-text-webpack-plugin@0.8.2
+70 verbose afterAdd /Users/erikhazzard/.npm/extract-text-webpack-plugin/0.8.2/package/package.json not in flight; writing
+71 verbose afterAdd /Users/erikhazzard/.npm/extract-text-webpack-plugin/0.8.2/package/package.json written
+72 silly install resolved [ { name: 'extract-text-webpack-plugin',
+72 silly install resolved     version: '0.8.2',
+72 silly install resolved     author: { name: 'Tobias Koppers @sokra' },
+72 silly install resolved     description: 'Extract text from bundle into a file.',
+72 silly install resolved     peerDependencies: { webpack: '^1.9.11' },
+72 silly install resolved     dependencies: { async: '^1.2.1', 'loader-utils': '~0.2.3' },
+72 silly install resolved     devDependencies:
+72 silly install resolved      { 'file-loader': '*',
+72 silly install resolved        'style-loader': '*',
+72 silly install resolved        'css-loader': '*',
+72 silly install resolved        webpack: '*' },
+72 silly install resolved     homepage: 'http://github.com/webpack/extract-text-webpack-plugin',
+72 silly install resolved     repository:
+72 silly install resolved      { type: 'git',
+72 silly install resolved        url: 'git+ssh://git@github.com/webpack/extract-text-webpack-plugin.git' },
+72 silly install resolved     license: 'MIT',
+72 silly install resolved     gitHead: 'a03c82c59d557ec4abe1f9afff8ad7cb91325eb0',
+72 silly install resolved     bugs: { url: 'https://github.com/webpack/extract-text-webpack-plugin/issues' },
+72 silly install resolved     _id: 'extract-text-webpack-plugin@0.8.2',
+72 silly install resolved     scripts: {},
+72 silly install resolved     _shasum: '49309df325f53affc53972f711afba2360c1914c',
+72 silly install resolved     _from: 'extract-text-webpack-plugin@>=0.8.1 <0.9.0',
+72 silly install resolved     _npmVersion: '2.10.0',
+72 silly install resolved     _nodeVersion: '0.12.2',
+72 silly install resolved     _npmUser: { name: 'sokra', email: 'tobias.koppers@googlemail.com' },
+72 silly install resolved     maintainers: [ [Object] ],
+72 silly install resolved     dist:
+72 silly install resolved      { shasum: '49309df325f53affc53972f711afba2360c1914c',
+72 silly install resolved        tarball: 'http://registry.npmjs.org/extract-text-webpack-plugin/-/extract-text-webpack-plugin-0.8.2.tgz' },
+72 silly install resolved     directories: {},
+72 silly install resolved     _resolved: 'https://registry.npmjs.org/extract-text-webpack-plugin/-/extract-text-webpack-plugin-0.8.2.tgz',
+72 silly install resolved     readme: 'ERROR: No README data found!' } ]
+73 info install extract-text-webpack-plugin@0.8.2 into /Users/erikhazzard/Code/GameDev/Epitaph-New
+74 info installOne extract-text-webpack-plugin@0.8.2
+75 verbose installOne of extract-text-webpack-plugin to /Users/erikhazzard/Code/GameDev/Epitaph-New not in flight; installing
+76 verbose lock using /Users/erikhazzard/.npm/_locks/extract-text-webpack-plu-80c32bf32d499827.lock for /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin
+77 silly install write writing extract-text-webpack-plugin 0.8.2 to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin
+78 verbose unbuild node_modules/extract-text-webpack-plugin
+79 info preuninstall extract-text-webpack-plugin@0.8.1
+80 info uninstall extract-text-webpack-plugin@0.8.1
+81 verbose unbuild rmStuff extract-text-webpack-plugin@0.8.1 from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules
+82 info postuninstall extract-text-webpack-plugin@0.8.1
+83 silly gentlyRm /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin is being purged from base /Users/erikhazzard/Code/GameDev/Epitaph-New
+84 verbose gentlyRm don't care about contents; nuking /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin
+85 silly vacuum-fs purging /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin
+86 silly vacuum-fs quitting because other entries in /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules
+87 verbose tar unpack /Users/erikhazzard/.npm/extract-text-webpack-plugin/0.8.2/package.tgz
+88 verbose tar unpacking to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin
+89 silly gentlyRm /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin is being purged
+90 verbose gentlyRm don't care about contents; nuking /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin
+91 silly gunzTarPerm modes [ '755', '644' ]
+92 silly gunzTarPerm extractEntry package.json
+93 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+94 silly gunzTarPerm extractEntry .npmignore
+95 silly gunzTarPerm modified mode [ '.npmignore', 438, 420 ]
+96 silly gunzTarPerm extractEntry README.md
+97 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+98 silly gunzTarPerm extractEntry ExtractedModule.js
+99 silly gunzTarPerm modified mode [ 'ExtractedModule.js', 438, 420 ]
+100 silly gunzTarPerm extractEntry OrderUndefinedError.js
+101 silly gunzTarPerm modified mode [ 'OrderUndefinedError.js', 438, 420 ]
+102 silly gunzTarPerm extractEntry index.js
+103 silly gunzTarPerm modified mode [ 'index.js', 438, 420 ]
+104 silly gunzTarPerm extractEntry loader.js
+105 silly gunzTarPerm modified mode [ 'loader.js', 438, 420 ]
+106 silly gunzTarPerm extractEntry .eslintrc
+107 silly gunzTarPerm modified mode [ '.eslintrc', 438, 420 ]
+108 silly gunzTarPerm extractEntry .editorconfig
+109 silly gunzTarPerm modified mode [ '.editorconfig', 438, 420 ]
+110 verbose write writing to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/package.json
+111 info preinstall extract-text-webpack-plugin@0.8.2
+112 verbose readDependencies loading dependencies from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/package.json
+113 silly prepareForInstallMany adding async@^1.2.1 from extract-text-webpack-plugin dependencies
+114 silly prepareForInstallMany adding loader-utils@~0.2.3 from extract-text-webpack-plugin dependencies
+115 silly prepareForInstallMany adding webpack@^1.9.11 from extract-text-webpack-plugin peerDependencies
+116 warn peerDependencies The peer dependency webpack@^1.9.11 included from extract-text-webpack-plugin will no
+117 warn peerDependencies longer be automatically installed to fulfill the peerDependency
+118 warn peerDependencies in npm 3+. Your application will need to depend on it explicitly.
+119 verbose readDependencies loading dependencies from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/package.json
+120 silly cache add args [ 'async@^1.2.1', null ]
+121 verbose cache add spec async@^1.2.1
+122 silly cache add args [ 'loader-utils@~0.2.3', null ]
+123 verbose cache add spec loader-utils@~0.2.3
+124 silly cache add parsed spec { raw: 'async@^1.2.1',
+124 silly cache add   scope: null,
+124 silly cache add   name: 'async',
+124 silly cache add   rawSpec: '^1.2.1',
+124 silly cache add   spec: '>=1.2.1 <2.0.0',
+124 silly cache add   type: 'range' }
+125 silly addNamed async@>=1.2.1 <2.0.0
+126 verbose addNamed ">=1.2.1 <2.0.0" is a valid semver range for async
+127 silly addNameRange { name: 'async', range: '>=1.2.1 <2.0.0', hasData: false }
+128 silly mapToRegistry name async
+129 silly mapToRegistry using default registry
+130 silly mapToRegistry registry https://registry.npmjs.org/
+131 silly mapToRegistry uri https://registry.npmjs.org/async
+132 verbose addNameRange registry:https://registry.npmjs.org/async not in flight; fetching
+133 silly cache add parsed spec { raw: 'loader-utils@~0.2.3',
+133 silly cache add   scope: null,
+133 silly cache add   name: 'loader-utils',
+133 silly cache add   rawSpec: '~0.2.3',
+133 silly cache add   spec: '>=0.2.3 <0.3.0',
+133 silly cache add   type: 'range' }
+134 silly addNamed loader-utils@>=0.2.3 <0.3.0
+135 verbose addNamed ">=0.2.3 <0.3.0" is a valid semver range for loader-utils
+136 silly addNameRange { name: 'loader-utils', range: '>=0.2.3 <0.3.0', hasData: false }
+137 silly mapToRegistry name loader-utils
+138 silly mapToRegistry using default registry
+139 silly mapToRegistry registry https://registry.npmjs.org/
+140 silly mapToRegistry uri https://registry.npmjs.org/loader-utils
+141 verbose addNameRange registry:https://registry.npmjs.org/loader-utils not in flight; fetching
+142 verbose request uri https://registry.npmjs.org/async
+143 verbose request no auth needed
+144 info attempt registry request try #1 at 3:07:18 PM
+145 verbose etag "4JDPHRFAOICPV1INZ05MOJ6ZU"
+146 http request GET https://registry.npmjs.org/async
+147 verbose request uri https://registry.npmjs.org/loader-utils
+148 verbose request no auth needed
+149 info attempt registry request try #1 at 3:07:18 PM
+150 verbose etag "47OAW8EATAH4HYQTCQT4MBAWY"
+151 http request GET https://registry.npmjs.org/loader-utils
+152 http 304 https://registry.npmjs.org/loader-utils
+153 silly get cb [ 304,
+153 silly get   { date: 'Thu, 16 Jul 2015 22:07:18 GMT',
+153 silly get     via: '1.1 varnish',
+153 silly get     'cache-control': 'max-age=60',
+153 silly get     etag: '"47OAW8EATAH4HYQTCQT4MBAWY"',
+153 silly get     age: '35',
+153 silly get     connection: 'keep-alive',
+153 silly get     'x-served-by': 'cache-lax1424-LAX',
+153 silly get     'x-cache': 'HIT',
+153 silly get     'x-cache-hits': '1',
+153 silly get     'x-timer': 'S1437084438.142147,VS0,VE0',
+153 silly get     vary: 'Accept' } ]
+154 verbose etag https://registry.npmjs.org/loader-utils from cache
+155 verbose get saving loader-utils to /Users/erikhazzard/.npm/registry.npmjs.org/loader-utils/.cache.json
+156 silly addNameRange number 2 { name: 'loader-utils', range: '>=0.2.3 <0.3.0', hasData: true }
+157 silly addNameRange versions [ 'loader-utils',
+157 silly addNameRange   [ '0.1.0',
+157 silly addNameRange     '0.1.1',
+157 silly addNameRange     '0.1.2',
+157 silly addNameRange     '0.2.0',
+157 silly addNameRange     '0.2.1',
+157 silly addNameRange     '0.2.2',
+157 silly addNameRange     '0.2.3',
+157 silly addNameRange     '0.2.4',
+157 silly addNameRange     '0.2.5',
+157 silly addNameRange     '0.2.6',
+157 silly addNameRange     '0.2.7',
+157 silly addNameRange     '0.2.8',
+157 silly addNameRange     '0.2.9',
+157 silly addNameRange     '0.2.10' ] ]
+158 silly addNamed loader-utils@0.2.10
+159 verbose addNamed "0.2.10" is a plain semver version for loader-utils
+160 silly cache afterAdd loader-utils@0.2.10
+161 verbose afterAdd /Users/erikhazzard/.npm/loader-utils/0.2.10/package/package.json not in flight; writing
+162 verbose afterAdd /Users/erikhazzard/.npm/loader-utils/0.2.10/package/package.json written
+163 http 200 https://registry.npmjs.org/async
+164 silly get cb [ 200,
+164 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+164 silly get     etag: '"14BXF1QQRDNBCAAZ7M6Y10M1P"',
+164 silly get     'content-type': 'application/json',
+164 silly get     'cache-control': 'max-age=60',
+164 silly get     'content-length': '125452',
+164 silly get     'accept-ranges': 'bytes',
+164 silly get     date: 'Thu, 16 Jul 2015 22:07:18 GMT',
+164 silly get     via: '1.1 varnish',
+164 silly get     age: '46',
+164 silly get     connection: 'keep-alive',
+164 silly get     'x-served-by': 'cache-lax1426-LAX',
+164 silly get     'x-cache': 'HIT',
+164 silly get     'x-cache-hits': '7',
+164 silly get     'x-timer': 'S1437084438.141483,VS0,VE0',
+164 silly get     vary: 'Accept' } ]
+165 verbose get saving async to /Users/erikhazzard/.npm/registry.npmjs.org/async/.cache.json
+166 silly addNameRange number 2 { name: 'async', range: '>=1.2.1 <2.0.0', hasData: true }
+167 silly addNameRange versions [ 'async',
+167 silly addNameRange   [ '0.1.0',
+167 silly addNameRange     '0.1.1',
+167 silly addNameRange     '0.1.2',
+167 silly addNameRange     '0.1.3',
+167 silly addNameRange     '0.1.4',
+167 silly addNameRange     '0.1.5',
+167 silly addNameRange     '0.1.6',
+167 silly addNameRange     '0.1.7',
+167 silly addNameRange     '0.1.8',
+167 silly addNameRange     '0.1.9',
+167 silly addNameRange     '0.1.10',
+167 silly addNameRange     '0.1.11',
+167 silly addNameRange     '0.1.12',
+167 silly addNameRange     '0.1.13',
+167 silly addNameRange     '0.1.14',
+167 silly addNameRange     '0.1.15',
+167 silly addNameRange     '0.1.16',
+167 silly addNameRange     '0.1.17',
+167 silly addNameRange     '0.1.18',
+167 silly addNameRange     '0.1.19',
+167 silly addNameRange     '0.1.20',
+167 silly addNameRange     '0.1.21',
+167 silly addNameRange     '0.1.22',
+167 silly addNameRange     '0.2.0',
+167 silly addNameRange     '0.2.1',
+167 silly addNameRange     '0.2.2',
+167 silly addNameRange     '0.2.3',
+167 silly addNameRange     '0.2.4',
+167 silly addNameRange     '0.2.5',
+167 silly addNameRange     '0.2.6',
+167 silly addNameRange     '0.2.7',
+167 silly addNameRange     '0.2.8',
+167 silly addNameRange     '0.2.9',
+167 silly addNameRange     '0.2.10',
+167 silly addNameRange     '0.3.0',
+167 silly addNameRange     '0.4.0',
+167 silly addNameRange     '0.4.1',
+167 silly addNameRange     '0.5.0',
+167 silly addNameRange     '0.6.0',
+167 silly addNameRange     '0.6.1',
+167 silly addNameRange     '0.6.2',
+167 silly addNameRange     '0.7.0',
+167 silly addNameRange     '0.8.0',
+167 silly addNameRange     '0.9.0',
+167 silly addNameRange     '0.9.2',
+167 silly addNameRange     '1.0.0',
+167 silly addNameRange     '1.1.0',
+167 silly addNameRange     '1.2.0',
+167 silly addNameRange     '1.1.1',
+167 silly addNameRange     '1.2.1',
+167 silly addNameRange     '1.3.0' ] ]
+168 silly addNamed async@1.3.0
+169 verbose addNamed "1.3.0" is a plain semver version for async
+170 silly cache afterAdd async@1.3.0
+171 verbose afterAdd /Users/erikhazzard/.npm/async/1.3.0/package/package.json not in flight; writing
+172 verbose afterAdd /Users/erikhazzard/.npm/async/1.3.0/package/package.json written
+173 silly install resolved [ { name: 'loader-utils',
+173 silly install resolved     version: '0.2.10',
+173 silly install resolved     author: { name: 'Tobias Koppers @sokra' },
+173 silly install resolved     description: 'utils for webpack loaders',
+173 silly install resolved     dependencies: { 'big.js': '^3.0.2', json5: '^0.4.0' },
+173 silly install resolved     scripts:
+173 silly install resolved      { test: 'mocha',
+173 silly install resolved        travis: 'npm run cover -- --report lcovonly',
+173 silly install resolved        cover: 'istanbul cover -x *.runtime.js node_modules/mocha/bin/_mocha',
+173 silly install resolved        'publish-patch': 'mocha && npm version patch && git push && git push --tags && npm publish' },
+173 silly install resolved     license: 'MIT',
+173 silly install resolved     repository:
+173 silly install resolved      { type: 'git',
+173 silly install resolved        url: 'git+https://github.com/webpack/loader-utils.git' },
+173 silly install resolved     devDependencies: { coveralls: '^2.11.2', istanbul: '^0.3.14', mocha: '^1.21.4' },
+173 silly install resolved     files: [ 'index.js' ],
+173 silly install resolved     gitHead: '7fd3e9a1c9a0fb8d775f835498b8c0a2002e36a0',
+173 silly install resolved     bugs: { url: 'https://github.com/webpack/loader-utils/issues' },
+173 silly install resolved     homepage: 'https://github.com/webpack/loader-utils#readme',
+173 silly install resolved     _id: 'loader-utils@0.2.10',
+173 silly install resolved     _shasum: '7ed2258e496644c83680590489bb82f3f57892fc',
+173 silly install resolved     _from: 'loader-utils@>=0.2.3 <0.3.0',
+173 silly install resolved     _npmVersion: '2.10.0',
+173 silly install resolved     _nodeVersion: '0.12.2',
+173 silly install resolved     _npmUser: { name: 'sokra', email: 'tobias.koppers@googlemail.com' },
+173 silly install resolved     maintainers: [ [Object] ],
+173 silly install resolved     dist:
+173 silly install resolved      { shasum: '7ed2258e496644c83680590489bb82f3f57892fc',
+173 silly install resolved        tarball: 'http://registry.npmjs.org/loader-utils/-/loader-utils-0.2.10.tgz' },
+173 silly install resolved     directories: {},
+173 silly install resolved     _resolved: 'https://registry.npmjs.org/loader-utils/-/loader-utils-0.2.10.tgz',
+173 silly install resolved     readme: 'ERROR: No README data found!' },
+173 silly install resolved   { name: 'async',
+173 silly install resolved     description: 'Higher-order functions and common patterns for asynchronous code',
+173 silly install resolved     main: 'lib/async.js',
+173 silly install resolved     author: { name: 'Caolan McMahon' },
+173 silly install resolved     version: '1.3.0',
+173 silly install resolved     keywords: [ 'async', 'callback', 'utility', 'module' ],
+173 silly install resolved     repository: { type: 'git', url: 'git+https://github.com/caolan/async.git' },
+173 silly install resolved     bugs: { url: 'https://github.com/caolan/async/issues' },
+173 silly install resolved     license: 'MIT',
+173 silly install resolved     devDependencies:
+173 silly install resolved      { benchmark: 'github:bestiejs/benchmark.js',
+173 silly install resolved        coveralls: '^2.11.2',
+173 silly install resolved        jshint: '~2.8.0',
+173 silly install resolved        lodash: '^3.9.0',
+173 silly install resolved        mkdirp: '~0.5.1',
+173 silly install resolved        nodeunit: '>0.0.0',
+173 silly install resolved        nyc: '^2.1.0',
+173 silly install resolved        'uglify-js': '~2.4.0',
+173 silly install resolved        xyz: '^0.5.0',
+173 silly install resolved        yargs: '~3.9.1' },
+173 silly install resolved     jam: { main: 'lib/async.js', include: [Object], categories: [Object] },
+173 silly install resolved     scripts:
+173 silly install resolved      { test: 'npm run-script lint && nodeunit test/test-async.js',
+173 silly install resolved        lint: 'jshint lib/*.js test/*.js perf/*.js',
+173 silly install resolved        coverage: 'nyc npm test && nyc report',
+173 silly install resolved        coveralls: 'nyc npm test && nyc report --reporter=text-lcov | coveralls' },
+173 silly install resolved     spm: { main: 'lib/async.js' },
+173 silly install resolved     volo: { main: 'lib/async.js', ignore: [Object] },
+173 silly install resolved     gitHead: '71fa2638973dafd8761fa5457c472a312cc820fe',
+173 silly install resolved     homepage: 'https://github.com/caolan/async#readme',
+173 silly install resolved     _id: 'async@1.3.0',
+173 silly install resolved     _shasum: 'a6f1631e8a595a663496d0a5586bd12007d4871d',
+173 silly install resolved     _from: 'async@>=1.2.1 <2.0.0',
+173 silly install resolved     _npmVersion: '2.9.1',
+173 silly install resolved     _nodeVersion: '0.12.3',
+173 silly install resolved     _npmUser: { name: 'aearly', email: 'alexander.early@gmail.com' },
+173 silly install resolved     maintainers: [ [Object], [Object], [Object] ],
+173 silly install resolved     dist:
+173 silly install resolved      { shasum: 'a6f1631e8a595a663496d0a5586bd12007d4871d',
+173 silly install resolved        tarball: 'http://registry.npmjs.org/async/-/async-1.3.0.tgz' },
+173 silly install resolved     directories: {},
+173 silly install resolved     _resolved: 'https://registry.npmjs.org/async/-/async-1.3.0.tgz',
+173 silly install resolved     readme: 'ERROR: No README data found!' } ]
+174 info install loader-utils@0.2.10 into /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin
+175 info install async@1.3.0 into /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin
+176 info installOne loader-utils@0.2.10
+177 verbose installOne of loader-utils to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin not in flight; installing
+178 info installOne async@1.3.0
+179 verbose installOne of async to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin not in flight; installing
+180 verbose lock using /Users/erikhazzard/.npm/_locks/loader-utils-863d1e5abc3a6bd9.lock for /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils
+181 silly install write writing loader-utils 0.2.10 to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils
+182 verbose lock using /Users/erikhazzard/.npm/_locks/async-3690fa521015dfae.lock for /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/async
+183 silly install write writing async 1.3.0 to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/async
+184 verbose unbuild node_modules/extract-text-webpack-plugin/node_modules/loader-utils
+185 silly gentlyRm /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils is being purged from base /Users/erikhazzard/Code/GameDev/Epitaph-New
+186 verbose gentlyRm don't care about contents; nuking /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils
+187 verbose unbuild node_modules/extract-text-webpack-plugin/node_modules/async
+188 verbose tar unpack /Users/erikhazzard/.npm/loader-utils/0.2.10/package.tgz
+189 verbose tar unpacking to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils
+190 silly gentlyRm /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils is being purged
+191 verbose gentlyRm don't care about contents; nuking /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils
+192 silly gunzTarPerm modes [ '755', '644' ]
+193 silly gentlyRm /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/async is being purged from base /Users/erikhazzard/Code/GameDev/Epitaph-New
+194 verbose gentlyRm don't care about contents; nuking /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/async
+195 verbose tar unpack /Users/erikhazzard/.npm/async/1.3.0/package.tgz
+196 verbose tar unpacking to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/async
+197 silly gentlyRm /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/async is being purged
+198 verbose gentlyRm don't care about contents; nuking /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/async
+199 silly gunzTarPerm modes [ '755', '644' ]
+200 silly gunzTarPerm extractEntry package.json
+201 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+202 silly gunzTarPerm extractEntry package.json
+203 silly gunzTarPerm modified mode [ 'package.json', 436, 420 ]
+204 silly gunzTarPerm extractEntry README.md
+205 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+206 silly gunzTarPerm extractEntry LICENSE
+207 silly gunzTarPerm modified mode [ 'LICENSE', 438, 420 ]
+208 silly gunzTarPerm extractEntry README.md
+209 silly gunzTarPerm modified mode [ 'README.md', 436, 420 ]
+210 silly gunzTarPerm extractEntry LICENSE
+211 silly gunzTarPerm modified mode [ 'LICENSE', 436, 420 ]
+212 silly gunzTarPerm extractEntry CHANGELOG.md
+213 silly gunzTarPerm modified mode [ 'CHANGELOG.md', 436, 420 ]
+214 silly gunzTarPerm extractEntry lib/async.js
+215 silly gunzTarPerm modified mode [ 'lib/async.js', 436, 420 ]
+216 silly gunzTarPerm extractEntry support/sync-package-managers.js
+217 silly gunzTarPerm modified mode [ 'support/sync-package-managers.js', 509, 493 ]
+218 silly gunzTarPerm extractEntry index.js
+219 silly gunzTarPerm modified mode [ 'index.js', 438, 420 ]
+220 verbose write writing to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/package.json
+221 info preinstall loader-utils@0.2.10
+222 verbose readDependencies loading dependencies from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/package.json
+223 silly prepareForInstallMany adding big.js@^3.0.2 from loader-utils dependencies
+224 silly prepareForInstallMany adding json5@^0.4.0 from loader-utils dependencies
+225 verbose readDependencies loading dependencies from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/package.json
+226 silly cache add args [ 'big.js@^3.0.2', null ]
+227 verbose cache add spec big.js@^3.0.2
+228 silly cache add parsed spec { raw: 'big.js@^3.0.2',
+228 silly cache add   scope: null,
+228 silly cache add   name: 'big.js',
+228 silly cache add   rawSpec: '^3.0.2',
+228 silly cache add   spec: '>=3.0.2 <4.0.0',
+228 silly cache add   type: 'range' }
+229 silly addNamed big.js@>=3.0.2 <4.0.0
+230 verbose addNamed ">=3.0.2 <4.0.0" is a valid semver range for big.js
+231 silly addNameRange { name: 'big.js', range: '>=3.0.2 <4.0.0', hasData: false }
+232 silly mapToRegistry name big.js
+233 silly mapToRegistry using default registry
+234 silly mapToRegistry registry https://registry.npmjs.org/
+235 silly mapToRegistry uri https://registry.npmjs.org/big.js
+236 verbose addNameRange registry:https://registry.npmjs.org/big.js not in flight; fetching
+237 silly cache add args [ 'json5@^0.4.0', null ]
+238 verbose cache add spec json5@^0.4.0
+239 silly cache add parsed spec { raw: 'json5@^0.4.0',
+239 silly cache add   scope: null,
+239 silly cache add   name: 'json5',
+239 silly cache add   rawSpec: '^0.4.0',
+239 silly cache add   spec: '>=0.4.0 <0.5.0',
+239 silly cache add   type: 'range' }
+240 silly addNamed json5@>=0.4.0 <0.5.0
+241 verbose addNamed ">=0.4.0 <0.5.0" is a valid semver range for json5
+242 silly addNameRange { name: 'json5', range: '>=0.4.0 <0.5.0', hasData: false }
+243 silly mapToRegistry name json5
+244 silly mapToRegistry using default registry
+245 silly mapToRegistry registry https://registry.npmjs.org/
+246 silly mapToRegistry uri https://registry.npmjs.org/json5
+247 verbose addNameRange registry:https://registry.npmjs.org/json5 not in flight; fetching
+248 verbose request uri https://registry.npmjs.org/big.js
+249 verbose request no auth needed
+250 info attempt registry request try #1 at 3:07:18 PM
+251 verbose etag "V2BGW5VM749T7RMZ6I77UNR9"
+252 http request GET https://registry.npmjs.org/big.js
+253 verbose request uri https://registry.npmjs.org/json5
+254 verbose request no auth needed
+255 info attempt registry request try #1 at 3:07:18 PM
+256 verbose etag "WJHOV7OMGVWCGCCSOCWNWLFT"
+257 http request GET https://registry.npmjs.org/json5
+258 verbose write writing to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/async/package.json
+259 info preinstall async@1.3.0
+260 verbose readDependencies loading dependencies from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/async/package.json
+261 verbose readDependencies loading dependencies from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/async/package.json
+262 silly install resolved []
+263 verbose about to build /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/async
+264 info build /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/async
+265 info linkStuff async@1.3.0
+266 silly linkStuff async@1.3.0 has /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules as its parent node_modules
+267 verbose linkBins async@1.3.0
+268 verbose linkMans async@1.3.0
+269 verbose rebuildBundles async@1.3.0
+270 info install async@1.3.0
+271 info postinstall async@1.3.0
+272 verbose unlock done using /Users/erikhazzard/.npm/_locks/async-3690fa521015dfae.lock for /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/async
+273 http 304 https://registry.npmjs.org/json5
+274 silly get cb [ 304,
+274 silly get   { date: 'Thu, 16 Jul 2015 22:07:18 GMT',
+274 silly get     via: '1.1 varnish',
+274 silly get     'cache-control': 'max-age=60',
+274 silly get     etag: '"WJHOV7OMGVWCGCCSOCWNWLFT"',
+274 silly get     age: '34',
+274 silly get     connection: 'keep-alive',
+274 silly get     'x-served-by': 'cache-lax1421-LAX',
+274 silly get     'x-cache': 'HIT',
+274 silly get     'x-cache-hits': '1',
+274 silly get     'x-timer': 'S1437084438.437519,VS0,VE0',
+274 silly get     vary: 'Accept' } ]
+275 verbose etag https://registry.npmjs.org/json5 from cache
+276 verbose get saving json5 to /Users/erikhazzard/.npm/registry.npmjs.org/json5/.cache.json
+277 http 304 https://registry.npmjs.org/big.js
+278 silly get cb [ 304,
+278 silly get   { date: 'Thu, 16 Jul 2015 22:07:18 GMT',
+278 silly get     via: '1.1 varnish',
+278 silly get     'cache-control': 'max-age=60',
+278 silly get     etag: '"V2BGW5VM749T7RMZ6I77UNR9"',
+278 silly get     age: '34',
+278 silly get     connection: 'keep-alive',
+278 silly get     'x-served-by': 'cache-lax1424-LAX',
+278 silly get     'x-cache': 'HIT',
+278 silly get     'x-cache-hits': '1',
+278 silly get     'x-timer': 'S1437084438.437550,VS0,VE0',
+278 silly get     vary: 'Accept' } ]
+279 verbose etag https://registry.npmjs.org/big.js from cache
+280 verbose get saving big.js to /Users/erikhazzard/.npm/registry.npmjs.org/big.js/.cache.json
+281 silly addNameRange number 2 { name: 'big.js', range: '>=3.0.2 <4.0.0', hasData: true }
+282 silly addNameRange versions [ 'big.js',
+282 silly addNameRange   [ '2.0.0',
+282 silly addNameRange     '2.1.0',
+282 silly addNameRange     '2.2.0',
+282 silly addNameRange     '2.4.0',
+282 silly addNameRange     '2.4.1',
+282 silly addNameRange     '2.5.0',
+282 silly addNameRange     '2.5.1',
+282 silly addNameRange     '3.0.0',
+282 silly addNameRange     '3.0.1',
+282 silly addNameRange     '3.0.2',
+282 silly addNameRange     '3.1.1',
+282 silly addNameRange     '3.1.2',
+282 silly addNameRange     '3.1.3' ] ]
+283 silly addNamed big.js@3.1.3
+284 verbose addNamed "3.1.3" is a plain semver version for big.js
+285 silly addNameRange number 2 { name: 'json5', range: '>=0.4.0 <0.5.0', hasData: true }
+286 silly addNameRange versions [ 'json5', [ '0.0.0', '0.0.1', '0.1.0', '0.2.0', '0.4.0' ] ]
+287 silly addNamed json5@0.4.0
+288 verbose addNamed "0.4.0" is a plain semver version for json5
+289 silly cache afterAdd big.js@3.1.3
+290 verbose afterAdd /Users/erikhazzard/.npm/big.js/3.1.3/package/package.json not in flight; writing
+291 verbose afterAdd /Users/erikhazzard/.npm/big.js/3.1.3/package/package.json written
+292 silly cache afterAdd json5@0.4.0
+293 verbose afterAdd /Users/erikhazzard/.npm/json5/0.4.0/package/package.json not in flight; writing
+294 verbose afterAdd /Users/erikhazzard/.npm/json5/0.4.0/package/package.json written
+295 silly install resolved [ { name: 'big.js',
+295 silly install resolved     description: 'A small, fast, easy-to-use library for arbitrary-precision decimal arithmetic',
+295 silly install resolved     version: '3.1.3',
+295 silly install resolved     keywords:
+295 silly install resolved      [ 'arbitrary',
+295 silly install resolved        'precision',
+295 silly install resolved        'arithmetic',
+295 silly install resolved        'big',
+295 silly install resolved        'number',
+295 silly install resolved        'decimal',
+295 silly install resolved        'float',
+295 silly install resolved        'biginteger',
+295 silly install resolved        'bigdecimal',
+295 silly install resolved        'bignumber',
+295 silly install resolved        'bigint',
+295 silly install resolved        'bignum' ],
+295 silly install resolved     repository:
+295 silly install resolved      { type: 'git',
+295 silly install resolved        url: 'git+https://github.com/MikeMcl/big.js.git' },
+295 silly install resolved     main: './big',
+295 silly install resolved     author: { name: 'Michael Mclaughlin', email: 'M8ch88l@gmail.com' },
+295 silly install resolved     bugs: { url: 'https://github.com/MikeMcl/big.js/issues' },
+295 silly install resolved     engines: { node: '*' },
+295 silly install resolved     license: 'MIT',
+295 silly install resolved     scripts:
+295 silly install resolved      { test: 'node ./test/every-test.js',
+295 silly install resolved        build: 'uglifyjs -o ./big.min.js ./big.js' },
+295 silly install resolved     files: [ 'big.js', 'big.min.js' ],
+295 silly install resolved     gitHead: '86268e96b3dbf6db8ce319489f410277d9d4ea1b',
+295 silly install resolved     homepage: 'https://github.com/MikeMcl/big.js#readme',
+295 silly install resolved     _id: 'big.js@3.1.3',
+295 silly install resolved     _shasum: '4cada2193652eb3ca9ec8e55c9015669c9806978',
+295 silly install resolved     _from: 'big.js@>=3.0.2 <4.0.0',
+295 silly install resolved     _npmVersion: '2.9.1',
+295 silly install resolved     _nodeVersion: '0.12.0',
+295 silly install resolved     _npmUser: { name: 'mikemcl', email: 'M8ch88l@gmail.com' },
+295 silly install resolved     maintainers: [ [Object] ],
+295 silly install resolved     dist:
+295 silly install resolved      { shasum: '4cada2193652eb3ca9ec8e55c9015669c9806978',
+295 silly install resolved        tarball: 'http://registry.npmjs.org/big.js/-/big.js-3.1.3.tgz' },
+295 silly install resolved     directories: {},
+295 silly install resolved     _resolved: 'https://registry.npmjs.org/big.js/-/big.js-3.1.3.tgz',
+295 silly install resolved     readme: 'ERROR: No README data found!' },
+295 silly install resolved   { name: 'json5',
+295 silly install resolved     version: '0.4.0',
+295 silly install resolved     description: 'JSON for the ES5 era.',
+295 silly install resolved     keywords: [ 'json', 'es5' ],
+295 silly install resolved     author: { name: 'Aseem Kishore', email: 'aseem.kishore@gmail.com' },
+295 silly install resolved     license: 'MIT',
+295 silly install resolved     contributors: [ [Object], [Object] ],
+295 silly install resolved     main: 'lib/json5.js',
+295 silly install resolved     bin: { json5: 'lib/cli.js' },
+295 silly install resolved     dependencies: {},
+295 silly install resolved     devDependencies: { mocha: '~1.0.3' },
+295 silly install resolved     scripts:
+295 silly install resolved      { build: './lib/cli.js -c package.json5',
+295 silly install resolved        test: 'mocha --ui exports --reporter spec' },
+295 silly install resolved     homepage: 'http://json5.org/',
+295 silly install resolved     repository: { type: 'git', url: 'git+https://github.com/aseemk/json5.git' },
+295 silly install resolved     bugs: { url: 'https://github.com/aseemk/json5/issues' },
+295 silly install resolved     _id: 'json5@0.4.0',
+295 silly install resolved     dist:
+295 silly install resolved      { shasum: '054352e4c4c80c86c0923877d449de176a732c8d',
+295 silly install resolved        tarball: 'http://registry.npmjs.org/json5/-/json5-0.4.0.tgz' },
+295 silly install resolved     _from: 'json5@>=0.4.0 <0.5.0',
+295 silly install resolved     _npmVersion: '1.3.21',
+295 silly install resolved     _npmUser: { name: 'aseemk', email: 'aseem.kishore@gmail.com' },
+295 silly install resolved     maintainers: [ [Object] ],
+295 silly install resolved     directories: {},
+295 silly install resolved     _shasum: '054352e4c4c80c86c0923877d449de176a732c8d',
+295 silly install resolved     _resolved: 'https://registry.npmjs.org/json5/-/json5-0.4.0.tgz',
+295 silly install resolved     readme: 'ERROR: No README data found!' } ]
+296 info install big.js@3.1.3 into /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils
+297 info install json5@0.4.0 into /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils
+298 info installOne big.js@3.1.3
+299 verbose installOne of big.js to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils not in flight; installing
+300 info installOne json5@0.4.0
+301 verbose installOne of json5 to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils not in flight; installing
+302 verbose lock using /Users/erikhazzard/.npm/_locks/big-js-384ff815246745ae.lock for /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/big.js
+303 silly install write writing big.js 3.1.3 to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/big.js
+304 verbose lock using /Users/erikhazzard/.npm/_locks/json5-3e571130c87fcecb.lock for /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/json5
+305 silly install write writing json5 0.4.0 to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/json5
+306 verbose unbuild node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/big.js
+307 silly gentlyRm /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/big.js is being purged from base /Users/erikhazzard/Code/GameDev/Epitaph-New
+308 verbose gentlyRm don't care about contents; nuking /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/big.js
+309 verbose tar unpack /Users/erikhazzard/.npm/big.js/3.1.3/package.tgz
+310 verbose tar unpacking to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/big.js
+311 silly gentlyRm /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/big.js is being purged
+312 verbose gentlyRm don't care about contents; nuking /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/big.js
+313 verbose unbuild node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/json5
+314 silly gunzTarPerm modes [ '755', '644' ]
+315 silly gentlyRm /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/json5 is being purged from base /Users/erikhazzard/Code/GameDev/Epitaph-New
+316 verbose gentlyRm don't care about contents; nuking /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/json5
+317 verbose tar unpack /Users/erikhazzard/.npm/json5/0.4.0/package.tgz
+318 verbose tar unpacking to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/json5
+319 silly gentlyRm /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/json5 is being purged
+320 verbose gentlyRm don't care about contents; nuking /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/json5
+321 silly gunzTarPerm modes [ '755', '644' ]
+322 silly gunzTarPerm extractEntry package.json
+323 silly gunzTarPerm modified mode [ 'package.json', 438, 420 ]
+324 silly gunzTarPerm extractEntry package.json
+325 silly gunzTarPerm extractEntry README.md
+326 silly gunzTarPerm modified mode [ 'README.md', 438, 420 ]
+327 silly gunzTarPerm extractEntry LICENCE
+328 silly gunzTarPerm modified mode [ 'LICENCE', 438, 420 ]
+329 silly gunzTarPerm extractEntry .npmignore
+330 silly gunzTarPerm extractEntry README.md
+331 silly gunzTarPerm extractEntry big.js
+332 silly gunzTarPerm modified mode [ 'big.js', 438, 420 ]
+333 silly gunzTarPerm extractEntry big.min.js
+334 silly gunzTarPerm modified mode [ 'big.min.js', 438, 420 ]
+335 silly gunzTarPerm extractEntry .editorconfig
+336 silly gunzTarPerm extractEntry .travis.yml
+337 silly gunzTarPerm extractEntry CHANGELOG.md
+338 silly gunzTarPerm extractEntry lib/cli.js
+339 silly gunzTarPerm extractEntry lib/json5.js
+340 silly gunzTarPerm extractEntry lib/require.js
+341 silly gunzTarPerm extractEntry package.json5
+342 silly gunzTarPerm extractEntry test/parse.js
+343 silly gunzTarPerm extractEntry test/require.js
+344 silly gunzTarPerm extractEntry test/stringify.js
+345 silly gunzTarPerm extractEntry test/parse-cases/arrays/leading-comma-array.js
+346 silly gunzTarPerm extractEntry test/parse-cases/arrays/lone-trailing-comma-array.js
+347 silly gunzTarPerm extractEntry test/parse-cases/arrays/empty-array.json
+348 silly gunzTarPerm extractEntry test/parse-cases/arrays/no-comma-array.txt
+349 silly gunzTarPerm extractEntry test/parse-cases/arrays/regular-array.json
+350 silly gunzTarPerm extractEntry test/parse-cases/arrays/trailing-comma-array.json5
+351 silly gunzTarPerm extractEntry test/parse-cases/comments/inline-comment-following-top-level-value.json5
+352 silly gunzTarPerm extractEntry test/parse-cases/comments/block-comment-following-array-element.json5
+353 silly gunzTarPerm extractEntry test/parse-cases/comments/block-comment-in-string.json
+354 silly gunzTarPerm extractEntry test/parse-cases/comments/block-comment-preceding-top-level-value.json5
+355 silly gunzTarPerm extractEntry test/parse-cases/comments/block-comment-with-asterisks.json5
+356 silly gunzTarPerm extractEntry test/parse-cases/comments/inline-comment-following-array-element.json5
+357 silly gunzTarPerm extractEntry test/parse-cases/comments/block-comment-following-top-level-value.json5
+358 silly gunzTarPerm extractEntry test/parse-cases/comments/inline-comment-in-string.json
+359 silly gunzTarPerm extractEntry test/parse-cases/comments/inline-comment-preceding-top-level-value.json5
+360 silly gunzTarPerm extractEntry test/parse-cases/comments/top-level-block-comment.txt
+361 silly gunzTarPerm extractEntry test/parse-cases/comments/top-level-inline-comment.txt
+362 silly gunzTarPerm extractEntry test/parse-cases/comments/unterminated-block-comment.txt
+363 silly gunzTarPerm extractEntry test/parse-cases/misc/empty.txt
+364 silly gunzTarPerm extractEntry test/parse-cases/misc/npm-package.json
+365 silly gunzTarPerm extractEntry test/parse-cases/misc/npm-package.json5
+366 silly gunzTarPerm extractEntry test/parse-cases/misc/readme-example.json5
+367 silly gunzTarPerm extractEntry test/parse-cases/misc/valid-whitespace.json5
+368 silly gunzTarPerm extractEntry test/parse-cases/new-lines/.editorconfig
+369 silly gunzTarPerm extractEntry test/parse-cases/new-lines/.gitattributes
+370 silly gunzTarPerm extractEntry test/parse-cases/new-lines/comment-cr.json5
+371 silly gunzTarPerm extractEntry test/parse-cases/new-lines/comment-crlf.json5
+372 silly gunzTarPerm extractEntry test/parse-cases/new-lines/comment-lf.json5
+373 silly gunzTarPerm extractEntry test/parse-cases/new-lines/escaped-cr.json5
+374 silly gunzTarPerm extractEntry test/parse-cases/new-lines/escaped-crlf.json5
+375 silly gunzTarPerm extractEntry test/parse-cases/new-lines/escaped-lf.json5
+376 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-noctal.js
+377 silly gunzTarPerm extractEntry test/parse-cases/numbers/noctal-with-leading-octal-digit.js
+378 silly gunzTarPerm extractEntry test/parse-cases/numbers/noctal.js
+379 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-noctal.js
+380 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-zero-binary-coffeescript.txt
+381 silly gunzTarPerm extractEntry test/parse-cases/numbers/float-with-integer-exponent.json
+382 silly gunzTarPerm extractEntry test/parse-cases/numbers/float.json
+383 silly gunzTarPerm extractEntry test/parse-cases/numbers/hexadecimal-empty.txt
+384 silly gunzTarPerm extractEntry test/parse-cases/numbers/hexadecimal-lowercase-letter.json5
+385 silly gunzTarPerm extractEntry test/parse-cases/numbers/hexadecimal-uppercase-x.json5
+386 silly gunzTarPerm extractEntry test/parse-cases/numbers/hexadecimal-with-integer-exponent.json5
+387 silly gunzTarPerm extractEntry test/parse-cases/numbers/hexadecimal.json5
+388 silly gunzTarPerm extractEntry test/parse-cases/numbers/infinity.json5
+389 silly gunzTarPerm extractEntry test/parse-cases/numbers/integer-with-float-exponent.txt
+390 silly gunzTarPerm extractEntry test/parse-cases/numbers/integer-with-hexadecimal-exponent.txt
+391 silly gunzTarPerm extractEntry test/parse-cases/numbers/integer-with-integer-exponent.json
+392 silly gunzTarPerm extractEntry test/parse-cases/numbers/integer-with-negative-float-exponent.txt
+393 silly gunzTarPerm extractEntry test/parse-cases/numbers/integer-with-negative-hexadecimal-exponent.txt
+394 silly gunzTarPerm extractEntry test/parse-cases/numbers/integer-with-negative-integer-exponent.json
+395 silly gunzTarPerm extractEntry test/parse-cases/numbers/integer-with-negative-zero-integer-exponent.json
+396 silly gunzTarPerm extractEntry test/parse-cases/numbers/integer-with-positive-float-exponent.txt
+397 silly gunzTarPerm extractEntry test/parse-cases/numbers/integer-with-positive-hexadecimal-exponent.txt
+398 silly gunzTarPerm extractEntry test/parse-cases/numbers/integer-with-positive-integer-exponent.json
+399 silly gunzTarPerm extractEntry test/parse-cases/numbers/integer-with-positive-zero-integer-exponent.json
+400 silly gunzTarPerm extractEntry test/parse-cases/numbers/integer-with-zero-integer-exponent.json
+401 silly gunzTarPerm extractEntry test/parse-cases/numbers/integer.json
+402 silly gunzTarPerm extractEntry test/parse-cases/numbers/lone-decimal-point.txt
+403 silly gunzTarPerm extractEntry test/parse-cases/numbers/nan.json5
+404 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-binary-coffeescript.txt
+405 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-float-leading-decimal-point.json5
+406 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-float-leading-zero.json
+407 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-float-trailing-decimal-point.json5
+408 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-float.json
+409 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-hexadecimal.json5
+410 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-infinity.json5
+411 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-integer.json
+412 silly gunzTarPerm extractEntry test/parse-cases/numbers/binary-coffeescript.txt
+413 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-octal-coffeescript.txt
+414 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-octal.txt
+415 silly gunzTarPerm extractEntry test/parse-cases/numbers/float-leading-decimal-point.json5
+416 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-zero-float-leading-decimal-point.json5
+417 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-zero-float-trailing-decimal-point.json5
+418 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-zero-float.json
+419 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-zero-hexadecimal.json5
+420 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-zero-integer.json
+421 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-zero-octal-coffeescript.txt
+422 silly gunzTarPerm extractEntry test/parse-cases/numbers/negative-zero-octal.txt
+423 silly gunzTarPerm extractEntry test/parse-cases/numbers/float-leading-zero.json
+424 silly gunzTarPerm extractEntry test/parse-cases/numbers/float-trailing-decimal-point-with-integer-exponent.json5
+425 silly gunzTarPerm extractEntry test/parse-cases/numbers/octal-coffeescript.txt
+426 silly gunzTarPerm extractEntry test/parse-cases/numbers/octal.txt
+427 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-binary-coffeescript.txt
+428 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-float-leading-decimal-point.json5
+429 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-float-leading-zero.json5
+430 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-float-trailing-decimal-point.json5
+431 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-float.json5
+432 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-hexadecimal.json5
+433 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-infinity.json5
+434 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-integer.json5
+435 silly gunzTarPerm extractEntry test/parse-cases/numbers/float-trailing-decimal-point.json5
+436 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-octal-coffeescript.txt
+437 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-octal.txt
+438 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-zero-binary-coffeescript.txt
+439 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-zero-float-leading-decimal-point.json5
+440 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-zero-float-trailing-decimal-point.json5
+441 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-zero-float.json5
+442 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-zero-hexadecimal.json5
+443 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-zero-integer.json5
+444 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-zero-octal-coffeescript.txt
+445 silly gunzTarPerm extractEntry test/parse-cases/numbers/positive-zero-octal.txt
+446 silly gunzTarPerm extractEntry test/parse-cases/numbers/zero-binary-coffeescript.txt
+447 silly gunzTarPerm extractEntry test/parse-cases/numbers/zero-float-leading-decimal-point.json5
+448 silly gunzTarPerm extractEntry test/parse-cases/numbers/zero-float-trailing-decimal-point.json5
+449 silly gunzTarPerm extractEntry test/parse-cases/numbers/zero-float.json
+450 silly gunzTarPerm extractEntry test/parse-cases/numbers/zero-hexadecimal.json5
+451 silly gunzTarPerm extractEntry test/parse-cases/numbers/zero-integer-with-integer-exponent.json
+452 silly gunzTarPerm extractEntry test/parse-cases/numbers/zero-integer.json
+453 silly gunzTarPerm extractEntry test/parse-cases/numbers/zero-octal-coffeescript.txt
+454 silly gunzTarPerm extractEntry test/parse-cases/numbers/zero-octal.txt
+455 silly gunzTarPerm extractEntry test/parse-cases/objects/lone-trailing-comma-object.txt
+456 silly gunzTarPerm extractEntry test/parse-cases/objects/duplicate-keys.json
+457 silly gunzTarPerm extractEntry test/parse-cases/objects/illegal-unquoted-key-number.txt
+458 silly gunzTarPerm extractEntry test/parse-cases/objects/illegal-unquoted-key-symbol.txt
+459 silly gunzTarPerm extractEntry test/parse-cases/objects/leading-comma-object.txt
+460 silly gunzTarPerm extractEntry test/parse-cases/objects/empty-object.json
+461 silly gunzTarPerm extractEntry test/parse-cases/objects/no-comma-object.txt
+462 silly gunzTarPerm extractEntry test/parse-cases/objects/reserved-unquoted-key.json5
+463 silly gunzTarPerm extractEntry test/parse-cases/objects/single-quoted-key.json5
+464 silly gunzTarPerm extractEntry test/parse-cases/objects/trailing-comma-object.json5
+465 silly gunzTarPerm extractEntry test/parse-cases/objects/unquoted-keys.json5
+466 silly gunzTarPerm extractEntry test/parse-cases/strings/escaped-single-quoted-string.json5
+467 silly gunzTarPerm extractEntry test/parse-cases/strings/multi-line-string.json5
+468 silly gunzTarPerm extractEntry test/parse-cases/strings/single-quoted-string.json5
+469 silly gunzTarPerm extractEntry test/parse-cases/strings/unescaped-multi-line-string.txt
+470 silly gunzTarPerm extractEntry test/parse-cases/todo/unicode-escaped-unquoted-key.json5
+471 silly gunzTarPerm extractEntry test/parse-cases/todo/unicode-unquoted-key.json5
+472 silly gunzTarPerm extractEntry test/readme.md
+473 verbose write writing to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/big.js/package.json
+474 info preinstall big.js@3.1.3
+475 verbose readDependencies loading dependencies from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/big.js/package.json
+476 verbose readDependencies loading dependencies from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/big.js/package.json
+477 silly install resolved []
+478 verbose about to build /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/big.js
+479 info build /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/big.js
+480 info linkStuff big.js@3.1.3
+481 silly linkStuff big.js@3.1.3 has /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules as its parent node_modules
+482 verbose linkBins big.js@3.1.3
+483 verbose linkMans big.js@3.1.3
+484 verbose rebuildBundles big.js@3.1.3
+485 info install big.js@3.1.3
+486 info postinstall big.js@3.1.3
+487 verbose unlock done using /Users/erikhazzard/.npm/_locks/big-js-384ff815246745ae.lock for /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/big.js
+488 verbose write writing to /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/json5/package.json
+489 info preinstall json5@0.4.0
+490 verbose readDependencies loading dependencies from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/json5/package.json
+491 verbose readDependencies loading dependencies from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/json5/package.json
+492 silly install resolved []
+493 verbose about to build /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/json5
+494 info build /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/json5
+495 info linkStuff json5@0.4.0
+496 silly linkStuff json5@0.4.0 has /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules as its parent node_modules
+497 verbose linkBins json5@0.4.0
+498 verbose link bins [ { json5: 'lib/cli.js' },
+498 verbose link bins   '/Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/.bin',
+498 verbose link bins   false ]
+499 verbose linkMans json5@0.4.0
+500 verbose rebuildBundles json5@0.4.0
+501 silly gentlyRm /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/.bin/json5 is being purged
+502 verbose gentlyRm don't care about contents; nuking /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/.bin/json5
+503 info install json5@0.4.0
+504 info postinstall json5@0.4.0
+505 verbose unlock done using /Users/erikhazzard/.npm/_locks/json5-3e571130c87fcecb.lock for /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils/node_modules/json5
+506 verbose about to build /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils
+507 info build /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils
+508 info linkStuff loader-utils@0.2.10
+509 silly linkStuff loader-utils@0.2.10 has /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules as its parent node_modules
+510 verbose linkBins loader-utils@0.2.10
+511 verbose linkMans loader-utils@0.2.10
+512 verbose rebuildBundles loader-utils@0.2.10
+513 verbose rebuildBundles [ '.bin', 'big.js', 'json5' ]
+514 info install loader-utils@0.2.10
+515 info postinstall loader-utils@0.2.10
+516 verbose unlock done using /Users/erikhazzard/.npm/_locks/loader-utils-863d1e5abc3a6bd9.lock for /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/node_modules/loader-utils
+517 verbose about to build /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin
+518 info build /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin
+519 info linkStuff extract-text-webpack-plugin@0.8.2
+520 silly linkStuff extract-text-webpack-plugin@0.8.2 has /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules as its parent node_modules
+521 verbose linkBins extract-text-webpack-plugin@0.8.2
+522 verbose linkMans extract-text-webpack-plugin@0.8.2
+523 verbose rebuildBundles extract-text-webpack-plugin@0.8.2
+524 verbose rebuildBundles [ 'async', 'loader-utils' ]
+525 info install extract-text-webpack-plugin@0.8.2
+526 info postinstall extract-text-webpack-plugin@0.8.2
+527 verbose readDependencies loading dependencies from /Users/erikhazzard/Code/GameDev/Epitaph-New/package.json
+528 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/babel-core/package.json
+529 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/babel-loader/package.json
+530 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/bragi-browser/package.json
+531 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/classnames/package.json
+532 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/css-loader/package.json
+533 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/d3/package.json
+534 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin/package.json
+535 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/file-loader/package.json
+536 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/immutable/package.json
+537 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/jquery/package.json
+538 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/jsx-loader/package.json
+539 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/localforage/package.json
+540 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/lodash/package.json
+541 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/mocha/package.json
+542 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/node-libs-browser/package.json
+543 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/node-sass/package.json
+544 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/promise/package.json
+545 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/react/package.json
+546 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/react-router/package.json
+547 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/react-tools/package.json
+548 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/reflux/package.json
+549 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/sass/package.json
+550 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/sass-loader/package.json
+551 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/style-loader/package.json
+552 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/url-loader/package.json
+553 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/uuid/package.json
+554 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/webpack/package.json
+555 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/.bin/jsx/package.json
+556 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/.bin/mocha/package.json
+557 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/.bin/node-sass/package.json
+558 verbose targetResolver reading package data from /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/.bin/webpack/package.json
+559 verbose already installed skipping webpack@^1.9.11 /Users/erikhazzard/Code/GameDev/Epitaph-New
+560 silly install resolved []
+561 verbose unlock done using /Users/erikhazzard/.npm/_locks/extract-text-webpack-plu-80c32bf32d499827.lock for /Users/erikhazzard/Code/GameDev/Epitaph-New/node_modules/extract-text-webpack-plugin
+562 verbose validateInstall loading /Users/erikhazzard/Code/GameDev/Epitaph-New/package.json for validation
+563 verbose stack Error: The package webpack does not satisfy its siblings' peerDependencies requirements!
+563 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:125:32
+563 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:267:7
+563 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:138:5
+563 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:251:14
+563 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+563 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:251:14
+563 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+563 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:251:14
+563 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+563 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:251:14
+564 verbose cwd /Users/erikhazzard/Code/GameDev/Epitaph-New
+565 error Darwin 14.4.0
+566 error argv "node" "/usr/local/bin/npm" "install" "--save-dev" "extract-text-webpack-plugin"
+567 error node v0.12.5
+568 error npm  v2.11.2
+569 error code EPEERINVALID
+570 error peerinvalid The package webpack does not satisfy its siblings' peerDependencies requirements!
+570 error peerinvalid Peer babel-loader@5.1.4 wants webpack@*
+570 error peerinvalid Peer extract-text-webpack-plugin@0.8.2 wants webpack@^1.9.11
+571 verbose exit [ 1, true ]

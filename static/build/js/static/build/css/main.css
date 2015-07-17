@@ -9,9 +9,6 @@
  * 2. Prevent iOS text size adjust after orientation change, without disabling
  *    user zoom.
  */
-* {
-  box-sizing: border-box; }
-
 html {
   font-family: sans-serif;
   /* 1 */
@@ -450,53 +447,14 @@ html, body {
   clear: both; }
 
 .displayNone {
-  display: none !important; }
+  display: none; }
 
 .opacity0 {
-  opacity: 0 !important; }
+  opacity: 0; }
 
 /* =========================================================================
  *
- * interactions.scss
- *      styles for user interaction elements
- * 
- * ========================================================================= */
-.interaction__input {
-  background: rgba(235, 235, 235, 0.35);
-  border: none;
-  border-bottom: 1px solid rgba(90, 90, 90, 0.8);
-  border-top: 1px solid rgba(90, 90, 90, 0.8);
-  color: rgba(34, 34, 34, 0.9);
-  display: table;
-  font-size: 1.4em;
-  font-weight: bold;
-  font-variant: small-caps;
-  margin: 0 auto;
-  letter-spacing: 2.2px;
-  text-align: center;
-  width: 270px;
-  max-width: 320px; }
-  .interaction__input:focus {
-    outline: none;
-    color: #ff0000;
-    background: rgba(125, 249, 249, 0.45);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-    border-top: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0 5px #FFFFFF, 0 0 22px #66C8DE, 0 0 36px #74C6D5;
-    color: #343434;
-    font-style: italic; }
-  .interaction__input ::-webkit-input-placeholder {
-    color: rgba(34, 34, 34, 0.3); }
-  .interaction__input :-moz-placeholder {
-    color: rgba(34, 34, 34, 0.3); }
-  .interaction__input ::-moz-placeholder {
-    color: rgba(34, 34, 34, 0.3); }
-  .interaction__input :-ms-input-placeholder {
-    color: rgba(34, 34, 34, 0.3); }
-
-/* =========================================================================
- *
- * game-screen__onboarding
+ * game-screen__title.scss
  *      Title styles
  * 
  * ========================================================================= */
@@ -519,10 +477,14 @@ html, body {
   right: 0;
   bottom: 0;
   left: 50%;
-  background: url("/static/img/onboarding/onboarding__book-bg.png");
-  margin-left: -500px;
+  background: url("/static/img/onboarding__book-bg.png");
+  margin-left: 500px;
   height: 680px;
   width: 1000px; }
+  .game-screen-onboarding__book-item-wrapper.game-screen__onboarding-wrapper--title {
+    background: none !important; }
+  .game-screen-onboarding__book-item-wrapper.game-screen-onboarding__book-item-wrapper--page-3 .hard {
+    background: none !important; }
   .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-item {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -540,41 +502,44 @@ html, body {
       -moz-transition: margin-left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       transition: margin-left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .game-screen-onboarding__book-item-wrapper .game-screen-title__menu-item {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    background: transparent; }
+  .game-screen-onboarding__book-item-wrapper .page {
+    background-color: white;
+    font-size: 20px; }
   .game-screen-onboarding__book-item-wrapper .page-wrapper {
     -webkit-perspective: 2000px;
     -moz-perspective: 2000px;
     -ms-perspective: 2000px;
     -o-perspective: 2000px;
     perspective: 2000px; }
-  .game-screen-onboarding__book-item-wrapper .page {
-    background-color: white;
-    font-size: 20px; }
   .game-screen-onboarding__book-item-wrapper .hard {
+    background: url("/static/img/wood-bg.jpg") !important;
     box-shadow: inset 0 0 5px #666;
     color: #ffffff;
     font-weight: bold; }
   .game-screen-onboarding__book-item-wrapper .odd, .game-screen-onboarding__book-item-wrapper .even {
     color: #343434; }
   .game-screen-onboarding__book-item-wrapper .odd {
-    background: url("/static/img/onboarding/onboarding__new--individual-page--right.png"); }
+    background: url("/static/img/onboarding__new--individual-page--right.png"); }
   .game-screen-onboarding__book-item-wrapper .even {
-    background: url("/static/img/onboarding/onboarding__new--individual-page--left.png"); }
+    background: url("/static/img/onboarding__new--individual-page--left.png"); }
   .game-screen-onboarding__book-item-wrapper .hard.even {
-    background: url("/static/img/onboarding/onboarding__new--individual-page--left.png") !important; }
-  .game-screen-onboarding__book-item-wrapper .onboarding-book__page-inner {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 30px; }
+    background: url("/static/img/onboarding__new--individual-page--left.png") !important; }
   .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--previous {
+    background: #f0f0f0;
     cursor: pointer;
     font-size: 3em;
     position: absolute;
     left: -30px;
     top: 200px; }
   .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--next {
+    background: #f0f0f0;
     cursor: pointer;
     font-size: 3em;
     position: absolute;
@@ -583,50 +548,6 @@ html, body {
   .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--next.disabled,
   .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--previous.disabled {
     opacity: 0.3; }
-  .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--previous,
-  .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--next {
-    cursor: pointer !important;
-    height: 142px;
-    padding: 30px 10px 10px 30px;
-    position: absolute;
-    opacity: 1;
-    right: -8px;
-    top: 230px;
-    width: 73px;
-    z-index: 100; }
-  .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--previous.fadeOut, .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--previous.fadeOut .arrow,
-  .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--next.fadeOut, .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--next.fadeOut .arrow {
-    cursor: default !important; }
-  .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--previous {
-    left: -38px;
-    right: auto; }
-  .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--next .arrow {
-    background-repeat: no-repeat;
-    background-image: url(/static/img/onboarding/arrow__right.png);
-    background-position: -2px -76px;
-    cursor: pointer !important;
-    height: 72px;
-    width: 43px; }
-  .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--next:hover .arrow {
-    background-position: -2px -150px !important; }
-  .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--next .arrow.disabled, .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--next:hover .arrow-disabled {
-    background-position: -2px -2px;
-    cursor: disabled; }
-  .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--previous .arrow {
-    background-repeat: no-repeat;
-    background-image: url(/static/img/onboarding/arrow__left.png);
-    background-position: -2px -76px;
-    cursor: pointer !important;
-    height: 72px;
-    width: 43px; }
-  .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--previous .arrow.disabled, .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--previous:hover .arrow-disabled {
-    background-position: -2px -2px;
-    cursor: disabled; }
-  .game-screen-onboarding__book-item-wrapper .game-screen-onboarding__book-arrow--previous:hover .arrow {
-    background-position: -2px -150px !important; }
-
-.game-screen-onboarding__book-item-wrapper.game-screen-onboarding__book-item-wrapper--page-3 .hard {
-  background: none !important; }
 
 /* =========================================================================
  *
@@ -635,20 +556,5 @@ html, body {
  * 
  * ========================================================================= */
 #game-screen-title__wrapper {
-  font-size: 2em;
-  padding: 1em 10px 10px 80px;
+  font-size: 5em;
   color: #f0f0f0; }
-
-.game-screen-onboarding__book-item-wrapper .hard.p1 {
-  background: transparent url("/static/img/onboarding/onboarding__book-cover.png") !important; }
-
-.game-screen-onboarding__book-item-wrapper.game-screen__onboarding-wrapper--title {
-  background: none !important; }
-
-.game-screen-onboarding__book-item-wrapper .game-screen-title__menu-item {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: pointer;
-  background: transparent; }

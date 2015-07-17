@@ -122,7 +122,7 @@
 	window.jQuery = _jquery2['default'];
 
 	// jquery plugins
-	__webpack_require__(255)(_jquery2['default']);
+	__webpack_require__(256)(_jquery2['default']);
 
 	// ====================================
 	//
@@ -130,11 +130,12 @@
 	//
 	// ====================================
 	_bragiBrowser2['default'].log('main:game', 'Initializing...');
+	//logger.options.groupsEnabled = ['components/onboarding__new:render'];
 
 	// Initial Setup
 	// ------------------------------------
 	// Setup key handling
-	__webpack_require__(256)();
+	__webpack_require__(257)();
 
 	// Setup global document / game wide events
 	$(document).on({
@@ -53603,7 +53604,7 @@
 
 	var _componentsGame__mainJs2 = _interopRequireDefault(_componentsGame__mainJs);
 
-	var _componentsNotFoundJs = __webpack_require__(254);
+	var _componentsNotFoundJs = __webpack_require__(255);
 
 	var _componentsNotFoundJs2 = _interopRequireDefault(_componentsNotFoundJs);
 
@@ -56922,7 +56923,7 @@
 
 	// Main screens
 
-	var _onboardingJs = __webpack_require__(245);
+	var _onboardingJs = __webpack_require__(250);
 
 	var _onboardingJs2 = _interopRequireDefault(_onboardingJs);
 
@@ -63603,11 +63604,11 @@
 
 	// Screen stores
 
-	var _onboardingJs = __webpack_require__(247);
+	var _onboardingJs = __webpack_require__(245);
 
 	var _onboardingJs2 = _interopRequireDefault(_onboardingJs);
 
-	var _utilSaveDataOnChangeForKeyJs = __webpack_require__(258);
+	var _utilSaveDataOnChangeForKeyJs = __webpack_require__(249);
 
 	var _utilSaveDataOnChangeForKeyJs2 = _interopRequireDefault(_utilSaveDataOnChangeForKeyJs);
 
@@ -63638,7 +63639,7 @@
 	        // load initial state
 	        // XXXXXXXXXXXXXXXXXXXXXXXXX
 	        // TODO: UNCOMMENT
-	        //this.loadInitialState();
+	        this.loadInitialState();
 	        // XXXXXXXXXXXXXXXXXXXXXXXXX
 
 	        return this;
@@ -63683,7 +63684,9 @@
 	                // Now, call corresponding state loads based on current screen
 	                // --------------------
 	                if (dataParsed.screen === 'onboarding') {
-	                    _onboardingJs2['default'].loadInitialState();
+	                    setTimeout(function () {
+	                        _onboardingJs2['default'].loadInitialState();
+	                    }, 200);
 	                }
 	            });
 	        });
@@ -63707,221 +63710,6 @@
 
 /***/ },
 /* 245 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* =========================================================================
-	 *
-	 * game-screen__onboarding.js
-	 *      Title screen
-	 *
-	 * ========================================================================= */
-	// External Dependencies
-	// ------------------------------------
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _react = __webpack_require__(19);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(178);
-
-	var _bragiBrowser = __webpack_require__(4);
-
-	var _bragiBrowser2 = _interopRequireDefault(_bragiBrowser);
-
-	var _reflux = __webpack_require__(219);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	var _immutable = __webpack_require__(241);
-
-	var _immutable2 = _interopRequireDefault(_immutable);
-
-	var _jquery = __webpack_require__(2);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	// Internal Dependencies
-	// ------------------------------------
-
-	var _utilTimingsJs = __webpack_require__(217);
-
-	var _utilTimingsJs2 = _interopRequireDefault(_utilTimingsJs);
-
-	var _actionsOnboardingJs = __webpack_require__(246);
-
-	var _actionsOnboardingJs2 = _interopRequireDefault(_actionsOnboardingJs);
-
-	var _storesGame__controllerJs = __webpack_require__(244);
-
-	var _storesGame__controllerJs2 = _interopRequireDefault(_storesGame__controllerJs);
-
-	var _storesOnboardingJs = __webpack_require__(247);
-
-	var _storesOnboardingJs2 = _interopRequireDefault(_storesOnboardingJs);
-
-	var _storesOnboarding__newJs = __webpack_require__(248);
-
-	var _storesOnboarding__newJs2 = _interopRequireDefault(_storesOnboarding__newJs);
-
-	// Book Pages
-
-	var _onboarding__titleJs = __webpack_require__(250);
-
-	var _onboarding__titleJs2 = _interopRequireDefault(_onboarding__titleJs);
-
-	var _onboarding__newJs = __webpack_require__(251);
-
-	var _onboarding__newJs2 = _interopRequireDefault(_onboarding__newJs);
-
-	// ========================================================================
-	//
-	// Functionality
-	//
-	// ========================================================================
-	var timings = new _utilTimingsJs2['default']('GameMain');
-
-	var ScreenOnboarding = _react2['default'].createClass({
-	    displayName: 'ScreenOnboarding',
-
-	    mixins: [_reflux2['default'].listenTo(_storesOnboardingJs2['default'], 'onboardingStoreChange')],
-
-	    getInitialState: function getInitialState() {
-	        this._previousBookState = 'title';
-
-	        return {
-	            state: _storesOnboardingJs2['default'].getState()
-	        };
-	    },
-
-	    // STORE Changes
-	    // --------------------------------
-	    onboardingStoreChange: function onboardingStoreChange(message) {
-	        // Change state if necessary
-	        // NOTE: We can't use props because we do NOT want to trigger an entire
-	        // re-render
-	        _bragiBrowser2['default'].log('components/onboarding:storeChange', 'called | %O', message);
-
-	        if (!_immutable2['default'].is(message.state, this.state.state)) {
-	            // Book state is different, re-render everything
-	            _bragiBrowser2['default'].log('components/onboarding:storeChange:dataDiff', 'data not same, changing');
-
-	            this.setState({ state: message.state });
-	        }
-	        return this;
-	    },
-
-	    // Component Mounting
-	    // --------------------------------
-	    componentWillMount: function componentWillMount() {
-	        _bragiBrowser2['default'].log('components/onboarding:componentWillMount', 'called');
-	        timings.push('componentWillMount');
-	    },
-
-	    shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
-	        _bragiBrowser2['default'].log('components/onboarding:shouldComponentUpdate', 'checking | %O', arguments);
-
-	        // Only update (render) if the book state is different
-	        if (nextState.state.get('bookState') !== this.state.state.get('bookState')) {
-	            _bragiBrowser2['default'].log('components/onboarding:shouldComponentUpdate', 'true');
-	            return true;
-	        } else {
-	            _bragiBrowser2['default'].log('components/onboarding:shouldComponentUpdate', 'false');
-	            return false;
-	        }
-	    },
-
-	    componentDidMount: function componentDidMount() {
-	        // After render is called, setup the flipbook
-	        timings.push('componentDidMount');
-	        _bragiBrowser2['default'].log('components/onboarding:componentDidMount', '<finished> called | took: ' + timings.printLast());
-	    },
-
-	    // Render
-	    // --------------------------------
-	    render: function render() {
-	        _bragiBrowser2['default'].log('components/onboarding:render', 'called | previousState: ' + this._previousBookState + ' | current: ' + this.state.state.get('bookState'));
-
-	        // Setup pages based on bookState (title, create, resume, or options page)
-	        var bookHtml;
-	        if (this.state.state.get('bookState') === 'title') {
-	            // TITLE PAGE
-	            bookHtml = _react2['default'].createElement(_onboarding__titleJs2['default'], null);
-	        } else if (this.state.state.get('bookState') === 'new') {
-	            // CREATE NEW CHARACTER
-	            bookHtml = _react2['default'].createElement(_onboarding__newJs2['default'], null);
-	        } else {
-	            _bragiBrowser2['default'].log('error:components/onboarding:render', 'invalid book state', this.state.state.get('bookState'));
-	            bookHtml = _react2['default'].createElement(
-	                'div',
-	                null,
-	                ' INVALID STATE '
-	            );
-	        }
-
-	        return _react2['default'].createElement(
-	            'div',
-	            { id: 'game-screen__onboarding-wrapper' },
-	            bookHtml
-	        );
-	    }
-	});
-
-	exports['default'] = ScreenOnboarding;
-	module.exports = exports['default'];
-
-/***/ },
-/* 246 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* =========================================================================
-	 *
-	 * onboarding
-	 *      Onboarding screen actions
-	 *
-	 * ========================================================================= */
-	// External Dependencies
-	// ------------------------------------
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _bragiBrowser = __webpack_require__(4);
-
-	var _bragiBrowser2 = _interopRequireDefault(_bragiBrowser);
-
-	var _react = __webpack_require__(19);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reflux = __webpack_require__(219);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
-	// Internal Dependencies
-	// ------------------------------------
-
-	// ========================================================================
-	//
-	// Functionality
-	//
-	// ========================================================================
-	var OnboardingActions = _reflux2['default'].createActions(['showTitle', 'showNew', 'showResume', 'turnPage']);
-	exports['default'] = OnboardingActions;
-	module.exports = exports['default'];
-
-/***/ },
-/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* =========================================================================
@@ -63967,11 +63755,11 @@
 
 	var _actionsOnboardingJs2 = _interopRequireDefault(_actionsOnboardingJs);
 
-	var _onboarding__newJs = __webpack_require__(248);
+	var _onboarding__newJs = __webpack_require__(247);
 
 	var _onboarding__newJs2 = _interopRequireDefault(_onboarding__newJs);
 
-	var _utilSaveDataOnChangeForKeyJs = __webpack_require__(258);
+	var _utilSaveDataOnChangeForKeyJs = __webpack_require__(249);
 
 	var _utilSaveDataOnChangeForKeyJs2 = _interopRequireDefault(_utilSaveDataOnChangeForKeyJs);
 
@@ -64074,7 +63862,51 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 248 */
+/* 246 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* =========================================================================
+	 *
+	 * onboarding
+	 *      Onboarding screen actions
+	 *
+	 * ========================================================================= */
+	// External Dependencies
+	// ------------------------------------
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _bragiBrowser = __webpack_require__(4);
+
+	var _bragiBrowser2 = _interopRequireDefault(_bragiBrowser);
+
+	var _react = __webpack_require__(19);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reflux = __webpack_require__(219);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	// Internal Dependencies
+	// ------------------------------------
+
+	// ========================================================================
+	//
+	// Functionality
+	//
+	// ========================================================================
+	var OnboardingActions = _reflux2['default'].createActions(['showTitle', 'showNew', 'showResume', 'turnPage']);
+	exports['default'] = OnboardingActions;
+	module.exports = exports['default'];
+
+/***/ },
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* =========================================================================
@@ -64120,7 +63952,7 @@
 	// Internal Dependencies
 	// ------------------------------------
 
-	var _actionsOnboarding__newJs = __webpack_require__(249);
+	var _actionsOnboarding__newJs = __webpack_require__(248);
 
 	var _actionsOnboarding__newJs2 = _interopRequireDefault(_actionsOnboarding__newJs);
 
@@ -64128,7 +63960,7 @@
 
 	var _actionsOnboardingJs2 = _interopRequireDefault(_actionsOnboardingJs);
 
-	var _utilSaveDataOnChangeForKeyJs = __webpack_require__(258);
+	var _utilSaveDataOnChangeForKeyJs = __webpack_require__(249);
 
 	var _utilSaveDataOnChangeForKeyJs2 = _interopRequireDefault(_utilSaveDataOnChangeForKeyJs);
 
@@ -64312,7 +64144,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 249 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* =========================================================================
@@ -64356,7 +64188,211 @@
 	module.exports = exports['default'];
 
 /***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* =========================================================================
+	 *
+	 * save-date-on-change-for-key.js
+	 *  Handles persisting store state when store changes
+	 *
+	 * ========================================================================= */
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _bragiBrowser = __webpack_require__(4);
+
+	var _bragiBrowser2 = _interopRequireDefault(_bragiBrowser);
+
+	function saveDataOnChangeForKey(store, key) {
+	    store.listen(function (d) {
+	        _bragiBrowser2['default'].log('saveDataOnChangeForKey', 'called with | ' + key);
+
+	        // Update localforage when state changes
+	        window.localforage.setItem(key, JSON.stringify(store.state.toJS()));
+	    });
+	}
+
+	exports['default'] = saveDataOnChangeForKey;
+	module.exports = exports['default'];
+
+/***/ },
 /* 250 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* =========================================================================
+	 *
+	 * game-screen__onboarding.js
+	 *      Title screen
+	 *
+	 * ========================================================================= */
+	// External Dependencies
+	// ------------------------------------
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(19);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(178);
+
+	var _bragiBrowser = __webpack_require__(4);
+
+	var _bragiBrowser2 = _interopRequireDefault(_bragiBrowser);
+
+	var _reflux = __webpack_require__(219);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _immutable = __webpack_require__(241);
+
+	var _immutable2 = _interopRequireDefault(_immutable);
+
+	var _jquery = __webpack_require__(2);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	// Internal Dependencies
+	// ------------------------------------
+
+	var _utilTimingsJs = __webpack_require__(217);
+
+	var _utilTimingsJs2 = _interopRequireDefault(_utilTimingsJs);
+
+	var _actionsOnboardingJs = __webpack_require__(246);
+
+	var _actionsOnboardingJs2 = _interopRequireDefault(_actionsOnboardingJs);
+
+	var _storesGame__controllerJs = __webpack_require__(244);
+
+	var _storesGame__controllerJs2 = _interopRequireDefault(_storesGame__controllerJs);
+
+	var _storesOnboardingJs = __webpack_require__(245);
+
+	var _storesOnboardingJs2 = _interopRequireDefault(_storesOnboardingJs);
+
+	var _storesOnboarding__newJs = __webpack_require__(247);
+
+	var _storesOnboarding__newJs2 = _interopRequireDefault(_storesOnboarding__newJs);
+
+	// Book Pages
+
+	var _onboarding__titleJs = __webpack_require__(251);
+
+	var _onboarding__titleJs2 = _interopRequireDefault(_onboarding__titleJs);
+
+	var _onboarding__newJs = __webpack_require__(252);
+
+	var _onboarding__newJs2 = _interopRequireDefault(_onboarding__newJs);
+
+	// ========================================================================
+	//
+	// Functionality
+	//
+	// ========================================================================
+	var timings = new _utilTimingsJs2['default']('GameMain');
+
+	var ScreenOnboarding = _react2['default'].createClass({
+	    displayName: 'ScreenOnboarding',
+
+	    mixins: [_reflux2['default'].listenTo(_storesOnboardingJs2['default'], 'onboardingStoreChange')],
+
+	    getInitialState: function getInitialState() {
+	        this._previousBookState = 'title';
+
+	        return {
+	            state: _storesOnboardingJs2['default'].getState()
+	        };
+	    },
+
+	    // STORE Changes
+	    // --------------------------------
+	    onboardingStoreChange: function onboardingStoreChange(message) {
+	        // Change state if necessary
+	        // NOTE: We can't use props because we do NOT want to trigger an entire
+	        // re-render
+	        _bragiBrowser2['default'].log('components/onboarding:storeChange', 'called | %O', message);
+
+	        if (!_immutable2['default'].is(message.state, this.state.state)) {
+	            // Book state is different, re-render everything
+	            _bragiBrowser2['default'].log('components/onboarding:storeChange:dataDiff', 'data not same, changing');
+	            this.setState({ state: message.state });
+	        }
+	        return this;
+	    },
+
+	    // Component Mounting
+	    // --------------------------------
+	    componentWillMount: function componentWillMount() {
+	        _bragiBrowser2['default'].log('components/onboarding:componentWillMount', 'called');
+	        timings.push('componentWillMount');
+	    },
+
+	    shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
+	        _bragiBrowser2['default'].log('components/onboarding:shouldComponentUpdate', 'checking | %O', arguments);
+
+	        // Only update (render) if the book state is different
+	        if (nextState.state.get('bookState') !== this.state.state.get('bookState')) {
+	            _bragiBrowser2['default'].log('components/onboarding:shouldComponentUpdate', 'true');
+	            return true;
+	        } else {
+	            _bragiBrowser2['default'].log('components/onboarding:shouldComponentUpdate', 'false');
+	            return false;
+	        }
+	    },
+
+	    componentDidMount: function componentDidMount() {
+	        // After render is called, setup the flipbook
+	        timings.push('componentDidMount');
+	        _bragiBrowser2['default'].log('components/onboarding:componentDidMount', '<finished> called | took: ' + timings.printLast());
+	    },
+
+	    // Render
+	    // --------------------------------
+	    render: function render() {
+	        _bragiBrowser2['default'].log('components/onboarding:render', 'called | previousState: ' + this._previousBookState + ' | current: ' + this.state.state.get('bookState'));
+
+	        // Setup pages based on bookState (title, create, resume, or options page)
+	        var bookHtml;
+	        if (this.state.state.get('bookState') === 'title') {
+	            // TITLE PAGE
+	            bookHtml = _react2['default'].createElement(_onboarding__titleJs2['default'], null);
+	        } else if (this.state.state.get('bookState') === 'new') {
+	            // CREATE NEW CHARACTER
+	            bookHtml = _react2['default'].createElement(_onboarding__newJs2['default'], null);
+	        } else {
+	            _bragiBrowser2['default'].log('error:components/onboarding:render', 'invalid book state', this.state.state.get('bookState'));
+	            bookHtml = _react2['default'].createElement(
+	                'div',
+	                null,
+	                ' INVALID STATE '
+	            );
+	        }
+
+	        return _react2['default'].createElement(
+	            'div',
+	            { id: 'game-screen__onboarding-wrapper' },
+	            bookHtml
+	        );
+	    }
+	});
+
+	exports['default'] = ScreenOnboarding;
+	module.exports = exports['default'];
+
+/***/ },
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* =========================================================================
@@ -64547,7 +64583,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 251 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* =========================================================================
@@ -64586,7 +64622,7 @@
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
-	var _classnames = __webpack_require__(252);
+	var _classnames = __webpack_require__(253);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -64605,11 +64641,11 @@
 
 	var _eventsJs2 = _interopRequireDefault(_eventsJs);
 
-	var _storesOnboarding__newJs = __webpack_require__(248);
+	var _storesOnboarding__newJs = __webpack_require__(247);
 
 	var _storesOnboarding__newJs2 = _interopRequireDefault(_storesOnboarding__newJs);
 
-	var _actionsOnboarding__newJs = __webpack_require__(249);
+	var _actionsOnboarding__newJs = __webpack_require__(248);
 
 	var _actionsOnboarding__newJs2 = _interopRequireDefault(_actionsOnboarding__newJs);
 
@@ -64617,15 +64653,18 @@
 
 	var _actionsOnboardingJs2 = _interopRequireDefault(_actionsOnboardingJs);
 
-	var _storesOnboardingJs = __webpack_require__(247);
+	var _storesOnboardingJs = __webpack_require__(245);
 
 	var _storesOnboardingJs2 = _interopRequireDefault(_storesOnboardingJs);
 
 	// Pages
 
-	var _onboarding__newPage3Js = __webpack_require__(253);
+	var _onboarding__newPage3Js = __webpack_require__(254);
 
 	var _onboarding__newPage3Js2 = _interopRequireDefault(_onboarding__newPage3Js);
+
+	// TODO: XXXXXXXXXXXXXXXXXXXX REMOVE
+	window.A = _actionsOnboardingJs2['default'];
 
 	// ========================================================================
 	//
@@ -64668,7 +64707,6 @@
 	        // If page state is different, we do need to re-setup page turn
 	        if (this._previousState.state.get('page') !== this.state.state.get('page')) {
 	            _bragiBrowser2['default'].log('components/onboarding__new:componentDidUpdate:differentPage', 'turning to new page');
-
 	            this.pageTurn.turn('page', this.state.state.get('page'));
 	        }
 
@@ -64753,10 +64791,8 @@
 	        // add the transition class AFTER we've setup the page turn, as if
 	        // it is added before the margin-left will transition and the book
 	        // will slide in - we want it started centered
-	        requestAnimationFrame(function () {
-	            (0, _jquery2['default'])('#game-screen-onboarding__book--new').addClass('transition');
-	            (0, _jquery2['default'])('#game-screen-onboarding__book--new').turn('page', _this.state.state.get('page'));
-	        });
+	        (0, _jquery2['default'])('#game-screen-onboarding__book--new').addClass('transition');
+	        (0, _jquery2['default'])('#game-screen-onboarding__book--new').turn('page', this.state.state.get('page'));
 	    },
 
 	    // --------------------------------
@@ -64836,7 +64872,7 @@
 	            'div',
 	            { className: previousClasses,
 	                onClick: this.arrowClickedPrevious },
-	            '<'
+	            _react2['default'].createElement('div', { className: 'arrow' })
 	        );
 
 	        // NEXT
@@ -64849,25 +64885,41 @@
 	            'div',
 	            { className: nextClasses,
 	                onClick: this.arrowClickedNext },
-	            '>'
+	            _react2['default'].createElement('div', { className: 'arrow' })
 	        );
+
+	        // Class name setup
+	        var bookWrapperClassName = 'game-screen-onboarding__book-item-wrapper ' + 'game-screen-onboarding__book-item-wrapper--page-' + currentPage;
 
 	        // Render it
 	        // ----------------------------
 	        return _react2['default'].createElement(
 	            'div',
-	            { id: 'game-screen-onboarding__book-wrapper--new', className: 'game-screen-onboarding__book-item-wrapper' },
+	            { id: 'game-screen-onboarding__book-wrapper--new',
+	                className: bookWrapperClassName },
 	            _react2['default'].createElement(
 	                'div',
 	                { id: 'game-screen-onboarding__book--new', className: 'game-screen-onboarding__book-item' },
 	                _react2['default'].createElement('div', { key: 'page1', className: 'hard' }),
-	                _react2['default'].createElement('div', { key: 'page2', className: 'hard' }),
 	                _react2['default'].createElement(
 	                    'div',
-	                    { key: 'page3' },
-	                    _react2['default'].createElement(_onboarding__newPage3Js2['default'], { name: this.state.state.get('entity__name'),
-	                        fadeInIntroText: this.state.state.get('page3__fadeInIntroText')
-	                    })
+	                    { key: 'page2', className: 'hard onboarding-new__page-wrapper' },
+	                    _react2['default'].createElement(
+	                        'div',
+	                        { className: 'onboarding-book__page-inner' },
+	                        'NAME'
+	                    )
+	                ),
+	                _react2['default'].createElement(
+	                    'div',
+	                    { key: 'page3', className: 'onboarding-new__page-wrapper' },
+	                    _react2['default'].createElement(
+	                        'div',
+	                        { className: 'onboarding-book__page-inner' },
+	                        _react2['default'].createElement(_onboarding__newPage3Js2['default'], { name: this.state.state.get('entity__name'),
+	                            fadeInIntroText: this.state.state.get('page3__fadeInIntroText')
+	                        })
+	                    )
 	                ),
 	                _react2['default'].createElement(
 	                    'div',
@@ -64907,7 +64959,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 252 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -64962,7 +65014,7 @@
 
 
 /***/ },
-/* 253 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* =========================================================================
@@ -64998,7 +65050,7 @@
 
 	var _immutable2 = _interopRequireDefault(_immutable);
 
-	var _classnames = __webpack_require__(252);
+	var _classnames = __webpack_require__(253);
 
 	var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -65017,11 +65069,11 @@
 
 	var _eventsJs2 = _interopRequireDefault(_eventsJs);
 
-	var _storesOnboarding__newJs = __webpack_require__(248);
+	var _storesOnboarding__newJs = __webpack_require__(247);
 
 	var _storesOnboarding__newJs2 = _interopRequireDefault(_storesOnboarding__newJs);
 
-	var _actionsOnboarding__newJs = __webpack_require__(249);
+	var _actionsOnboarding__newJs = __webpack_require__(248);
 
 	var _actionsOnboarding__newJs2 = _interopRequireDefault(_actionsOnboarding__newJs);
 
@@ -65029,7 +65081,7 @@
 
 	var _actionsOnboardingJs2 = _interopRequireDefault(_actionsOnboardingJs);
 
-	var _storesOnboardingJs = __webpack_require__(247);
+	var _storesOnboardingJs = __webpack_require__(245);
 
 	var _storesOnboardingJs2 = _interopRequireDefault(_storesOnboardingJs);
 
@@ -65084,7 +65136,7 @@
 	                _react2['default'].createElement('input', { type: 'text',
 	                    name: 'page1-name-input',
 	                    key: 'page1nameInput',
-	                    className: 'interaction',
+	                    className: 'interaction__input',
 	                    onChange: this.changeName,
 	                    onKeyDown: this.keyDown,
 	                    value: this.props.name || '',
@@ -65099,7 +65151,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 254 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* =========================================================================
@@ -65154,7 +65206,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 255 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -68004,7 +68056,7 @@
 	//bound.bind('released', turnMethods._eventReleased);
 
 /***/ },
-/* 256 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* =========================================================================
@@ -68029,7 +68081,7 @@
 
 	var _eventsJs2 = _interopRequireDefault(_eventsJs);
 
-	var jwerty = __webpack_require__(257).jwerty;
+	var jwerty = __webpack_require__(258).jwerty;
 
 	var keys = ['up', 'down', 'left', 'right', 'space', 'escape', 'enter', 'q', 'w', 'e', 'r', 'shift+q', 'shift+w', 'shift+e', 'shift+r', 'h', 'j', 'k', 'l', '`', 'shift+`', '~', 'shift+~', '1', '2', '3', '4', '5', '6', 'shift+1', 'shift+2', 'shift+3', 'shift+4', 'shift+5', 'shift+6', 'backspace', 'tab', 'shift+tab', 'shift+up', 'shift+down', 'shift+i'];
 
@@ -68063,7 +68115,7 @@
 	module.exports = handleKeys;
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*
@@ -68597,40 +68649,6 @@
 	    };
 	})(typeof global !== 'undefined' && global.window || undefined, typeof module !== 'undefined' && module.exports ? module.exports : undefined);
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 258 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* =========================================================================
-	 *
-	 * save-date-on-change-for-key.js
-	 *  Handles persisting store state when store changes
-	 *
-	 * ========================================================================= */
-	'use strict';
-
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-	var _bragiBrowser = __webpack_require__(4);
-
-	var _bragiBrowser2 = _interopRequireDefault(_bragiBrowser);
-
-	function saveDataOnChangeForKey(store, key) {
-	    store.listen(function (d) {
-	        _bragiBrowser2['default'].log('saveDataOnChangeForKey', 'called with | ' + key);
-
-	        // Update localforage when state changes
-	        window.localforage.setItem(key, JSON.stringify(store.state.toJS()));
-	    });
-	}
-
-	exports['default'] = saveDataOnChangeForKey;
-	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

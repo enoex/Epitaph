@@ -49,7 +49,7 @@ var GameControllerStore = Reflux.createStore({
         // load initial state
         // XXXXXXXXXXXXXXXXXXXXXXXXX
         // TODO: UNCOMMENT
-        //this.loadInitialState();
+        this.loadInitialState();
         // XXXXXXXXXXXXXXXXXXXXXXXXX
 
         return this;
@@ -94,7 +94,9 @@ var GameControllerStore = Reflux.createStore({
                 // Now, call corresponding state loads based on current screen
                 // --------------------
                 if(dataParsed.screen === 'onboarding'){
-                    OnboardingStore.loadInitialState();
+                    setTimeout(()=>{
+                        OnboardingStore.loadInitialState();
+                    }, 200);
                 }
             });
         });

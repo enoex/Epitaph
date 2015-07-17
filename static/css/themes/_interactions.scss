@@ -1,0 +1,55 @@
+/* =========================================================================
+ *
+ * interactions.scss
+ *      styles for user interaction elements
+ * 
+ * ========================================================================= */
+
+@mixin interaction__selected(){
+    background: $BACKGROUND-INTERACTION-SELECTED;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    border-top: 1px solid rgba(255,255,255,0.4);
+    box-shadow: $BOX-SHADOW-INTERACTION-SELECTED;
+    color: #343434;
+    font-style: italic;
+}
+
+
+.interaction__input {
+        background: $BACKGROUND-INTERACTION;
+        border: none;
+        border-bottom: 1px solid $COLOR-INTERACTION-BORDER;
+        border-top: 1px solid $COLOR-INTERACTION-BORDER;
+        color: $COLOR-INTERACTION-TEXT;
+        display: table;
+        // TODO: add font
+        //font-family: $input-font;
+        font-size: 1.4em;
+        font-weight: bold;
+        font-variant: small-caps;
+        margin: 0 auto;
+        letter-spacing: 2.2px;
+        text-align: center;
+        width: 270px;
+        max-width: 320px;
+
+    &:focus {
+        outline:none;
+        color: #ff0000;
+        @include interaction__selected();
+    }
+    ::-webkit-input-placeholder { 
+        color: $COLOR-INTERACTION-PLACEHOLDER;
+    }
+    :-moz-placeholder { 
+        color: $COLOR-INTERACTION-PLACEHOLDER;
+    }
+    ::-moz-placeholder { 
+        color: $COLOR-INTERACTION-PLACEHOLDER;
+    }
+    :-ms-input-placeholder { 
+        color: $COLOR-INTERACTION-PLACEHOLDER;
+    }
+}
+
+

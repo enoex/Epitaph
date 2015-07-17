@@ -1,0 +1,11 @@
+// Book Wrapper
+// ------------------------------------
+.game-screen-onboarding__book-item-wrapper {
+    // different BG for onboarding state
+    // --------------------------------
+    &.game-screen-onboarding__book-item-wrapper--page-3 {
+        .hard {
+            background: none !important;
+        }
+    }
+}

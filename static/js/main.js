@@ -51,6 +51,7 @@ import router from './router.js';
 //
 // ====================================
 logger.log("main:game", "Initializing...");
+//logger.options.groupsEnabled = ['components/onboarding__new:render'];
 
 // Initial Setup
 // ------------------------------------

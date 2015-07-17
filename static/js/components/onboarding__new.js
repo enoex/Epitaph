@@ -28,6 +28,9 @@ import OnboardingNewActions from '../actions/onboarding__new.js';
 import OnboardingActions from '../actions/onboarding.js';
 import OnboardingStore from '../stores/onboarding.js';
 
+// TODO: XXXXXXXXXXXXXXXXXXXX REMOVE
+window.A = OnboardingActions;
+
 // Pages
 import Page3 from './onboarding__new--page3.js';
 
@@ -74,7 +77,6 @@ var ScreenCreate = React.createClass({
         if(this._previousState.state.get('page') !== this.state.state.get('page')){
             logger.log('components/onboarding__new:componentDidUpdate:differentPage',
             'turning to new page');
-
             this.pageTurn.turn('page', this.state.state.get('page'));
         }
 
@@ -158,10 +160,8 @@ var ScreenCreate = React.createClass({
         // add the transition class AFTER we've setup the page turn, as if
         // it is added before the margin-left will transition and the book
         // will slide in - we want it started centered
-        requestAnimationFrame(()=>{
             $("#game-screen-onboarding__book--new").addClass('transition');
             $("#game-screen-onboarding__book--new").turn("page", this.state.state.get('page'));
-        });
     },
 
     // --------------------------------
@@ -238,7 +238,7 @@ var ScreenCreate = React.createClass({
         let arrowHtmlPrevious = (
             <div className={previousClasses}
                 onClick={this.arrowClickedPrevious}>
-                &lt;
+                <div className='arrow'></div>
             </div>
         );
 
@@ -251,22 +251,34 @@ var ScreenCreate = React.createClass({
         let arrowHtmlNext = (
             <div className={nextClasses}
                 onClick={this.arrowClickedNext}>
-                &gt;
+                <div className='arrow'></div>
             </div>
         );
+
+        // Class name setup
+        var bookWrapperClassName = 'game-screen-onboarding__book-item-wrapper ' +
+            'game-screen-onboarding__book-item-wrapper--page-' + currentPage;
 
         // Render it
         // ----------------------------
         return (
-            <div id='game-screen-onboarding__book-wrapper--new' className='game-screen-onboarding__book-item-wrapper'>
+            <div id='game-screen-onboarding__book-wrapper--new'
+                className={bookWrapperClassName}>
                 <div id="game-screen-onboarding__book--new" className="game-screen-onboarding__book-item">
                     <div key='page1' className="hard"></div>
-                    <div key='page2' className="hard"></div>
 
-                    <div key='page3'>
-                        <Page3 name={this.state.state.get('entity__name')}
-                            fadeInIntroText={this.state.state.get('page3__fadeInIntroText')}
-                        />
+                    <div key='page2' className="hard onboarding-new__page-wrapper">
+                        <div className='onboarding-book__page-inner'>
+                            NAME
+                        </div>
+                    </div>
+
+                    <div key='page3' className='onboarding-new__page-wrapper'>
+                        <div className='onboarding-book__page-inner'>
+                            <Page3 name={this.state.state.get('entity__name')}
+                                fadeInIntroText={this.state.state.get('page3__fadeInIntroText')}
+                            />
+                        </div>
                     </div>
 
                     <div key='page4'> Page 2 </div>

@@ -1,0 +1,31 @@
+/* =========================================================================
+ *
+ * game-screen__title.scss
+ *      Title styles
+ * 
+ * ========================================================================= */
+#game-screen-title__wrapper {
+    font-size: 2em;
+    padding: 1em 10px 10px 80px;
+    color: #f0f0f0;
+}
+
+.game-screen-onboarding__book-item-wrapper {
+    // COVER page
+    .hard.p1 {
+        background: rgba(0,0,0,0) url("/static/img/onboarding/onboarding__book-cover.png") !important;
+    }
+
+    &.game-screen__onboarding-wrapper--title {
+        // TODO: use a different image, fade in / out image using :after with
+        // opacity and different background image?
+        background: none !important;
+    }
+
+    .game-screen-title__menu-item {
+        @include user-select(none);
+        cursor: pointer;
+        background: rgba(0,0,0,0);
+    }
+
+}
