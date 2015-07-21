@@ -64923,13 +64923,21 @@
 	                ),
 	                _react2['default'].createElement(
 	                    'div',
-	                    { key: 'page4' },
-	                    ' Page 2 '
+	                    { key: 'page4', className: 'onboarding-new__page-wrapper' },
+	                    _react2['default'].createElement(
+	                        'div',
+	                        { className: 'onboarding-book__page-inner' },
+	                        'Select Race'
+	                    )
 	                ),
 	                _react2['default'].createElement(
 	                    'div',
-	                    { key: 'page5' },
-	                    ' Page 3 '
+	                    { key: 'page5', className: 'onboarding-new__page-wrapper' },
+	                    _react2['default'].createElement(
+	                        'div',
+	                        { className: 'onboarding-book__page-inner' },
+	                        'Race Info'
+	                    )
 	                ),
 	                _react2['default'].createElement(
 	                    'div',

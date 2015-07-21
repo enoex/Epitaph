@@ -626,7 +626,7 @@ html, body {
     background-position: -2px -150px !important; }
 
 .game-screen-onboarding__book-item-wrapper.game-screen-onboarding__book-item-wrapper--page-3 .hard {
-  background: none !important; }
+  background: url("/static/img/onboarding/onboarding__new--individual-page--left.png") !important; }
 
 /* =========================================================================
  *

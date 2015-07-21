@@ -281,8 +281,17 @@ var ScreenCreate = React.createClass({
                         </div>
                     </div>
 
-                    <div key='page4'> Page 2 </div>
-                    <div key='page5'> Page 3 </div>
+                    <div key='page4' className='onboarding-new__page-wrapper'>
+                        <div className='onboarding-book__page-inner'>
+                            Select Race
+                        </div>
+                    </div>
+                    <div key='page5' className='onboarding-new__page-wrapper'>
+                        <div className='onboarding-book__page-inner'>
+                            Race Info
+                        </div>
+                    </div>
+
                     <div key='page6'> Page 4 </div>
                     <div key='page7'> Page 5 </div>
                     <div key='page8'> Page 6 </div>
