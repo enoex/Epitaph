@@ -37,10 +37,7 @@ window.jQuery = jQuery;
 // jquery plugins
 require('./lib/turn')(jQuery);
 
-// ------------------------------------
-//
 // Internal Dependencies
-//
 // ------------------------------------
 import events from './events.js';
 import router from './router.js';

@@ -1,8 +1,7 @@
 /* =========================================================================
  *
- * screen
- *      Actions for which screen the player is on. One of:
- *          'onboarding', 'battle', 'map'
+ * Game Controller
+ *      Actions for the main, game wide game controller
  *
  * ========================================================================= */
 // External Dependencies
@@ -17,7 +16,7 @@ import Reflux from 'reflux';
 // Functionality
 //
 // ========================================================================
-var ScreenActions = Reflux.createActions([
+var GameControllerActions = Reflux.createActions([
     "showOnboarding"
 ]);
-export default ScreenActions;
+export default GameControllerActions;

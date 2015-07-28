@@ -1,0 +1,8 @@
+.onboarding-new-page-4__race-list-item {
+    @include transition(all 0.2s);
+}
+
+.onboarding-new-page-4__race-list-item.selected {
+    font-weight: bold;
+    font-size: 1.2em;
+}

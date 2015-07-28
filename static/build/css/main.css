@@ -628,6 +628,15 @@ html, body {
 .game-screen-onboarding__book-item-wrapper.game-screen-onboarding__book-item-wrapper--page-3 .hard {
   background: url("/static/img/onboarding/onboarding__new--individual-page--left.png") !important; }
 
+.onboarding-new-page-4__race-list-item {
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s; }
+
+.onboarding-new-page-4__race-list-item.selected {
+  font-weight: bold;
+  font-size: 1.2em; }
+
 /* =========================================================================
  *
  * game-screen__title.scss

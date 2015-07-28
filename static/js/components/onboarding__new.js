@@ -28,11 +28,9 @@ import OnboardingNewActions from '../actions/onboarding__new.js';
 import OnboardingActions from '../actions/onboarding.js';
 import OnboardingStore from '../stores/onboarding.js';
 
-// TODO: XXXXXXXXXXXXXXXXXXXX REMOVE
-window.A = OnboardingActions;
-
 // Pages
 import Page3 from './onboarding__new--page3.js';
+import Page4 from './onboarding__new--page4.js';
 
 // ========================================================================
 //
@@ -73,10 +71,11 @@ var ScreenCreate = React.createClass({
     componentDidUpdate: function(){
         logger.log('components/onboarding__new:componentDidUpdate', 'called %O', { state: this.state });
 
-        // If page state is different, we do need to re-setup page turn
         if(this._previousState.state.get('page') !== this.state.state.get('page')){
             logger.log('components/onboarding__new:componentDidUpdate:differentPage',
             'turning to new page');
+            // If we're on a different page, we need to call pageTurn to go
+            // to that page
             this.pageTurn.turn('page', this.state.state.get('page'));
         }
 
@@ -160,8 +159,8 @@ var ScreenCreate = React.createClass({
         // add the transition class AFTER we've setup the page turn, as if
         // it is added before the margin-left will transition and the book
         // will slide in - we want it started centered
-            $("#game-screen-onboarding__book--new").addClass('transition');
-            $("#game-screen-onboarding__book--new").turn("page", this.state.state.get('page'));
+        $("#game-screen-onboarding__book--new").addClass('transition');
+        $("#game-screen-onboarding__book--new").turn("page", this.state.state.get('page'));
     },
 
     // --------------------------------
@@ -176,8 +175,13 @@ var ScreenCreate = React.createClass({
         logger.log('components/onboarding__new:handleKeyPress',
         'called with | ', data);
         // handle page turning
-        if(data.key === 'right'){ return this.pageNext(); }
+        if(data.key === 'right' || data.key === 'enter'){ return this.pageNext(); }
         else if(data.key === 'left'){ return this.pagePrevious(); }
+
+        //// NOTE: if we want to listen for a keypress which will take us back
+        //// to the title screen, we can use:
+        //OnboardingActions.showTitle();
+
         return true;
     },
 
@@ -283,9 +287,12 @@ var ScreenCreate = React.createClass({
 
                     <div key='page4' className='onboarding-new__page-wrapper'>
                         <div className='onboarding-book__page-inner'>
-                            Select Race
+                            <Page4 selectedRace={this.state.state.get('entity__race')}
+                                    availableRaces={this.state.state.get('data__races')}
+                                />
                         </div>
                     </div>
+
                     <div key='page5' className='onboarding-new__page-wrapper'>
                         <div className='onboarding-book__page-inner'>
                             Race Info

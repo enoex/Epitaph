@@ -19,6 +19,7 @@ import Immutable from 'immutable';
 // ------------------------------------
 import OnboardingNewActions from '../actions/onboarding__new.js';
 import OnboardingActions from '../actions/onboarding.js';
+import ErrorActions from '../actions/errors.js';
 
 import saveDataOnChangeForKey from './util/save-data-on-change-for-key.js';
 
@@ -27,7 +28,11 @@ import saveDataOnChangeForKey from './util/save-data-on-change-for-key.js';
 // Functionality
 //
 // ========================================================================
+// ====================================
+//
 // Utility values
+//
+// ====================================
 var MAX_NUM_PAGES = 8;
 
 // errors by furthest page
@@ -39,7 +44,15 @@ var FURTHEST_ERRORS = {
 
 var STORE_KEY = 'store:onboarding__new';
 
+// TODO: Pull from server
+import AVAILABLE_RACES from './data/races.js';
+import AVAILABLE_ABILITIES from './data/abilities.js';
+
+// ====================================
+//
 // STORE
+//
+// ====================================
 var OnboardingNewStore = Reflux.createStore({
     listenables: [OnboardingActions, OnboardingNewActions],
 
@@ -59,8 +72,13 @@ var OnboardingNewStore = Reflux.createStore({
             // error if user tries to go to next page
             furthestError: FURTHEST_ERRORS['3'],
 
+            data__races: AVAILABLE_RACES,
+            data__abilities: AVAILABLE_ABILITIES,
+
             // entity info
             entity__name: '',
+            entity__race: {},
+            entity__abilities: [],
 
             // page states
             page3__fadeInIntroText: true
@@ -73,7 +91,6 @@ var OnboardingNewStore = Reflux.createStore({
     // --------------------------------
     loadInitialState: function(){
         // loads initial state when called (from onboarding store)
-
         window.localforage.getItem(STORE_KEY, (err, d)=>{
             requestAnimationFrame(()=>{
                 if(!d || !JSON.parse(d)){
@@ -87,16 +104,27 @@ var OnboardingNewStore = Reflux.createStore({
                 dataParsed = JSON.parse(d);
 
                 logger.log('stores/onboarding__new:loadInitialState', 'called | %O', {
-                    err: err, data: dataParsed
+                    data: dataParsed
                 });
 
-                this.state = Immutable.fromJS(dataParsed);
-                this.trigger({ state: this.state });
+                // Check that localForage data is not out of date
+                // TODO: XXXXXXXXXXXXXX
+                // Handle this in a better way - how do we specify which
+                // keys should exist? What if client loads game with old
+                // local forage data?
+                // TODO: Check version. If version mismatch, clear localforage?
+                if(!dataParsed.data__races || !dataParsed.data__races){
+                    return false;
+                }
+
+                setTimeout(()=>{requestAnimationFrame(()=>{
+                    this.state = Immutable.fromJS(dataParsed);
+                    this.trigger({ state: this.state });
+                });}, 120);
             });
         });
     },
 
-    // --------------------------------
     // State manipulation
     // --------------------------------
     getState: function(){
@@ -115,7 +143,6 @@ var OnboardingNewStore = Reflux.createStore({
         return this.state;
     },
 
-    // --------------------------------
     // Util to get character data from create state
     // --------------------------------
     getEntityFromBookState: function (){
@@ -123,7 +150,9 @@ var OnboardingNewStore = Reflux.createStore({
     },
 
     // --------------------------------
-    // Update state 
+    //
+    // Update state
+    //
     // --------------------------------
     onUpdateData: function( key, value ){
         // Takes in a key and value then updates and returns the new state
@@ -133,6 +162,7 @@ var OnboardingNewStore = Reflux.createStore({
         var furthestError = this.state.get('furthestError');
 
         // TODO: clean way to do this...
+        // Need to check if certain keys exist to set furthest page
         if(key === 'entity__name'){
             // no value? We can't go on
             if(('' + value).length < 1){
@@ -157,6 +187,43 @@ var OnboardingNewStore = Reflux.createStore({
     },
 
     // --------------------------------
+    // Update data utils
+    // --------------------------------
+    onSelectRace: function( raceName ){
+        // Takes in a race's name and sets the selected race object to be
+        // the corresponding race
+        logger.log('stores/onboarding__new:onSelectRace', 'called with ' + raceName);
+        var selectedRace;
+
+        for(let i = 0; i < AVAILABLE_RACES.length; i++){
+            if(AVAILABLE_RACES[i].name === raceName){
+                selectedRace = AVAILABLE_RACES[i];
+                break;
+            }
+        }
+
+        if(selectedRace){
+            // Set the selected race
+            this.state = this.state.mergeDeep({
+                entity__race: selectedRace
+            });
+
+            this.trigger({ state: this.state });
+
+        } else {
+            // No selected race found
+            logger.log('error:stores/onboarding__new:onSelectRace',
+            'could not find race');
+
+            ErrorActions.triggerError({
+                message: "Could not find race",
+                internal: true
+            });
+            return false;
+        }
+    },
+
+    // --------------------------------
     //
     // Turn page
     //
@@ -172,7 +239,7 @@ var OnboardingNewStore = Reflux.createStore({
 
             // TODO: Throw error; have view listen for and catch it
             // TODO: onboarding error store
-            alert(this.state.get('furthestError'));
+            window.alert(this.state.get('furthestError'));
             return false;
         }
 

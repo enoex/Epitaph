@@ -1,15 +1,17 @@
 /* =========================================================================
  *
- * onboarding__new
- *      Actions for the create character flow
+ * user
+ *  game user / player store. Stores meta info like account information
  *
  * ========================================================================= */
 // External Dependencies
 // ------------------------------------
 import logger from 'bragi-browser';
+import _ from 'lodash';
 
 import React from 'react';
 import Reflux from 'reflux';
+import Immutable from 'immutable';
 
 // Internal Dependencies
 // ------------------------------------
@@ -19,12 +21,7 @@ import Reflux from 'reflux';
 // Functionality
 //
 // ========================================================================
-var OnboardingNewActions = Reflux.createActions([
-    'pageTurnNext',
-    'pageTurnPrevious',
+var UserStore = Reflux.createStore({
+});
 
-    'updateData',
-    'selectRace',
-    'selectAbility'
-]);
-export default OnboardingNewActions;
+export default UserStore;

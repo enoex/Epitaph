@@ -35,6 +35,7 @@ var OnboardingStore = Reflux.createStore({
 
         // listen for changes and update
         saveDataOnChangeForKey(this, STORE_KEY);
+        // TODO: when store data changes, update the GAME store
 
         // set initial state
         this.state = Immutable.fromJS({ bookState: 'title' });

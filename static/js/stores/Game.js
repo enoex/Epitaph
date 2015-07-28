@@ -1,7 +1,11 @@
 /* =========================================================================
  *
  * Game.js
- *  Main game store
+ *  Main game store.
+ *
+ *  TODO: This is a sort of "omni" store pattern where in this game
+ *  store is the source of truth for the entire app. Other stores are used
+ *  essentially as data caches / data aggregations
  *
  * ========================================================================= */
 // External Dependencies
@@ -22,7 +26,8 @@ import GameControllerActions from '../actions/game__controller.js';
 // Functionality
 //
 // ========================================================================
-// keep track of state
+// TODO: Check version. If version mismatch, clear localstorage
+// TODO: Load state from local storage, change how data is passed to substores
 
 // Store
 var GameStore = Reflux.createStore({
