@@ -58,8 +58,8 @@ var Page4 = React.createClass({
             // CSS classes
             let classes = classNames({
                 'interaction__select-item': true,
-                'onboarding-new-page-4__race-list-item': true,
-                selected: isSelected
+                'interaction__select-item--selected': isSelected,
+                'onboarding-new-page-4__race-list-item': true
             });
 
             return (
@@ -67,7 +67,9 @@ var Page4 = React.createClass({
                     className={classes}
                     onClick={this.selectRace.bind(this, race)}
                     >
-                    {race.name}
+                    <div className='interaction__select-item-inner'>
+                        {race.name}
+                    </div>
                 </div>
             );
         });
@@ -75,8 +77,10 @@ var Page4 = React.createClass({
         // Setup final HTML
         return (
             <div>
-                Page 4
-                {racesHtml}
+                <h3> Race </h3>
+                <div className='interaction__select-list-wrapper'>
+                    {racesHtml}
+                </div>
             </div>
         );
     }

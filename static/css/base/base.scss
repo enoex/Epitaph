@@ -7,9 +7,16 @@
 html, body {
     @include position(absolute, 0 0 0 0);
     background: #f0f0f0;
+    font-family: 'Lustria';
     margin: 0;
     overflow: hidden;
     padding: 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'IM Fell English';
+    font-style: normal;
+    font-variant: small-caps;
 }
 
 // ====================================

@@ -31,6 +31,7 @@ import OnboardingStore from '../stores/onboarding.js';
 // Pages
 import Page3 from './onboarding__new--page3.js';
 import Page4 from './onboarding__new--page4.js';
+import Page5 from './onboarding__new--page5.js';
 
 // ========================================================================
 //
@@ -295,7 +296,8 @@ var ScreenCreate = React.createClass({
 
                     <div key='page5' className='onboarding-new__page-wrapper'>
                         <div className='onboarding-book__page-inner'>
-                            Race Info
+                            <Page5 selectedRace={this.state.state.get('entity__race')}
+                                />
                         </div>
                     </div>
 

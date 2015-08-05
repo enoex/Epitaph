@@ -120,7 +120,7 @@ var OnboardingNewStore = Reflux.createStore({
                 setTimeout(()=>{requestAnimationFrame(()=>{
                     this.state = Immutable.fromJS(dataParsed);
                     this.trigger({ state: this.state });
-                });}, 120);
+                }); }, 120);
             });
         });
     },

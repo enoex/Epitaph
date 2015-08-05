@@ -15,7 +15,7 @@ module.exports = {
         loaders: [
             { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader') },
             { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader'},
-
+            { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" },
             { test: /\.jpg$/, loader: 'url-loader?limit=10000&minetype=image/jpg' },
             { test: /\.jpeg$/, loader: 'url-loader?limit=10000&minetype=image/jpg' },
             { test: /\.png/, loader: 'url-loader?limit=10000&minetype=image/png' },
